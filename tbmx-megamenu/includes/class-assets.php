@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Assets
  *
  * Manages enqueuing of CSS and JS files.
- * Phase 2 will implement conditional loading logic.
  */
 class Assets {
 
@@ -31,11 +30,40 @@ class Assets {
      * Only loads when the current menu has items with _tbmx_enabled.
      */
     public function enqueue_public_assets() {
-        // Phase 2: Implement conditional enqueue
-        // 1. Check if current menu has mega items
-        // 2. If yes, enqueue megamenu.css and megamenu.js
-        // 3. Inject tokens as inline CSS in :root
-        // TODO: Implement in Phase 2
+        // Check if any registered menu has mega items
+        if ( ! self::any_menu_has_mega_items() ) {
+            return;
+        }
+
+        $version = TBMX_MEGAMENU_VERSION;
+
+        // Main stylesheet
+        wp_enqueue_style(
+            'tbmx-megamenu',
+            TBMX_MEGAMENU_URL . 'assets/css/megamenu.css',
+            array(),
+            $version
+        );
+
+        // Main script (vanilla JS, no dependencies)
+        wp_enqueue_script(
+            'tbmx-megamenu',
+            TBMX_MEGAMENU_URL . 'assets/js/megamenu.js',
+            array(),
+            $version,
+            true // Load in footer
+        );
+
+        // Pass config to JS
+        $settings = Settings::get_settings();
+        wp_localize_script( 'tbmx-megamenu', 'tbmxConfig', array(
+            'hoverIn'    => intval( $settings['hover_in'] ),
+            'hoverOut'   => intval( $settings['hover_out'] ),
+            'breakpoint' => intval( $settings['breakpoint'] ),
+        ) );
+
+        // Inject tokens as inline CSS
+        add_action( 'wp_head', array( __CLASS__, 'print_tokens' ), 1 );
     }
 
     /**
@@ -46,21 +74,80 @@ class Assets {
      * Only loads on nav-menus.php and the settings page.
      */
     public function enqueue_admin_assets( $hook_suffix ) {
-        // Phase 1: Enqueue admin.css and admin.js on:
-        // - nav-menus.php (for the metabox)
-        // - Appearance > TBMX Mega Menu (for settings page)
-        // TODO: Implement in Phase 1
+        // Only on menu editor and our settings page
+        $allowed_screens = array( 'nav-menus.php', 'appearance_page_' . Settings::PAGE_SLUG );
+
+        if ( ! in_array( $hook_suffix, $allowed_screens, true ) ) {
+            return;
+        }
+
+        $version = TBMX_MEGAMENU_VERSION;
+
+        // Admin styles
+        wp_enqueue_style(
+            'tbmx-megamenu-admin',
+            TBMX_MEGAMENU_URL . 'assets/css/admin.css',
+            array(),
+            $version
+        );
+
+        // Admin scripts
+        wp_enqueue_script(
+            'tbmx-megamenu-admin',
+            TBMX_MEGAMENU_URL . 'assets/js/admin.js',
+            array( 'jquery' ),
+            $version,
+            true
+        );
+
+        // WordPress color picker on settings page
+        if ( 'appearance_page_' . Settings::PAGE_SLUG === $hook_suffix ) {
+            wp_enqueue_style( 'wp-color-picker' );
+            wp_enqueue_script( 'wp-color-picker' );
+        }
     }
 
     /**
-     * Check if the current menu has any mega menu items
+     * Check if any registered menu has mega items
      *
-     * @param string $menu_location Theme location slug.
      * @return bool
      */
-    public static function menu_has_mega_items( $menu_location ) {
-        // Phase 2: Query menu items and check _tbmx_enabled meta
-        // TODO: Implement in Phase 2
+    public static function any_menu_has_mega_items() {
+        // Get all registered menu locations
+        $locations = get_nav_menu_locations();
+
+        if ( empty( $locations ) ) {
+            return false;
+        }
+
+        foreach ( $locations as $location => $menu_id ) {
+            if ( self::menu_has_mega_items( $menu_id ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if a specific menu has any mega menu items
+     *
+     * @param int $menu_id Menu term ID.
+     * @return bool
+     */
+    public static function menu_has_mega_items( $menu_id ) {
+        $items = wp_get_nav_menu_items( $menu_id );
+
+        if ( empty( $items ) ) {
+            return false;
+        }
+
+        foreach ( $items as $item ) {
+            if ( Menu_Fields::is_mega_enabled( $item->ID ) ) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -72,7 +159,7 @@ class Assets {
     public static function get_tokens_css() {
         $settings = Settings::get_settings();
 
-        $css = ':root {';
+        $css  = ':root {';
         $css .= '--tbmx-bg:' . esc_attr( $settings['bg'] ) . ';';
         $css .= '--tbmx-fg:' . esc_attr( $settings['fg'] ) . ';';
         $css .= '--tbmx-muted:' . esc_attr( $settings['muted'] ) . ';';
@@ -90,10 +177,8 @@ class Assets {
 
     /**
      * Print inline tokens CSS in the head
-     *
-     * Phase 2: Hook this to wp_head when mega menu is active
      */
     public static function print_tokens() {
-        echo '<style id="tbmx-megamenu-tokens">' . self::get_tokens_css() . '</style>';
+        echo '<style id="tbmx-megamenu-tokens">' . self::get_tokens_css() . '</style>' . "\n";
     }
 }

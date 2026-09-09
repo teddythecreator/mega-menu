@@ -135,31 +135,27 @@ final class Plugin {
      * Register admin-specific hooks
      */
     private function define_admin_hooks() {
-        if ( is_admin() ) {
-            // Menu fields (metabox in menu items)
-            add_action( 'wp_nav_menu_item_custom_fields', array( $this->menu_fields, 'render_fields' ), 10, 5 );
-            add_action( 'wp_update_nav_menu_item', array( $this->menu_fields, 'save_fields' ), 10, 3 );
+        // Menu fields (metabox in menu items)
+        add_action( 'wp_nav_menu_item_custom_fields', array( $this->menu_fields, 'render_fields' ), 10, 5 );
+        add_action( 'wp_update_nav_menu_item', array( $this->menu_fields, 'save_fields' ), 10, 3 );
 
-            // Settings page
-            add_action( 'admin_menu', array( $this->settings, 'add_settings_page' ) );
-            add_action( 'admin_init', array( $this->settings, 'register_settings' ) );
+        // Settings page
+        add_action( 'admin_menu', array( $this->settings, 'add_settings_page' ) );
+        add_action( 'admin_init', array( $this->settings, 'register_settings' ) );
 
-            // Admin assets
-            add_action( 'admin_enqueue_scripts', array( $this->assets, 'enqueue_admin_assets' ) );
-        }
+        // Admin assets
+        add_action( 'admin_enqueue_scripts', array( $this->assets, 'enqueue_admin_assets' ) );
     }
 
     /**
      * Register public-facing hooks
      */
     private function define_public_hooks() {
-        if ( ! is_admin() ) {
-            // Front-end assets (conditional)
-            add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
+        // Front-end assets (conditional)
+        add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
 
-            // Custom walker will be applied via wp_nav_menu_args filter
-            // This will be implemented in Phase 2
-        }
+        // Custom walker will be applied via wp_nav_menu_args filter
+        // This will be implemented in Phase 2
     }
 
     /**

@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Renderer
  *
  * Handles rendering of mega panel content.
- * Phase 2 will implement the actual rendering logic.
  */
 class Renderer {
 
@@ -49,12 +48,29 @@ class Renderer {
      * @return string Rendered HTML.
      */
     private function render_divi_layout( $layout_id ) {
-        // Phase 2: Implement Divi layout rendering
-        // 1. Get the layout post content
-        // 2. Process with do_shortcode (Divi shortcodes)
-        // 3. Ensure Divi styles are loaded
-        // TODO: Implement in Phase 2
-        return '';
+        $layout = get_post( $layout_id );
+
+        if ( ! $layout || 'et_pb_layout' !== $layout->post_type ) {
+            return '';
+        }
+
+        // Get the layout content
+        $content = $layout->post_content;
+
+        if ( empty( $content ) ) {
+            return '';
+        }
+
+        // Process Divi shortcodes
+        if ( self::is_divi_active() ) {
+            // Divi is active, process shortcodes
+            $content = do_shortcode( $content );
+        } else {
+            // Divi not active, return raw content with warning
+            $content = '<p class="tbmx-warning">' . esc_html__( 'Divi is not active. Please activate Divi to render this layout.', 'tbmx-megamenu' ) . '</p>';
+        }
+
+        return $content;
     }
 
     /**
@@ -64,12 +80,71 @@ class Renderer {
      * @return string Rendered HTML.
      */
     private function render_columns( $item_id ) {
-        // Phase 2: Implement custom columns rendering
-        // - Get child menu items
-        // - Render in columns layout
-        // - Optional featured block
-        // TODO: Implement in Phase 2
-        return '';
+        // Get child menu items
+        $children = $this->get_child_items( $item_id );
+
+        if ( empty( $children ) ) {
+            return '<p class="tbmx-empty">' . esc_html__( 'No child menu items found.', 'tbmx-megamenu' ) . '</p>';
+        }
+
+        // Group into columns (3 columns by default)
+        $columns = array_chunk( $children, ceil( count( $children ) / 3 ) );
+
+        ob_start();
+        ?>
+        <div class="tbmx-columns">
+            <?php foreach ( $columns as $column ) : ?>
+                <div class="tbmx-column">
+                    <ul class="tbmx-column-links">
+                        <?php foreach ( $column as $child ) : ?>
+                            <li>
+                                <a href="<?php echo esc_url( $child->url ); ?>">
+                                    <?php echo esc_html( $child->title ); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    /**
+     * Get child menu items for a parent item
+     *
+     * @param int $parent_id Parent menu item ID.
+     * @return array Array of menu item objects.
+     */
+    private function get_child_items( $parent_id ) {
+        global $wpdb;
+
+        // Get the menu this item belongs to
+        $menu_id = wp_get_post_terms( $parent_id, 'nav_menu', array( 'fields' => 'ids' ) );
+
+        if ( empty( $menu_id ) ) {
+            return array();
+        }
+
+        $menu_id = $menu_id[0];
+
+        // Get all items in this menu
+        $items = wp_get_nav_menu_items( $menu_id );
+
+        if ( empty( $items ) ) {
+            return array();
+        }
+
+        // Filter children of the parent
+        $children = array();
+        foreach ( $items as $item ) {
+            if ( (int) $item->menu_item_parent === $parent_id ) {
+                $children[] = $item;
+            }
+        }
+
+        return $children;
     }
 
     /**
@@ -78,21 +153,55 @@ class Renderer {
      * @return bool
      */
     public static function is_divi_active() {
-        return function_exists( 'et_setup_theme' ) || defined( 'ET_BUILDER_PLUGIN_VERSION' );
+        // Check for Divi theme
+        if ( function_exists( 'et_setup_theme' ) ) {
+            return true;
+        }
+
+        // Check for Divi Builder plugin
+        if ( defined( 'ET_BUILDER_PLUGIN_VERSION' ) ) {
+            return true;
+        }
+
+        // Check if et_pb_layout CPT exists
+        if ( post_type_exists( 'et_pb_layout' ) ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * Get available Divi Library layouts
      *
-     * @return array Array of layout objects (ID, title).
+     * @return array Array of layout objects (ID, post_title).
      */
     public static function get_divi_layouts() {
         if ( ! self::is_divi_active() ) {
             return array();
         }
 
-        // Phase 2: Query et_pb_layout CPT
-        // TODO: Implement in Phase 2
-        return array();
+        $layouts = get_posts( array(
+            'post_type'      => 'et_pb_layout',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'fields'         => 'ids',
+        ) );
+
+        if ( empty( $layouts ) ) {
+            return array();
+        }
+
+        $result = array();
+        foreach ( $layouts as $layout_id ) {
+            $result[] = (object) array(
+                'ID'         => $layout_id,
+                'post_title' => get_the_title( $layout_id ),
+            );
+        }
+
+        return $result;
     }
 }

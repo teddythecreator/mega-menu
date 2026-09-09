@@ -17,7 +17,35 @@ msgid "Enable Mega Panel"
 msgstr ""
 
 #: includes/class-menu-fields.php
+msgid "Convert this menu item into a mega menu trigger"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Content Source"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Divi Library Layout"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Custom Columns (no Divi)"
+msgstr ""
+
+#: includes/class-menu-fields.php
 msgid "Select Divi Layout"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "— Select a layout —"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "No Divi layouts found"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Design your panel with Divi Builder and save as a Library layout"
 msgstr ""
 
 #: includes/class-menu-fields.php
@@ -34,6 +62,10 @@ msgstr ""
 
 #: includes/class-menu-fields.php
 msgid "Custom Width"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Custom Width (px)"
 msgstr ""
 
 #: includes/class-menu-fields.php
@@ -57,15 +89,31 @@ msgid "Icon (optional)"
 msgstr ""
 
 #: includes/class-menu-fields.php
+msgid "Divi icon class or custom SVG"
+msgstr ""
+
+#: includes/class-menu-fields.php
 msgid "Badge (optional)"
 msgstr ""
 
+#: includes/class-menu-fields.php
+msgid "New, Sale, etc."
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Small label next to the menu item"
+msgstr ""
+
 #: includes/class-settings.php
-msgid "TBMX Mega Menu Settings"
+msgid "TBMX Mega Menu"
 msgstr ""
 
 #: includes/class-settings.php
 msgid "Colors"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Base color tokens for the mega menu panels. These values are injected as CSS custom properties."
 msgstr ""
 
 #: includes/class-settings.php
@@ -93,7 +141,7 @@ msgid "Layout"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Border Radius"
+msgid "Typography, spacing, and visual treatment of the panels."
 msgstr ""
 
 #: includes/class-settings.php
@@ -101,11 +149,31 @@ msgid "Font Family"
 msgstr ""
 
 #: includes/class-settings.php
+msgid "Border Radius"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Box Shadow"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Gap"
+msgstr ""
+
+#: includes/class-settings.php
 msgid "Behavior"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Hover Delay (ms)"
+msgid "Interaction timing and responsive behavior."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Hover In Delay (ms)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Hover Out Delay (ms)"
 msgstr ""
 
 #: includes/class-settings.php
@@ -113,17 +181,73 @@ msgid "Mobile Breakpoint (px)"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Preset"
+msgid "Default Panel Width"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Dark"
+msgid "Style Presets"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Light"
+msgid "Apply a preset to reset all color and layout values. This will overwrite your current customizations."
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Minimal"
+msgid "Load Preset"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Select a preset and click \"Save Changes\" to apply. This overwrites current color values."
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Save Settings"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Quick Reference"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "CSS Variable"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Current Value"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Description"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Panel background"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Panel text color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Muted text"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Brand accent"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Borders"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Configure global settings for the TBMX Mega Menu plugin. These values are injected as CSS custom properties (--tbmx-*) in the front-end."
+msgstr ""
+
+#: includes/class-renderer.php
+msgid "Divi is not active. Please activate Divi to render this layout."
+msgstr ""
+
+#: includes/class-renderer.php
+msgid "No child menu items found."
 msgstr ""
