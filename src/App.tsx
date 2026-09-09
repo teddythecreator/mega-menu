@@ -5,6 +5,7 @@ import Design from "./components/Design";
 import MegaHeader from "./components/MegaHeader";
 import Phases from "./components/Phases";
 import Prompts from "./components/Prompts";
+import QAChecklist from "./components/QAChecklist";
 import Quality from "./components/Quality";
 import Roadmap from "./components/Roadmap";
 import Tech from "./components/Tech";
@@ -159,6 +160,7 @@ export default function App() {
           <Design preset={preset} onPreset={setPreset} />
           <Quality />
           <Roadmap />
+          <QAChecklist />
           <Prompts />
           <Business />
         </main>

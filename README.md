@@ -39,6 +39,25 @@ npm run build
 
 El build genera `dist/index.html` — la web estática del documento.
 
+### Checklist de pruebas interactivo
+
+El documento incluye un **checklist de QA interactivo** con 309 pruebas organizadas en 12 categorías:
+
+- 📦 Instalación y Activación
+- ⚙️ Ajustes Globales
+- 🎛️ Metabox en Ítems de Menú
+- 🎨 Render en Front-End
+- 🖥️ Interacción Desktop
+- ⌨️ Interacción Teclado
+- 📱 Interacción Móvil
+- ♿ Accesibilidad (WCAG 2.1 AA)
+- ⚡ Rendimiento
+- 🔒 Seguridad
+- 🔗 Compatibilidad
+- 🧪 Edge Cases
+
+Puedes marcar las pruebas directamente en la web y el progreso se guarda en tu navegador. También está disponible el documento completo en `tbmx-megamenu/QA-CHECKLIST.md`.
+
 ## Uso de los scripts de despliegue
 
 **Importante:** Los scripts requieren que el plugin PHP exista en `./tbmx-megamenu/`. Actualmente está pendiente de construir (ver §10 del documento maestro).

@@ -47,6 +47,7 @@ const MEGA: {
 
 const PLAIN = [
   { label: "Roadmap", href: "#roadmap" },
+  { label: "QA", href: "#qa-checklist" },
   { label: "Prompts", href: "#prompts" },
   { label: "Licencia", href: "#licencia" },
 ];
