@@ -3,7 +3,7 @@
  * Plugin Name: TCB-MegaMenu
  * Plugin URI: https://thecreator.business/tcb-megamenu
  * Description: Professional mega menus for WordPress with Divi integration. Create stunning mega menus using Divi Library layouts or custom columns.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: The Creator Business
  * Author URI: https://thecreator.business/
  * License: GPL v2 or later

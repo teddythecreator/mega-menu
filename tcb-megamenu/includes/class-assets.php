@@ -169,36 +169,22 @@ class Assets {
     public static function get_tokens_css() {
         $settings = Settings::get_settings();
         
-        // Determine background based on bg_mode
-        $bg_mode = isset( $settings['bg_mode'] ) ? $settings['bg_mode'] : 'transparent';
-        $bg_color = $settings['bg'];
-        
-        // Apply background mode logic
-        if ( $bg_mode === 'transparent' ) {
-            $bg_color = 'transparent';
-        } elseif ( $bg_mode === 'light' ) {
-            $bg_color = 'rgba(255, 255, 255, 0.98)';
-        } elseif ( $bg_mode === 'dark' ) {
-            $bg_color = '#1a1a1a';
-        }
-        // 'custom' uses the $settings['bg'] value
-
+        // SIN FONDO - Panel completamente transparente
         $css  = ':root {';
-        $css .= '--tcb-bg:' . esc_attr( $bg_color ) . ';';
-        $css .= '--tcb-fg:' . esc_attr( $settings['fg'] ) . ';';
-        $css .= '--tcb-muted:' . esc_attr( $settings['muted'] ) . ';';
-        $css .= '--tcb-accent:' . esc_attr( $settings['accent'] ) . ';';
-        $css .= '--tcb-border:' . esc_attr( $settings['border'] ) . ';';
-        $css .= '--tcb-radius:' . esc_attr( $settings['radius'] ) . ';';
-        $css .= '--tcb-shadow:' . esc_attr( $settings['shadow'] ) . ';';
-        $css .= '--tcb-font:' . esc_attr( $settings['font'] ) . ';';
-        $css .= '--tcb-gap:' . esc_attr( $settings['gap'] ) . ';';
-        $css .= '--tcb-anim:' . esc_attr( $settings['anim'] ) . ';';
+        $css .= '--tcb-bg:transparent;';
+        $css .= '--tcb-fg:' . esc_attr( $settings['fg'] ?? 'inherit' ) . ';';
+        $css .= '--tcb-muted:' . esc_attr( $settings['muted'] ?? 'inherit' ) . ';';
+        $css .= '--tcb-accent:' . esc_attr( $settings['accent'] ?? '#e11414' ) . ';';
+        $css .= '--tcb-border:transparent;';
+        $css .= '--tcb-radius:0;';
+        $css .= '--tcb-shadow:none;';
+        $css .= '--tcb-font:' . esc_attr( $settings['font'] ?? 'inherit' ) . ';';
+        $css .= '--tcb-gap:' . esc_attr( $settings['gap'] ?? 'clamp(16px, 2vw, 32px)' ) . ';';
+        $css .= '--tcb-anim:' . esc_attr( $settings['anim'] ?? '.22s cubic-bezier(.22,.61,.36,1)' ) . ';';
         $css .= '}';
 
         return $css;
     }
-
     /**
      * Print inline tokens CSS in the head
      */
