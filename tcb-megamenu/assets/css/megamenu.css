@@ -30,19 +30,35 @@
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 9999;
-    background: var(--tcb-bg, #050506);
-    color: var(--tcb-fg, #f5f5f5);
-    border-top: 1px solid var(--tcb-border, rgba(255,255,255,.08));
+    z-index: 9998;
+    background: var(--tcb-bg, transparent);
+    color: var(--tcb-fg, inherit);
+    border-top: 1px solid var(--tcb-border, rgba(0,0,0,.08));
     border-radius: 0 0 var(--tcb-radius, 10px) var(--tcb-radius, 10px);
-    box-shadow: var(--tcb-shadow, 0 24px 60px rgba(0,0,0,.5));
+    box-shadow: var(--tcb-shadow, 0 24px 60px rgba(0,0,0,.15));
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity var(--tcb-anim, .22s cubic-bezier(.22,.61,.36,1)),
                 transform var(--tcb-anim, .22s cubic-bezier(.22,.61,.36,1)),
                 visibility 0s linear var(--tcb-anim, .22s);
-    font-family: var(--tcb-font, "Montserrat", system-ui, sans-serif);
+    font-family: var(--tcb-font, inherit);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Modo transparente (hereda del tema) */
+.tcb-panel.tcb-transparent {
+    background: rgba(255, 255, 255, 0.98);
+    color: #333;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+/* Modo oscuro (por defecto para temas claros) */
+.tcb-panel.tcb-dark {
+    background: #1a1a1a;
+    color: #f5f5f5;
+    border-top: 1px solid rgba(255,255,255,.1);
 }
 
 .tcb-panel[aria-hidden="false"] {
@@ -100,6 +116,55 @@
     padding: var(--tcb-gap, clamp(16px, 2vw, 32px));
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+}
+
+/* ── Integration with theme ─────────────────────────────────────── */
+/* Ensure panel doesn't overlap with theme elements */
+.tcb-mega-item {
+    position: relative;
+    z-index: 100;
+}
+
+.tcb-panel {
+    z-index: 99;
+}
+
+/* Improve link visibility */
+.tcb-panel a {
+    color: var(--tcb-fg, inherit);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.tcb-panel a:hover,
+.tcb-panel a:focus {
+    color: var(--tcb-accent, inherit);
+}
+
+/* Improve list styling */
+.tcb-column-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tcb-column-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.tcb-column-links a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--tcb-radius, 6px);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tcb-column-links a:hover,
+.tcb-column-links a:focus {
+    background: var(--tcb-border, rgba(0,0,0,.05));
+    color: var(--tcb-accent, inherit);
 }
 
 /* ── Divi content wrapper ───────────────────────────────────────── */

@@ -48,14 +48,16 @@ class Settings {
 
     public static function get_defaults() {
         return array(
-            'bg'         => '#050506',
-            'fg'         => '#f5f5f5',
-            'muted'      => 'rgba(245,245,245,.6)',
+            // Background mode: 'transparent', 'dark', 'light', 'custom'
+            'bg_mode'    => 'transparent',
+            'bg'         => '#ffffff',
+            'fg'         => '#333333',
+            'muted'      => 'rgba(51,51,51,.6)',
             'accent'     => '#e11414',
-            'border'     => 'rgba(255,255,255,.08)',
+            'border'     => 'rgba(0,0,0,.08)',
             'radius'     => '10px',
-            'shadow'     => '0 24px 60px rgba(0,0,0,.5)',
-            'font'       => '"Montserrat", system-ui, sans-serif',
+            'shadow'     => '0 24px 60px rgba(0,0,0,.15)',
+            'font'       => 'inherit',
             'gap'        => 'clamp(16px, 2vw, 32px)',
             'anim'       => '.22s cubic-bezier(.22,.61,.36,1)',
             'width'      => 'full',
@@ -63,7 +65,7 @@ class Settings {
             'hover_in'   => 120,
             'hover_out'  => 200,
             'breakpoint' => 980,
-            'preset'     => 'oscuro',
+            'preset'     => 'claro',
         );
     }
 
@@ -265,20 +267,318 @@ class Settings {
 
     public function render_page() {
         if ( ! current_user_can( 'edit_theme_options' ) ) return;
+        
+        $settings = self::get_settings();
         ?>
-        <div class="wrap" style="max-width:900px;">
-            <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-            <p style="color:#666;font-size:14px;margin-bottom:20px;">
-                <?php esc_html_e( 'Configure global settings for TCB MegaMenu. These values are injected as CSS custom properties.', 'tcb-megamenu' ); ?>
-            </p>
+        <div class="wrap tcb-settings-wrap">
+            <!-- Page Header -->
+            <div class="tcb-page-header">
+                <div class="tcb-page-header-content">
+                    <div class="tcb-page-header-icon">⚡</div>
+                    <div>
+                        <h1 class="tcb-page-header-title"><?php esc_html_e( 'TCB MegaMenu Settings', 'tcb-megamenu' ); ?></h1>
+                        <p class="tcb-page-header-subtitle">
+                            <?php esc_html_e( 'Configure your mega menu appearance and behavior', 'tcb-megamenu' ); ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="tcb-tabs">
+                <a href="#settings" class="tcb-tab active">
+                    <span class="tcb-tab-icon">⚙️</span>
+                    <?php esc_html_e( 'Settings', 'tcb-megamenu' ); ?>
+                </a>
+                <a href="#preview" class="tcb-tab">
+                    <span class="tcb-tab-icon">👁️</span>
+                    <?php esc_html_e( 'Preview', 'tcb-megamenu' ); ?>
+                </a>
+                <a href="#presets" class="tcb-tab">
+                    <span class="tcb-tab-icon">🎨</span>
+                    <?php esc_html_e( 'Presets', 'tcb-megamenu' ); ?>
+                </a>
+            </div>
+
+            <!-- Main Content -->
             <form method="post" action="options.php">
-                <?php
-                settings_fields( 'tcb_megamenu_group' );
-                do_settings_sections( self::PAGE_SLUG );
-                submit_button( __( 'Save Settings', 'tcb-megamenu' ) );
-                ?>
+                <?php settings_fields( 'tcb_megamenu_group' ); ?>
+
+                <!-- Background Mode Card -->
+                <div class="tcb-card">
+                    <div class="tcb-card-header">
+                        <div class="tcb-card-icon">🎨</div>
+                        <div>
+                            <h2 class="tcb-card-title"><?php esc_html_e( 'Background Mode', 'tcb-megamenu' ); ?></h2>
+                            <p class="tcb-card-description"><?php esc_html_e( 'Choose how your mega menu background integrates with your theme', 'tcb-megamenu' ); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="tcb-settings-grid">
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Background Mode', 'tcb-megamenu' ); ?></div>
+                            <select name="<?php echo esc_attr( self::OPTION_NAME ); ?>[bg_mode]" class="tcb-setting-input tcb-field-select">
+                                <option value="transparent" <?php selected( $settings['bg_mode'], 'transparent' ); ?>>
+                                    🔲 <?php esc_html_e( 'Transparent (Inherit from theme)', 'tcb-megamenu' ); ?>
+                                </option>
+                                <option value="light" <?php selected( $settings['bg_mode'], 'light' ); ?>>
+                                    ☀️ <?php esc_html_e( 'Light Background', 'tcb-megamenu' ); ?>
+                                </option>
+                                <option value="dark" <?php selected( $settings['bg_mode'], 'dark' ); ?>>
+                                    🌙 <?php esc_html_e( 'Dark Background', 'tcb-megamenu' ); ?>
+                                </option>
+                                <option value="custom" <?php selected( $settings['bg_mode'], 'custom' ); ?>>
+                                    🎨 <?php esc_html_e( 'Custom Color', 'tcb-megamenu' ); ?>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Background Color', 'tcb-megamenu' ); ?></div>
+                            <div class="tcb-color-picker-wrapper">
+                                <input type="text" 
+                                       name="<?php echo esc_attr( self::OPTION_NAME ); ?>[bg]" 
+                                       value="<?php echo esc_attr( $settings['bg'] ); ?>" 
+                                       class="tcb-setting-input tcb-color-field" 
+                                       data-tcb-color="true" />
+                                <span class="tcb-color-preview" style="background:<?php echo esc_attr( $settings['bg'] ); ?>"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colors Card -->
+                <div class="tcb-card">
+                    <div class="tcb-card-header">
+                        <div class="tcb-card-icon">🎨</div>
+                        <div>
+                            <h2 class="tcb-card-title"><?php esc_html_e( 'Colors', 'tcb-megamenu' ); ?></h2>
+                            <p class="tcb-card-description"><?php esc_html_e( 'Customize the color palette of your mega menu', 'tcb-megamenu' ); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="tcb-settings-grid">
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Text Color', 'tcb-megamenu' ); ?></div>
+                            <div class="tcb-color-picker-wrapper">
+                                <input type="text" 
+                                       name="<?php echo esc_attr( self::OPTION_NAME ); ?>[fg]" 
+                                       value="<?php echo esc_attr( $settings['fg'] ); ?>" 
+                                       class="tcb-setting-input tcb-color-field" />
+                                <span class="tcb-color-preview" style="background:<?php echo esc_attr( $settings['fg'] ); ?>"></span>
+                            </div>
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Accent Color', 'tcb-megamenu' ); ?></div>
+                            <div class="tcb-color-picker-wrapper">
+                                <input type="text" 
+                                       name="<?php echo esc_attr( self::OPTION_NAME ); ?>[accent]" 
+                                       value="<?php echo esc_attr( $settings['accent'] ); ?>" 
+                                       class="tcb-setting-input tcb-color-field" />
+                                <span class="tcb-color-preview" style="background:<?php echo esc_attr( $settings['accent'] ); ?>"></span>
+                            </div>
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Border Color', 'tcb-megamenu' ); ?></div>
+                            <div class="tcb-color-picker-wrapper">
+                                <input type="text" 
+                                       name="<?php echo esc_attr( self::OPTION_NAME ); ?>[border]" 
+                                       value="<?php echo esc_attr( $settings['border'] ); ?>" 
+                                       class="tcb-setting-input tcb-color-field" />
+                                <span class="tcb-color-preview" style="background:<?php echo esc_attr( $settings['border'] ); ?>"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layout Card -->
+                <div class="tcb-card">
+                    <div class="tcb-card-header">
+                        <div class="tcb-card-icon">📐</div>
+                        <div>
+                            <h2 class="tcb-card-title"><?php esc_html_e( 'Layout & Typography', 'tcb-megamenu' ); ?></h2>
+                            <p class="tcb-card-description"><?php esc_html_e( 'Control spacing, borders, and typography', 'tcb-megamenu' ); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="tcb-settings-grid">
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Font Family', 'tcb-megamenu' ); ?></div>
+                            <input type="text" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[font]" 
+                                   value="<?php echo esc_attr( $settings['font'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   placeholder="inherit" />
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Border Radius', 'tcb-megamenu' ); ?></div>
+                            <input type="text" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[radius]" 
+                                   value="<?php echo esc_attr( $settings['radius'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   placeholder="10px" />
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Gap/Spacing', 'tcb-megamenu' ); ?></div>
+                            <input type="text" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[gap]" 
+                                   value="<?php echo esc_attr( $settings['gap'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   placeholder="clamp(16px, 2vw, 32px)" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavior Card -->
+                <div class="tcb-card">
+                    <div class="tcb-card-header">
+                        <div class="tcb-card-icon">⚡</div>
+                        <div>
+                            <h2 class="tcb-card-title"><?php esc_html_e( 'Behavior & Interaction', 'tcb-megamenu' ); ?></h2>
+                            <p class="tcb-card-description"><?php esc_html_e( 'Configure timing and responsive behavior', 'tcb-megamenu' ); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="tcb-settings-grid">
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Hover In Delay (ms)', 'tcb-megamenu' ); ?></div>
+                            <input type="number" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[hover_in]" 
+                                   value="<?php echo esc_attr( $settings['hover_in'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   min="0" max="1000" step="10" />
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Hover Out Delay (ms)', 'tcb-megamenu' ); ?></div>
+                            <input type="number" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[hover_out]" 
+                                   value="<?php echo esc_attr( $settings['hover_out'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   min="0" max="1000" step="10" />
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Mobile Breakpoint (px)', 'tcb-megamenu' ); ?></div>
+                            <input type="number" 
+                                   name="<?php echo esc_attr( self::OPTION_NAME ); ?>[breakpoint]" 
+                                   value="<?php echo esc_attr( $settings['breakpoint'] ); ?>" 
+                                   class="tcb-setting-input" 
+                                   min="320" max="1400" step="10" />
+                        </div>
+
+                        <div class="tcb-setting-item">
+                            <div class="tcb-setting-label"><?php esc_html_e( 'Default Panel Width', 'tcb-megamenu' ); ?></div>
+                            <select name="<?php echo esc_attr( self::OPTION_NAME ); ?>[width]" class="tcb-setting-input tcb-field-select">
+                                <option value="full" <?php selected( $settings['width'], 'full' ); ?>>
+                                    ↔️ <?php esc_html_e( 'Full Width', 'tcb-megamenu' ); ?>
+                                </option>
+                                <option value="container" <?php selected( $settings['width'], 'container' ); ?>>
+                                    📦 <?php esc_html_e( 'Container Width', 'tcb-megamenu' ); ?>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div style="margin-top: 24px; text-align: center;">
+                    <button type="submit" class="tcb-btn tcb-btn-primary">
+                        💾 <?php esc_html_e( 'Save Settings', 'tcb-megamenu' ); ?>
+                    </button>
+                </div>
             </form>
+
+            <!-- Live Preview -->
+            <div class="tcb-live-preview">
+                <div class="tcb-preview-header">
+                    <div class="tcb-preview-title">👁️ <?php esc_html_e( 'Live Preview', 'tcb-megamenu' ); ?></div>
+                    <div class="tcb-preview-actions">
+                        <button class="tcb-preview-btn" data-mode="desktop">🖥️ Desktop</button>
+                        <button class="tcb-preview-btn" data-mode="mobile">📱 Mobile</button>
+                    </div>
+                </div>
+                <div class="tcb-preview-mockup" id="tcb-preview-mockup">
+                    <div style="background: <?php echo esc_attr( $settings['bg'] ); ?>; color: <?php echo esc_attr( $settings['fg'] ); ?>; padding: 20px; border-radius: <?php echo esc_attr( $settings['radius'] ); ?>;">
+                        <div style="display: flex; gap: 20px; margin-bottom: 16px;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: <?php echo esc_attr( $settings['accent'] ); ?>; margin-bottom: 8px;">Column 1</div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px; width: 80%;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; width: 60%;"></div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: <?php echo esc_attr( $settings['accent'] ); ?>; margin-bottom: 8px;">Column 2</div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px; width: 80%;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; width: 60%;"></div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: <?php echo esc_attr( $settings['accent'] ); ?>; margin-bottom: 8px;">Column 3</div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; margin-bottom: 8px; width: 80%;"></div>
+                                <div style="height: 8px; background: <?php echo esc_attr( $settings['border'] ); ?>; border-radius: 4px; width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div style="background: <?php echo esc_attr( $settings['accent'] ); ?>; color: white; padding: 10px 20px; border-radius: <?php echo esc_attr( $settings['radius'] ); ?>; text-align: center; font-weight: 600;">
+                            Call to Action
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <script>
+        jQuery(document).ready(function($) {
+            // Initialize color pickers
+            if ($.fn.wpColorPicker) {
+                $('.tcb-color-field').wpColorPicker({
+                    change: function(event, ui) {
+                        $(this).closest('.tcb-color-picker-wrapper').find('.tcb-color-preview').css('background', ui.color.toString());
+                        updatePreview();
+                    }
+                });
+            }
+
+            // Update preview on input change
+            $('input, select').on('change', function() {
+                updatePreview();
+            });
+
+            function updatePreview() {
+                var bg = $('input[name$="[bg]"]').val() || '#ffffff';
+                var fg = $('input[name$="[fg]"]').val() || '#333333';
+                var accent = $('input[name$="[accent]"]').val() || '#e11414';
+                var border = $('input[name$="[border]"]').val() || 'rgba(0,0,0,.08)';
+                var radius = $('input[name$="[radius]"]').val() || '10px';
+
+                $('#tcb-preview-mockup > div').css({
+                    'background': bg,
+                    'color': fg,
+                    'border-radius': radius
+                });
+
+                $('#tcb-preview-mockup .tcb-accent').css('color', accent);
+            }
+
+            // Preview mode toggle
+            $('.tcb-preview-btn').on('click', function() {
+                var mode = $(this).data('mode');
+                $('.tcb-preview-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                if (mode === 'mobile') {
+                    $('#tcb-preview-mockup').css('max-width', '375px');
+                } else {
+                    $('#tcb-preview-mockup').css('max-width', '100%');
+                }
+            });
+        });
+        </script>
         <?php
     }
 

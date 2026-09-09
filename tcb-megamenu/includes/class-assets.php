@@ -168,9 +168,23 @@ class Assets {
      */
     public static function get_tokens_css() {
         $settings = Settings::get_settings();
+        
+        // Determine background based on bg_mode
+        $bg_mode = isset( $settings['bg_mode'] ) ? $settings['bg_mode'] : 'transparent';
+        $bg_color = $settings['bg'];
+        
+        // Apply background mode logic
+        if ( $bg_mode === 'transparent' ) {
+            $bg_color = 'transparent';
+        } elseif ( $bg_mode === 'light' ) {
+            $bg_color = 'rgba(255, 255, 255, 0.98)';
+        } elseif ( $bg_mode === 'dark' ) {
+            $bg_color = '#1a1a1a';
+        }
+        // 'custom' uses the $settings['bg'] value
 
         $css  = ':root {';
-        $css .= '--tcb-bg:' . esc_attr( $settings['bg'] ) . ';';
+        $css .= '--tcb-bg:' . esc_attr( $bg_color ) . ';';
         $css .= '--tcb-fg:' . esc_attr( $settings['fg'] ) . ';';
         $css .= '--tcb-muted:' . esc_attr( $settings['muted'] ) . ';';
         $css .= '--tcb-accent:' . esc_attr( $settings['accent'] ) . ';';
