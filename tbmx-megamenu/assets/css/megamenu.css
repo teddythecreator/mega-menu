@@ -1,0 +1,67 @@
+/**
+ * TBMX Mega Menu - Front-end styles
+ *
+ * Uses CSS custom properties (--tbmx-*) for theming.
+ * Tokens are injected inline by class-assets.php.
+ *
+ * @package TBMX_MegaMenu
+ * @version 0.1.0
+ */
+
+/* ── Base panel ─────────────────────────────────────────────────── */
+.tbmx-panel {
+    /* Phase 2: Implement panel styles */
+    /* Uses: --tbmx-bg, --tbmx-fg, --tbmx-border, --tbmx-radius, --tbmx-shadow */
+}
+
+/* ── Panel content layout ───────────────────────────────────────── */
+.tbmx-panel-content {
+    /* Phase 2: Grid/flex layout for columns */
+    /* Uses: --tbmx-gap, --tbmx-font */
+}
+
+/* ── Columns ────────────────────────────────────────────────────── */
+.tbmx-column {
+    /* Phase 2: Column styles */
+}
+
+.tbmx-column-title {
+    /* Phase 2: Column heading */
+}
+
+.tbmx-column-links {
+    /* Phase 2: Link list */
+}
+
+/* ── Featured block ─────────────────────────────────────────────── */
+.tbmx-featured {
+    /* Phase 2: Featured image/banner + CTA */
+}
+
+/* ── Animations ─────────────────────────────────────────────────── */
+.tbmx-panel[aria-hidden="false"] {
+    /* Phase 2: fade + translateY animation */
+    /* Uses: --tbmx-anim */
+}
+
+/* ── Focus states ───────────────────────────────────────────────── */
+.tbmx-panel a:focus-visible,
+.tbmx-panel button:focus-visible {
+    /* Phase 2: Visible focus outline */
+}
+
+/* ── Responsive: mobile accordion ───────────────────────────────── */
+@media (max-width: 980px) {
+    .tbmx-panel {
+        /* Phase 2: Accordion styles for mobile */
+    }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .tbmx-panel {
+        /* Phase 2: Disable animations */
+        animation: none !important;
+        transition: none !important;
+    }
+}

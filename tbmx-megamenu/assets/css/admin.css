@@ -1,0 +1,77 @@
+/**
+ * TBMX Mega Menu - Admin styles
+ *
+ * Styles for the menu item metabox and settings page.
+ *
+ * @package TBMX_MegaMenu
+ * @version 0.1.0
+ */
+
+/* ── Menu item metabox ──────────────────────────────────────────── */
+.tbmx-menu-fields {
+    /* Phase 1: Metabox container styles */
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.tbmx-menu-fields label {
+    /* Phase 1: Field labels */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.tbmx-menu-fields select,
+.tbmx-menu-fields input[type="text"],
+.tbmx-menu-fields input[type="number"] {
+    /* Phase 1: Input styles */
+    width: 100%;
+    max-width: 300px;
+}
+
+.tbmx-menu-fields .description {
+    /* Phase 1: Field descriptions */
+    font-style: italic;
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ── Settings page ──────────────────────────────────────────────── */
+.tbmx-settings-wrap {
+    /* Phase 1: Settings page wrapper */
+    max-width: 800px;
+}
+
+.tbmx-settings-section {
+    /* Phase 1: Section styles */
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.tbmx-settings-section h2 {
+    /* Phase 1: Section headings */
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.tbmx-color-field {
+    /* Phase 1: Color picker field */
+    width: 100px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media screen and (max-width: 782px) {
+    .tbmx-menu-fields select,
+    .tbmx-menu-fields input[type="text"],
+    .tbmx-menu-fields input[type="number"] {
+        max-width: 100%;
+    }
+}

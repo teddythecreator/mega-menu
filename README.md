@@ -63,11 +63,13 @@ Ver [DEPLOY.md](DEPLOY.md) para la guía completa.
 Ver §10 del documento maestro (web) o el checklist interactivo en la sección "Roadmap".
 
 **Fases:**
-- **Fase 0 · Andamiaje** — estructura de archivos, bootstrap, readme
-- **Fase 1 · Admin** — metabox, ajustes globales
+- ✅ **Fase 0 · Andamiaje** — estructura de archivos, bootstrap, readme [COMPLETADA]
+- **Fase 1 · Admin** — metabox, ajustes globales [EN PROGRESO]
 - **Fase 2 · Front** — Walker, render, enqueue condicional
 - **Fase 3 · Interacción** — JS hover-intent, acordeón móvil
 - **Fase 4 · Pulido** — presets, i18n, QA
+
+Ver [FASE-0-COMPLETADA.md](FASE-0-COMPLETADA.md) para detalles de la Fase 0.
 
 ## Documentación
 

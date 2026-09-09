@@ -1,0 +1,129 @@
+# Copyright (C) 2024 TuboMax
+# This file is distributed under the same license as the TBMX Mega Menu plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: TBMX Mega Menu 0.1.0\n"
+"Report-Msgid-Bugs-To: https://tubomax.com/support\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: includes/class-menu-fields.php
+msgid "Enable Mega Panel"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Select Divi Layout"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Panel Width"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Full Width"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Container Width"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Custom Width"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Panel Alignment"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Left"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Center"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Right"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Icon (optional)"
+msgstr ""
+
+#: includes/class-menu-fields.php
+msgid "Badge (optional)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "TBMX Mega Menu Settings"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Colors"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Background Color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Text Color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Muted Text Color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Accent Color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Border Color"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Layout"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Border Radius"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Font Family"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Behavior"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Hover Delay (ms)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Mobile Breakpoint (px)"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Preset"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Dark"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Light"
+msgstr ""
+
+#: includes/class-settings.php
+msgid "Minimal"
+msgstr ""
