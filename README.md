@@ -1,14 +1,17 @@
-# TBMX Mega Menu — Documento Maestro
+# TCB MegaMenu — By The Creator Business
 
-> Fuente única de verdad para construir el plugin WordPress que convierte menús nativos en mega menús con layouts de la Biblioteca de Divi.
+> Professional mega menus for WordPress with seamless Divi integration.
+> Website: [thecreator.business](https://thecreator.business/)
 
 ## ¿Qué es este proyecto?
 
-Este repositorio contiene **dos cosas**:
+Este repositorio contiene:
 
-1. **El documento maestro** (web React + Vite) — lo que estás viendo en el navegador. Es la especificación completa del plugin: decisiones, arquitectura, diseño, roadmap y prompts para Claude Code.
+1. **El documento maestro** (web React + Vite) — Especificación completa del plugin: decisiones, arquitectura, diseño, roadmap y prompts.
 
-2. **Los scripts de despliegue** — herramientas para empaquetar y subir el plugin cuando exista.
+2. **El plugin TCB MegaMenu** — Plugin WordPress funcional listo para instalar.
+
+3. **Los scripts de despliegue** — Herramientas para empaquetar y subir el plugin.
 
 ## Estructura del repositorio
 
@@ -18,13 +21,51 @@ Este repositorio contiene **dos cosas**:
 │   ├── App.tsx
 │   ├── components/         # Secciones del documento
 │   └── lib/                # Datos y utilidades
-├── scripts/                # Scripts de terminal para el plugin
+├── tcb-megamenu/           # Plugin WordPress (listo para instalar)
+│   ├── tcb-megamenu.php    # Archivo principal
+│   ├── includes/           # Clases PHP
+│   ├── assets/             # CSS y JS
+│   ├── INSTALLATION-GUIDE.md
+│   ├── readme.txt          # WordPress.org format
+│   └── LICENSE
+├── scripts/                # Scripts de terminal
 │   ├── package-plugin.sh   # Empaqueta el plugin en .zip
 │   └── deploy-plugin.sh    # Sube y activa el plugin por SSH
-├── DEPLOY.md               # Guía completa de despliegue
-├── tbmx-megamenu/          # [PENDIENTE] Plugin PHP de WordPress
+├── DEPLOY.md               # Guía de despliegue
 └── package.json
 ```
+
+## Uso del plugin
+
+### Instalación rápida
+
+1. Empaquetar el plugin:
+```bash
+chmod +x scripts/package-plugin.sh
+./scripts/package-plugin.sh --tag 1.0.0
+```
+
+2. Instalar en WordPress:
+   - Ve a **Plugins → Añadir nuevo → Subir plugin**
+   - Selecciona `tcb-megamenu-1.0.0.zip`
+   - Activa el plugin
+
+3. Configurar:
+   - Ve a **TCB MegaMenu → Settings**
+   - Elige un preset o personaliza colores
+   - Guarda cambios
+
+4. Crear mega menús:
+   - Ve a **Apariencia → Menús**
+   - Activa "Enable Mega Panel" en ítems padre
+   - Elige Divi Layout o Custom Columns
+   - Guarda el menú
+
+### Documentación del plugin
+
+- **Guía de instalación:** `tcb-megamenu/INSTALLATION-GUIDE.md`
+- **WordPress.org readme:** `tcb-megamenu/readme.txt`
+- **Licencia:** `tcb-megamenu/LICENSE` (GPL v2)
 
 ## Uso del documento maestro
 
@@ -38,25 +79,6 @@ npm run build
 ```
 
 El build genera `dist/index.html` — la web estática del documento.
-
-### Checklist de pruebas interactivo
-
-El documento incluye un **checklist de QA interactivo** con 309 pruebas organizadas en 12 categorías:
-
-- 📦 Instalación y Activación
-- ⚙️ Ajustes Globales
-- 🎛️ Metabox en Ítems de Menú
-- 🎨 Render en Front-End
-- 🖥️ Interacción Desktop
-- ⌨️ Interacción Teclado
-- 📱 Interacción Móvil
-- ♿ Accesibilidad (WCAG 2.1 AA)
-- ⚡ Rendimiento
-- 🔒 Seguridad
-- 🔗 Compatibilidad
-- 🧪 Edge Cases
-
-Puedes marcar las pruebas directamente en la web y el progreso se guarda en tu navegador. También está disponible el documento completo en `tbmx-megamenu/QA-CHECKLIST.md`.
 
 ## Uso de los scripts de despliegue
 

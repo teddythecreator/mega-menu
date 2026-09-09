@@ -2,32 +2,22 @@
 /**
  * Renderer - Panel content renderer
  *
- * Renders the mega panel content from either:
- * - Divi Library layout (et_pb_layout CPT)
- * - Custom columns (fallback without Divi)
+ * CRITICAL: Uses apply_filters('the_content') for proper Divi shortcode processing.
+ * This ensures Divi modules render correctly with all their styles and scripts.
  *
- * @package TBMX_MegaMenu
+ * @package TCB_MegaMenu
  */
 
-namespace TBMX_MegaMenu;
+namespace TCB_MegaMenu;
 
-// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-/**
- * Class Renderer
- *
- * Handles rendering of mega panel content.
- */
 class Renderer {
 
     /**
      * Render panel content for a menu item
-     *
-     * @param int $item_id Menu item ID.
-     * @return string Panel HTML content.
      */
     public function render( $item_id ) {
         $source    = Menu_Fields::get_meta( $item_id, Menu_Fields::META_SOURCE, 'divi_layout' );
@@ -37,12 +27,15 @@ class Renderer {
             return $this->render_divi_layout( $layout_id );
         }
 
-        // Fallback: render custom columns
         return $this->render_columns( $item_id );
     }
 
     /**
      * Render content from a Divi Library layout
+     *
+     * IMPORTANT: We use apply_filters('the_content') instead of do_shortcode()
+     * because Divi registers its shortcodes through the_content filter.
+     * This ensures all Divi modules render with their proper HTML, CSS, and JS.
      *
      * @param int $layout_id Post ID of the et_pb_layout.
      * @return string Rendered HTML.
@@ -51,75 +44,77 @@ class Renderer {
         $layout = get_post( $layout_id );
 
         if ( ! $layout || 'et_pb_layout' !== $layout->post_type ) {
-            return $this->render_error( __( 'Layout not found.', 'tbmx-megamenu' ) );
+            return $this->render_error( __( 'Layout not found or invalid.', 'tcb-megamenu' ) );
         }
 
-        // Get the layout content
         $content = $layout->post_content;
 
         if ( empty( $content ) ) {
-            return $this->render_error( __( 'Layout is empty.', 'tbmx-megamenu' ) );
+            return $this->render_error( __( 'Layout is empty.', 'tcb-megamenu' ) );
         }
 
-        // Process Divi shortcodes
-        if ( self::is_divi_active() ) {
-            // Ensure Divi shortcodes are processed
-            if ( function_exists( 'et_pb_allow_shortcode_processing' ) ) {
-                et_pb_allow_shortcode_processing();
-            }
-
-            // Apply content filters (this processes Divi shortcodes)
-            $content = apply_filters( 'the_content', $content );
-
-            // Wrap in container for proper styling
-            $content = '<div class="tbmx-divi-content">' . $content . '</div>';
-        } else {
-            // Divi not active, show warning
+        // Check if Divi is active
+        if ( ! self::is_divi_active() ) {
             return $this->render_error(
-                __( 'Divi is not active. Please activate Divi to render this layout.', 'tbmx-megamenu' )
+                __( 'Divi is not active. Please activate Divi theme or Divi Builder plugin to render this layout. Alternatively, use "Custom Columns" mode.', 'tcb-megamenu' )
             );
         }
 
-        return $content;
+        // Ensure Divi shortcodes are registered
+        if ( function_exists( 'et_pb_allow_shortcode_processing' ) ) {
+            et_pb_allow_shortcode_processing();
+        }
+
+        // CRITICAL: Use apply_filters('the_content') for proper Divi rendering
+        // This processes all Divi shortcodes and applies necessary filters
+        $content = apply_filters( 'the_content', $content );
+
+        // Wrap in container for proper styling isolation
+        $output = '<div class="tcb-divi-content tcb-layout-' . esc_attr( $layout_id ) . '">';
+        $output .= $content;
+        $output .= '</div>';
+
+        return $output;
     }
 
     /**
-     * Render custom columns layout (fallback)
-     *
-     * @param int $item_id Menu item ID.
-     * @return string Rendered HTML.
+     * Render custom columns layout (fallback without Divi)
      */
     private function render_columns( $item_id ) {
-        // Get child menu items
         $children = $this->get_child_items( $item_id );
 
         if ( empty( $children ) ) {
-            return '<p class="tbmx-empty">' . esc_html__( 'No child menu items found. Add sub-items to this menu item to populate the panel.', 'tbmx-megamenu' ) . '</p>';
+            return '<p class="tcb-empty">' . esc_html__( 'No child menu items found. Add sub-items to this menu item to populate the panel.', 'tcb-megamenu' ) . '</p>';
         }
 
-        // Group into columns (3 columns by default, max 4)
-        $column_count = min( 4, max( 1, ceil( count( $children ) / 5 ) ) );
-        $columns      = array_chunk( $children, ceil( count( $children ) / $column_count ) );
+        // Determine column count based on number of items
+        $count = count( $children );
+        if ( $count <= 5 ) {
+            $column_count = 1;
+        } elseif ( $count <= 10 ) {
+            $column_count = 2;
+        } elseif ( $count <= 15 ) {
+            $column_count = 3;
+        } else {
+            $column_count = 4;
+        }
+
+        $columns = array_chunk( $children, (int) ceil( $count / $column_count ) );
 
         ob_start();
         ?>
-        <div class="tbmx-columns" style="grid-template-columns: repeat(<?php echo esc_attr( $column_count ); ?>, 1fr);">
-            <?php foreach ( $columns as $column_index => $column ) : ?>
-                <div class="tbmx-column">
-                    <?php
-                    // Optional: column title based on first item's parent
-                    if ( ! empty( $column ) ) :
-                    ?>
-                        <ul class="tbmx-column-links">
-                            <?php foreach ( $column as $child ) : ?>
-                                <li>
-                                    <a href="<?php echo esc_url( $child->url ); ?>"<?php echo $child->target ? ' target="' . esc_attr( $child->target ) . '"' : ''; ?>>
-                                        <?php echo esc_html( $child->title ); ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
+        <div class="tcb-columns" style="grid-template-columns: repeat(<?php echo esc_attr( $column_count ); ?>, 1fr);">
+            <?php foreach ( $columns as $column ) : ?>
+                <div class="tcb-column">
+                    <ul class="tcb-column-links">
+                        <?php foreach ( $column as $child ) : ?>
+                            <li>
+                                <a href="<?php echo esc_url( $child->url ); ?>"<?php echo ! empty( $child->target ) ? ' target="' . esc_attr( $child->target ) . '"' : ''; ?>>
+                                    <?php echo esc_html( $child->title ); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -129,22 +124,15 @@ class Renderer {
 
     /**
      * Render error message
-     *
-     * @param string $message Error message.
-     * @return string Error HTML.
      */
     private function render_error( $message ) {
-        return '<p class="tbmx-warning">' . esc_html( $message ) . '</p>';
+        return '<div class="tcb-error"><p>' . esc_html( $message ) . '</p></div>';
     }
 
     /**
      * Get child menu items for a parent item
-     *
-     * @param int $parent_id Parent menu item ID.
-     * @return array Array of menu item objects.
      */
     private function get_child_items( $parent_id ) {
-        // Get the menu this item belongs to
         $menu_ids = wp_get_post_terms( $parent_id, 'nav_menu', array( 'fields' => 'ids' ) );
 
         if ( empty( $menu_ids ) ) {
@@ -152,15 +140,12 @@ class Renderer {
         }
 
         $menu_id = $menu_ids[0];
-
-        // Get all items in this menu
         $items = wp_get_nav_menu_items( $menu_id );
 
         if ( empty( $items ) ) {
             return array();
         }
 
-        // Filter children of the parent
         $children = array();
         foreach ( $items as $item ) {
             if ( (int) $item->menu_item_parent === $parent_id ) {
@@ -174,20 +159,20 @@ class Renderer {
     /**
      * Check if Divi is active
      *
-     * @return bool
+     * Checks for:
+     * 1. Divi theme (et_setup_theme function)
+     * 2. Divi Builder plugin (ET_BUILDER_PLUGIN_VERSION constant)
+     * 3. et_pb_layout CPT existence
      */
     public static function is_divi_active() {
-        // Check for Divi theme
         if ( function_exists( 'et_setup_theme' ) ) {
             return true;
         }
 
-        // Check for Divi Builder plugin
         if ( defined( 'ET_BUILDER_PLUGIN_VERSION' ) ) {
             return true;
         }
 
-        // Check if et_pb_layout CPT exists
         if ( post_type_exists( 'et_pb_layout' ) ) {
             return true;
         }
