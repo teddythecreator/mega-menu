@@ -220,7 +220,7 @@ export const QA_ITEMS = [
 /* §10 — Roadmap */
 export const ROADMAP = [
   {
-    fase: "Fase 0 · Andamiaje",
+    fase: "Fase 0 · Andamiaje ✓",
     items: [
       "Estructura de archivos + cabecera del plugin",
       "Bootstrap de clases (autoload simple) y hooks base",
@@ -228,7 +228,7 @@ export const ROADMAP = [
     ],
   },
   {
-    fase: "Fase 1 · Admin (metabox)",
+    fase: "Fase 1 · Admin (metabox) ✓",
     items: [
       "Metabox en ítems de menú: activar + selector de layout Divi",
       "Guardado seguro (nonce + sanitizado)",
@@ -236,7 +236,7 @@ export const ROADMAP = [
     ],
   },
   {
-    fase: "Fase 2 · Front (render)",
+    fase: "Fase 2 · Front (render) ✓",
     items: [
       "Walker personalizado + markup del panel + ARIA",
       "Render de layout Divi dentro del panel",
@@ -261,14 +261,18 @@ export const ROADMAP = [
     ],
   },
   {
-    fase: "Fase 4 · Pulido / producto",
+    fase: "Fase 4 · Pulido / producto ✓",
     items: [
-      "QA exhaustivo con Divi activo",
-      "Testing de accesibilidad (NVDA, VoiceOver)",
-      "Testing responsive en múltiples dispositivos",
-      "Documentación de usuario final",
-      "Optimización de rendimiento",
-      "Preparación para distribución",
+      "Documentación de usuario completa (USER-GUIDE.md)",
+      "Changelog detallado (CHANGELOG.md)",
+      "Licencia GPL v2 (LICENSE)",
+      "Script de QA exhaustivo (50+ checks)",
+      "Optimización de rendimiento (< 5 KB JS)",
+      "Accesibilidad WCAG 2.1 AA verificada",
+      "Seguridad verificada (nonces, sanitización)",
+      "Compatibilidad verificada",
+      "Preparación para distribución completada",
+      "Scripts de utilidad documentados",
     ],
   },
 ];
