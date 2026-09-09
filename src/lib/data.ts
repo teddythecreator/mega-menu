@@ -220,7 +220,7 @@ export const QA_ITEMS = [
 /* §10 — Roadmap */
 export const ROADMAP = [
   {
-    fase: "Fase 0 · Andamiaje ✓",
+    fase: "Fase 0 · Andamiaje ✓ COMPLETADA",
     items: [
       "Estructura de archivos + cabecera del plugin",
       "Bootstrap de clases (autoload simple) y hooks base",
@@ -228,27 +228,30 @@ export const ROADMAP = [
     ],
   },
   {
-    fase: "Fase 1 · Admin (metabox) ✓",
+    fase: "Fase 1 · Admin (metabox) ✓ COMPLETADA",
     items: [
       "Metabox en ítems de menú: activar + selector de layout Divi",
       "Guardado seguro (nonce + sanitizado)",
       "Ajustes globales (tokens/colores, ancho, breakpoint)",
+      "8 campos configurables (enabled, source, layout, width, align, icon, badge)",
     ],
   },
   {
-    fase: "Fase 2 · Front (render) ✓",
+    fase: "Fase 2 · Front (render) ✓ COMPLETADA",
     items: [
       "Walker personalizado + markup del panel + ARIA",
       "Render de layout Divi dentro del panel",
       "Enqueue condicional + tokens inline",
+      "Panel Width funcional (Full, Container, Custom)",
+      "Modo columnas sin Divi (fallback)",
     ],
   },
   {
-    fase: "Fase 3 · Interacción ✓",
+    fase: "Fase 3 · Interacción ✓ COMPLETADA",
     items: [
       "JS: hover-intent, clic, teclado, cierre",
       "Animaciones + prefers-reduced-motion",
-      "Acordeón móvil",
+      "Acordeón móvil básico",
       "Hover progress indicator",
       "Staggered column animations",
       "Scroll lock (mobile)",
@@ -261,10 +264,9 @@ export const ROADMAP = [
     ],
   },
   {
-    fase: "Fase 4 · Pulido / producto ✓",
+    fase: "Fase 4 · Pulido / producto ✓ COMPLETADA",
     items: [
-      "Documentación de usuario completa (USER-GUIDE.md)",
-      "Changelog detallado (CHANGELOG.md)",
+      "Documentación completa (README, INSTALLATION-GUIDE, GUIA-VISUAL)",
       "Licencia GPL v2 (LICENSE)",
       "Script de QA exhaustivo (50+ checks)",
       "Optimización de rendimiento (< 5 KB JS)",
@@ -273,6 +275,10 @@ export const ROADMAP = [
       "Compatibilidad verificada",
       "Preparación para distribución completada",
       "Scripts de utilidad documentados",
+      "4 estilos de menú móvil (Accordion, Drawer, Overlay, Slide)",
+      "5 iconos hamburguesa personalizables (Classic, Arrow, Dots, Plus, X)",
+      "Color, tamaño y grosor del icono configurables",
+      "Drawer con posición y ancho configurables",
     ],
   },
 ];

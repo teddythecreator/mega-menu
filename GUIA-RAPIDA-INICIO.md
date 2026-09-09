@@ -1,54 +1,51 @@
-# 🚀 Guía Rápida de Inicio — TBMX Mega Menu
+# 🚀 Guía Rápida de Inicio - TCB MegaMenu
 
 > **Tiempo estimado:** 5 minutos
-> **Requisito:** Plugin ya instalado y activo en tu WordPress local
+> **Versión:** 1.3.0
 
 ---
 
-## Paso 0: Verificar que el plugin está activo
+## ✅ Paso 0: Verificar Instalación
 
 1. Ve a **Plugins** en el menú lateral de WordPress
-2. Busca **"TBMX Mega Menu"** en la lista
+2. Busca **"TCB MegaMenu"** en la lista
 3. Asegúrate de que aparece como **"Activado"** (en azul)
 
 Si no está activado, haz clic en **"Activar"**.
 
-Al activarlo verás dos cosas nuevas:
-- ✅ Una entrada **"TBMX Mega Menu"** bajo el menú **Apariencia**
-- ✅ Nuevos campos en los ítems de menú (Apariencia → Menús)
+Al activarlo verás:
+- ✅ Menú **"TCB MegaMenu"** en la barra lateral
+- ✅ Icono de grid amarillo
 
 ---
 
-## Paso 1: Configurar los ajustes globales (opcional pero recomendado)
+## 🎨 Paso 1: Configurar Ajustes Globales (2 min)
 
-1. Ve a **Apariencia → TBMX Mega Menu**
-2. Verás la página de ajustes con 4 secciones
+1. Ve a **TCB MegaMenu → Settings**
+2. Configura los colores básicos:
 
-### Opción rápida: Aplicar un preset
+### Colores Recomendados
 
-Si no quieres personalizar colores manualmente:
+**Para tema claro:**
+- Background Color: `#ffffff`
+- Text Color: `#333333`
+- Accent Color: `#e11414` (o tu color de marca)
 
-1. Baja hasta la sección **"Style Presets"**
-2. Selecciona uno de los 3 presets:
-   - **Oscuro** — Fondo negro, texto blanco, rojo de marca
-   - **Claro** — Fondo claro, texto oscuro, rojo de marca
-   - **Minimal** — Fondo gris, texto negro, esquinas cuadradas
-3. Haz clic en **"Guardar cambios"** (abajo del todo)
+**Para tema oscuro:**
+- Background Color: `#1a1a1a`
+- Text Color: `#f5f5f5`
+- Accent Color: `#f0b429` (o tu color de marca)
 
-¡Listo! Los colores se aplicarán automáticamente.
+3. Configura el menú móvil:
+- **Mobile Style**: Elige entre Accordion, Drawer, Overlay, Slide
+- **Hamburger Icon**: Elige entre Classic, Arrow, Dots, Plus, X
+- **Icon Color**: Color del icono (debe contrastar con el header)
 
-### Opción personalizada: Elegir tus propios colores
-
-1. En la sección **"Colors"**, haz clic en cada color picker
-2. Elige los colores que quieras:
-   - **Background Color** → Fondo del panel del mega menú
-   - **Text Color** → Color del texto
-   - **Accent Color** → Color de acento (enlaces al pasar el mouse, badges)
-3. Haz clic en **"Guardar cambios"**
+4. Haz clic en **"Guardar cambios"**
 
 ---
 
-## Paso 2: Crear un menú (si aún no tienes uno)
+## 📋 Paso 2: Crear un Menú (3 min)
 
 1. Ve a **Apariencia → Menús**
 2. Si no tienes un menú:
@@ -56,31 +53,24 @@ Si no quieres personalizar colores manualmente:
    - Haz clic en **"Crear menú"**
 3. Añade algunos ítems al menú desde la columna izquierda:
    - Páginas, categorías, enlaces personalizados, etc.
-4. En **"Ubicación del tema"**, marca la ubicación donde quieres que aparezca (ej: "Primary Menu")
+4. En **"Ubicación del tema"**, marca la ubicación donde quieres que aparezca
 5. Haz clic en **"Guardar menú"**
 
 ---
 
-## Paso 3: Activar el mega menú en un ítem
-
-Este es el paso clave. Vamos a convertir un ítem de menú en un mega menú.
+## 🎯 Paso 3: Activar el Mega Menú (2 min)
 
 ### 3.1 Abre el ítem de menú
 
 1. En la página de Menús, busca el ítem que quieres convertir
 2. Haz clic en la **flecha ▼** a la derecha del ítem para desplegarlo
 3. Verás los campos habituales (URL, Título, etc.)
-4. **Desplázate hacia abajo** — verás una nueva sección con fondo gris: **"TBMX Mega Menu"**
+4. **Desplázate hacia abajo** — verás una nueva sección: **"TCB Mega Menu"**
 
 ### 3.2 Activa el mega panel
 
 1. Marca la casilla **"☑ Enable Mega Panel"**
-2. Automáticamente se desplegarán más campos:
-   - Content Source
-   - Panel Width
-   - Panel Alignment
-   - Icon (opcional)
-   - Badge (opcional)
+2. Automáticamente se desplegarán más campos
 
 ### 3.3 Elige el contenido del panel
 
@@ -140,7 +130,7 @@ Servicios (mega panel activado) ← padre
 Si quieres una etiqueta pequeña junto al ítem del menú (ej: "Nuevo", "Oferta"):
 
 1. En el campo **"Badge"**, escribe el texto
-2. Se mostrará como una etiqueta roja junto al nombre del ítem
+2. Se mostrará como una etiqueta con el color accent
 
 ### 3.6 Guarda el menú
 
@@ -148,7 +138,7 @@ Haz clic en **"Guardar menú"** (botón azul abajo a la derecha).
 
 ---
 
-## Paso 4: Ver el resultado en el front-end
+## 👁️ Paso 4: Ver el Resultado en el Front-End
 
 1. Abre tu sitio web en el navegador
 2. Pasa el mouse sobre el ítem del menú que configuraste
@@ -164,12 +154,12 @@ Haz clic en **"Guardar menú"** (botón azul abajo a la derecha).
 
 **En móvil (< 980px):**
 - Redimensiona la ventana del navegador
-- El mega menú se convierte en un acordeón
-- Toca el ítem para abrirlo/cerrarlo
+- El mega menú se convierte en el estilo que elegiste (Accordion, Drawer, Overlay, Slide)
+- Toca el icono hamburguesa para abrirlo/cerrarlo
 
 ---
 
-## Paso 5: Probar la interacción
+## 🧪 Paso 5: Probar la Interacción
 
 ### En desktop:
 - **Hover**: Pasa el mouse sobre el ítem → se abre el panel
@@ -178,17 +168,17 @@ Haz clic en **"Guardar menú"** (botón azul abajo a la derecha).
 - **Cerrar**: Haz clic fuera del panel o pulsa Esc
 
 ### En móvil:
-- **Tap**: Toca el ítem → se abre el acordeón
-- **Cerrar**: Toca de nuevo o toca otro ítem
+- **Tap**: Toca el icono hamburguesa → se abre el menú
+- **Cerrar**: Toca de nuevo o toca fuera del menú
 
 ---
 
-## 🐛 Solución de problemas comunes
+## 🐛 Solución de Problemas Comunes
 
 ### "No veo los campos del mega menú en los ítems"
 
 **Causa:** El plugin no está activo.
-**Solución:** Ve a Plugins y activa "TBMX Mega Menu".
+**Solución:** Ve a Plugins y activa "TCB MegaMenu".
 
 ### "El mega menú no aparece en el front-end"
 
@@ -208,39 +198,43 @@ Haz clic en **"Guardar menú"** (botón azul abajo a la derecha).
 
 **Causa:** Caché del navegador o del plugin de caché.
 **Solución:** 
-- Limpia la caché del navegador (Ctrl+F5 o Cmd+Shift+R)
+- Limpia la caché del navegador (Ctrl+F5)
 - Si usas WP Rocket, W3 Total Cache, etc., limpia la caché del plugin
 
-### "El mega menú se ve raro en móvil"
+### "El menú móvil no funciona"
 
 **Causa:** El breakpoint no coincide con tu tema.
-**Solución:** Ve a Apariencia → TBMX Mega Menu → Behavior → ajusta el "Mobile Breakpoint" (por defecto 980px).
+**Solución:** Ve a TCB MegaMenu → Settings → Behavior → ajusta el "Mobile Breakpoint" (por defecto 980px).
 
 ---
 
-## 📋 Checklist rápido
+## 📋 Checklist Rápido
 
 Antes de dar por terminado, verifica:
 
 - [ ] El plugin está activo
-- [ ] Los ajustes globales están configurados (o usaste un preset)
+- [ ] Los ajustes globales están configurados (colores, móvil)
 - [ ] Creaste un menú con al menos un ítem padre
 - [ ] Activaste "Enable Mega Panel" en el ítem padre
 - [ ] Seleccionaste un layout de Divi O añadiste sub-ítems
 - [ ] Guardaste el menú
 - [ ] El menú está asignado a una ubicación del tema
 - [ ] El mega menú aparece en el front-end al pasar el mouse
-- [ ] Funciona en móvil (acordeón)
+- [ ] Funciona en móvil (el estilo que elegiste)
 
 ---
 
-## 🎯 Ejemplo completo paso a paso
+## 🎯 Ejemplo Completo Paso a Paso
 
 Vamos a crear un mega menú completo de ejemplo:
 
 ### 1. Configura los ajustes
-- Ve a **Apariencia → TBMX Mega Menu**
-- Selecciona el preset **"Oscuro"**
+- Ve a **TCB MegaMenu → Settings**
+- Background Color: `#ffffff`
+- Text Color: `#333333`
+- Accent Color: `#e11414`
+- Mobile Style: `Drawer`
+- Hamburger Icon: `Classic`
 - Guarda cambios
 
 ### 2. Crea el menú
@@ -276,29 +270,29 @@ Vamos a crear un mega menú completo de ejemplo:
 - Abre tu sitio
 - Pasa el mouse sobre "Servicios"
 - Deberías ver un panel con 3 columnas de enlaces y un badge "Nuevo"
-- Redimensiona la ventana y verifica que funciona en móvil
-
----
-
-## 📚 Más información
-
-- **Guía completa de usuario:** `USER-GUIDE.md`
-- **Checklist de pruebas:** `QA-CHECKLIST.md`
-- **Changelog:** `CHANGELOG.md`
-- **Documento maestro:** Web interactiva del proyecto
+- Redimensiona la ventana y verifica que funciona en móvil (drawer)
 
 ---
 
 ## 💡 Consejos
 
 1. **Empieza simple:** Usa "Custom Columns" primero, luego prueba con layouts de Divi
-2. **Usa un preset:** Los presets te dan un resultado profesional inmediato
-3. **Prueba en móvil:** Redimensiona la ventana para ver el modo acordeón
+2. **Usa colores contrastados:** Asegúrate de que el texto sea legible sobre el fondo
+3. **Prueba en móvil:** Redimensiona la ventana para ver el modo móvil
 4. **Usa el teclado:** Prueba Tab, Enter, Esc para verificar accesibilidad
 5. **Guarda frecuentemente:** No olvides guardar el menú después de cada cambio
 
 ---
 
+## 📚 Más Información
+
+- **Guía completa:** Ver `INSTALLATION-GUIDE.md`
+- **Guía visual móvil:** Ver `GUIA-VISUAL-MOVIL.md`
+- **Documentación técnica:** Ver `README.md`
+- **Sitio web:** https://thecreator.business/
+
+---
+
 **¿Todo funciona? ¡Felicidades! Tu mega menú está listo.** 🎉
 
-**¿Problemas?** Revisa la sección de solución de problemas o consulta la guía completa de usuario.
+**¿Problemas?** Revisa la sección de solución de problemas o consulta la guía completa de instalación.
