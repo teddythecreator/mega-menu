@@ -204,7 +204,7 @@ class Menu_Walker extends \Walker_Nav_Menu {
 
         if ( $is_mega && 0 === $depth ) {
             // Render the mega panel
-            $panel_id   = 'tbmx-panel-' . $data_object->ID;
+            $panel_id      = 'tbmx-panel-' . $data_object->ID;
             $panel_content = $this->renderer->render( $data_object->ID );
 
             // Get panel settings
@@ -215,6 +215,12 @@ class Menu_Walker extends \Walker_Nav_Menu {
             $panel_classes[] = 'tbmx-width-' . $width;
             $panel_classes[] = 'tbmx-align-' . $align;
 
+            // Add data attributes for JS
+            $panel_data = array(
+                'tbmx-panel'   => 'true',
+                'tbmx-parent'  => $data_object->ID,
+            );
+
             $output .= "\n<div";
             $output .= ' id="' . esc_attr( $panel_id ) . '"';
             $output .= ' class="' . esc_attr( implode( ' ', $panel_classes ) ) . '"';
@@ -222,6 +228,12 @@ class Menu_Walker extends \Walker_Nav_Menu {
             $output .= ' aria-label="' . esc_attr( sprintf( __( 'Mega menu panel for %s', 'tbmx-megamenu' ), $data_object->title ) ) . '"';
             $output .= ' aria-hidden="true"';
             $output .= ' hidden';
+
+            // Add data attributes
+            foreach ( $panel_data as $attr => $value ) {
+                $output .= ' data-' . esc_attr( $attr ) . '="' . esc_attr( $value ) . '"';
+            }
+
             $output .= ">\n";
             $output .= '<div class="tbmx-panel-inner">' . $panel_content . "</div>\n";
             $output .= "</div>\n";

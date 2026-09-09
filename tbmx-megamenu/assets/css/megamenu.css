@@ -27,6 +27,53 @@
     vertical-align: middle;
 }
 
+/* ── Hover progress indicator ───────────────────────────────────── */
+.tbmx-hover-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--tbmx-accent, #e11414);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.12s cubic-bezier(0.22, 0.61, 0.36, 1);
+    pointer-events: none;
+}
+
+.tbmx-hover-indicator--active {
+    animation: tbmxProgressFill var(--tbmx-hover-in, 120ms) linear forwards;
+}
+
+@keyframes tbmxProgressFill {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* ── Touch feedback ─────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+    .tbmx-mega-item:active > a {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* ── In-view animations ─────────────────────────────────────────── */
+.tbmx-mega-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tbmx-mega-item.tbmx-in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ── Panel base ─────────────────────────────────────────────────── */
 .tbmx-panel {
     position: absolute;

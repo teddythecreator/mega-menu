@@ -57,9 +57,13 @@ class Assets {
         // Pass config to JS
         $settings = Settings::get_settings();
         wp_localize_script( 'tbmx-megamenu', 'tbmxConfig', array(
-            'hoverIn'    => intval( $settings['hover_in'] ),
-            'hoverOut'   => intval( $settings['hover_out'] ),
-            'breakpoint' => intval( $settings['breakpoint'] ),
+            'hoverIn'        => intval( $settings['hover_in'] ),
+            'hoverOut'       => intval( $settings['hover_out'] ),
+            'breakpoint'     => intval( $settings['breakpoint'] ),
+            'scrollLock'     => true,
+            'focusTrap'      => false,
+            'staggerDelay'   => 50,
+            'lazyLoadImages' => true,
         ) );
 
         // Inject tokens as inline CSS
