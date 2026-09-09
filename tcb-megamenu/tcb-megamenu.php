@@ -39,6 +39,9 @@ add_action( 'plugins_loaded', 'tcb_megamenu_init' );
 
 // Activation hook
 register_activation_hook( __FILE__, function() {
+    // Load required classes for activation
+    require_once TCB_MEGAMENU_DIR . 'includes/class-settings.php';
+    
     // Set default options on activation
     if ( ! get_option( 'tcb_megamenu_settings' ) ) {
         update_option( 'tcb_megamenu_settings', TCB_MegaMenu\Settings::get_defaults() );
