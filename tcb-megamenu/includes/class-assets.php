@@ -37,12 +37,19 @@ class Assets {
 
         $settings = Settings::get_settings();
         wp_localize_script( 'tcb-megamenu', 'tcbConfig', array(
-            'hoverIn'        => intval( $settings['hover_in'] ),
-            'hoverOut'       => intval( $settings['hover_out'] ),
-            'breakpoint'     => intval( $settings['breakpoint'] ),
-            'scrollLock'     => true,
-            'staggerDelay'   => 50,
-            'lazyLoadImages' => true,
+            'hoverIn'            => intval( $settings['hover_in'] ),
+            'hoverOut'           => intval( $settings['hover_out'] ),
+            'breakpoint'         => intval( $settings['breakpoint'] ),
+            'mobileStyle'        => $settings['mobile_style'],
+            'mobilePosition'     => $settings['mobile_position'],
+            'mobileWidth'        => intval( $settings['mobile_width'] ),
+            'hamburgerIcon'      => $settings['hamburger_icon'],
+            'hamburgerColor'     => $settings['hamburger_color'],
+            'hamburgerSize'      => intval( $settings['hamburger_size'] ),
+            'hamburgerThickness' => intval( $settings['hamburger_thickness'] ),
+            'scrollLock'         => true,
+            'staggerDelay'       => 50,
+            'lazyLoadImages'     => true,
         ) );
 
         add_action( 'wp_head', array( __CLASS__, 'print_tokens' ), 1 );
@@ -156,6 +163,12 @@ class Assets {
         $css .= '--tcb-font:' . esc_attr( $settings['font'] ) . ';';
         $css .= '--tcb-gap:' . esc_attr( $settings['gap'] ) . ';';
         $css .= '--tcb-anim:' . esc_attr( $settings['anim'] ) . ';';
+        // Mobile settings
+        $css .= '--tcb-mobile-width:' . intval( $settings['mobile_width'] ) . 'px;';
+        // Hamburger icon settings
+        $css .= '--tcb-hamburger-color:' . esc_attr( $settings['hamburger_color'] ) . ';';
+        $css .= '--tcb-hamburger-size:' . intval( $settings['hamburger_size'] ) . 'px;';
+        $css .= '--tcb-hamburger-thickness:' . intval( $settings['hamburger_thickness'] ) . 'px;';
         $css .= '}';
 
         return $css;

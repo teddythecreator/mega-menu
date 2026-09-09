@@ -1,10 +1,8 @@
 /**
  * TCB-MegaMenu - Front-end interaction
  *
- * Vanilla JS (< 5 KB target)
- *
  * @package TCB_MegaMenu
- * @version 1.0.0
+ * @version 1.3.0
  */
 
 (function() {
@@ -14,21 +12,25 @@
         hoverIn: 120,
         hoverOut: 200,
         breakpoint: 980,
-        scrollLock: true,
-        staggerDelay: 50,
-        lazyLoadImages: true
+        mobileStyle: 'accordion',
+        mobilePosition: 'left',
+        mobileWidth: 300,
+        hamburgerIcon: 'classic',
+        hamburgerColor: '#333333',
+        hamburgerSize: 24,
+        hamburgerThickness: 2
     }, window.tcbConfig || {});
-
-    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let activePanel = null;
     let hoverInTimer = null;
     let hoverOutTimer = null;
-    let scrollPosition = 0;
 
     function init() {
         const triggers = document.querySelectorAll('[data-tcb-toggle="mega"]');
         if (!triggers.length) return;
+
+        // Add hamburger button for mobile
+        addHamburgerButtons();
 
         triggers.forEach(function(trigger) {
             const li = trigger.closest('.tcb-mega-item');
@@ -36,6 +38,9 @@
 
             const panel = li.querySelector('.tcb-panel');
             if (!panel) return;
+
+            // Add mobile class based on settings
+            addMobileClass(panel);
 
             // Desktop: hover intent
             li.addEventListener('mouseenter', function() {
@@ -56,6 +61,7 @@
 
             // Click/tap
             trigger.addEventListener('click', function(e) {
+                if (isMobile()) return; // Let hamburger handle mobile
                 e.preventDefault();
                 e.stopPropagation();
                 if (activePanel === panel) {
@@ -76,13 +82,6 @@
                     trigger.focus();
                 }
             });
-
-            // Lazy load images
-            if (CONFIG.lazyLoadImages) {
-                panel.addEventListener('tcb:open', function() {
-                    lazyLoadImages(panel);
-                });
-            }
         });
 
         // Close on click outside
@@ -117,56 +116,135 @@
         });
     }
 
+    function addHamburgerButtons() {
+        const megaItems = document.querySelectorAll('.tcb-mega-item');
+        
+        megaItems.forEach(function(item) {
+            const trigger = item.querySelector('a[data-tcb-toggle="mega"]');
+            if (!trigger) return;
+
+            // Check if hamburger already exists
+            if (item.querySelector('.tcb-hamburger')) return;
+
+            const hamburger = document.createElement('button');
+            hamburger.className = 'tcb-hamburger tcb-hamburger-icon-' + CONFIG.hamburgerIcon;
+            hamburger.setAttribute('aria-label', 'Toggle menu');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-controls', trigger.getAttribute('aria-controls'));
+            
+            // Add lines
+            for (let i = 0; i < 3; i++) {
+                const line = document.createElement('span');
+                line.className = 'tcb-hamburger-line';
+                hamburger.appendChild(line);
+            }
+
+            // Insert hamburger after trigger
+            trigger.parentNode.insertBefore(hamburger, trigger.nextSibling);
+
+            // Add click handler
+            hamburger.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const panel = document.getElementById(this.getAttribute('aria-controls'));
+                if (!panel) return;
+
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                if (isExpanded) {
+                    closePanel(this, panel);
+                    this.setAttribute('aria-expanded', 'false');
+                } else {
+                    // Close any other open panels
+                    closeAllPanels();
+                    openPanel(this, panel);
+                    this.setAttribute('aria-expanded', 'true');
+                    
+                    // Show overlay for drawer and overlay styles
+                    if (CONFIG.mobileStyle === 'drawer' || CONFIG.mobileStyle === 'overlay') {
+                        showMobileOverlay();
+                    }
+                }
+            });
+        });
+    }
+
+    function addMobileClass(panel) {
+        const styleClass = 'tcb-mobile-' + CONFIG.mobileStyle;
+        panel.classList.add(styleClass);
+
+        // Add position class for drawer
+        if (CONFIG.mobileStyle === 'drawer') {
+            panel.classList.add('tcb-mobile-position-' + CONFIG.mobilePosition);
+        }
+    }
+
+    function showMobileOverlay() {
+        let overlay = document.querySelector('.tcb-mobile-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'tcb-mobile-overlay';
+            document.body.appendChild(overlay);
+
+            overlay.addEventListener('click', function() {
+                closeAllPanels();
+                hideMobileOverlay();
+            });
+        }
+        
+        setTimeout(function() {
+            overlay.classList.add('active');
+        }, 10);
+    }
+
+    function hideMobileOverlay() {
+        const overlay = document.querySelector('.tcb-mobile-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            setTimeout(function() {
+                overlay.remove();
+            }, 300);
+        }
+    }
+
+    function closeAllPanels() {
+        document.querySelectorAll('.tcb-panel[aria-hidden="false"]').forEach(function(panel) {
+            const trigger = document.querySelector('[aria-controls="' + panel.id + '"]');
+            if (trigger) {
+                closePanel(trigger, panel);
+                if (trigger.classList.contains('tcb-hamburger')) {
+                    trigger.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        hideMobileOverlay();
+    }
+
     function openPanel(trigger, panel) {
         if (activePanel && activePanel !== panel) {
             const otherTrigger = document.querySelector('[aria-controls="' + activePanel.id + '"]');
             if (otherTrigger) closePanel(otherTrigger, activePanel);
         }
 
-        if (CONFIG.scrollLock && isMobile()) {
-            scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            document.body.style.position = 'fixed';
-            document.body.style.top = '-' + scrollPosition + 'px';
-            document.body.style.width = '100%';
-        }
-
         trigger.setAttribute('aria-expanded', 'true');
         panel.setAttribute('aria-hidden', 'false');
         panel.removeAttribute('hidden');
 
-        if (!REDUCED_MOTION) staggerColumns(panel);
-
         activePanel = panel;
-        panel.dispatchEvent(new CustomEvent('tcb:open'));
-
-        if (!REDUCED_MOTION) {
-            setTimeout(function() {
-                const firstFocusable = panel.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
-                if (firstFocusable) firstFocusable.focus();
-            }, 100);
-        }
     }
 
     function closePanel(trigger, panel) {
         trigger.setAttribute('aria-expanded', 'false');
         panel.setAttribute('aria-hidden', 'true');
 
-        if (CONFIG.scrollLock && isMobile()) {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            window.scrollTo(0, scrollPosition);
-        }
-
-        const delay = REDUCED_MOTION ? 0 : 220;
         setTimeout(function() {
             if (panel.getAttribute('aria-hidden') === 'true') {
                 panel.setAttribute('hidden', '');
             }
-        }, delay);
+        }, 300);
 
         if (activePanel === panel) activePanel = null;
-        panel.dispatchEvent(new CustomEvent('tcb:close'));
     }
 
     function handleKeyboard(e, trigger, panel) {
@@ -174,8 +252,11 @@
             case 'Enter':
             case ' ':
                 e.preventDefault();
-                if (activePanel === panel) closePanel(trigger, panel);
-                else openPanel(trigger, panel);
+                if (activePanel === panel) {
+                    closePanel(trigger, panel);
+                } else {
+                    openPanel(trigger, panel);
+                }
                 break;
             case 'ArrowDown':
                 e.preventDefault();
@@ -214,34 +295,11 @@
         allTriggers[nextIndex].focus();
     }
 
-    function staggerColumns(panel) {
-        const columns = panel.querySelectorAll('.tcb-column');
-        columns.forEach(function(column, index) {
-            column.style.opacity = '0';
-            column.style.transform = 'translateY(20px)';
-            column.style.transition = 'none';
-            setTimeout(function() {
-                column.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                column.style.opacity = '1';
-                column.style.transform = 'translateY(0)';
-            }, index * CONFIG.staggerDelay);
-        });
-    }
-
-    function lazyLoadImages(panel) {
-        const images = panel.querySelectorAll('img[data-src]');
-        images.forEach(function(img) {
-            if (!img.src || img.src === '') {
-                img.src = img.getAttribute('data-src');
-                img.removeAttribute('data-src');
-            }
-        });
-    }
-
     function isMobile() {
         return window.innerWidth < CONFIG.breakpoint;
     }
 
+    // Initialize on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -264,12 +322,7 @@
                 if (panel) closePanel(trigger, panel);
             }
         },
-        closeAll: function() {
-            document.querySelectorAll('[data-tcb-toggle="mega"]').forEach(function(trigger) {
-                const panel = document.getElementById(trigger.getAttribute('aria-controls'));
-                if (panel) closePanel(trigger, panel);
-            });
-        }
+        closeAll: closeAllPanels
     };
 
 })();
