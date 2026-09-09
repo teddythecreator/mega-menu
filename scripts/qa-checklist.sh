@@ -16,7 +16,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
-PLUGIN_DIR="tbmx-megamenu"
+PLUGIN_DIR="tcb-megamenu"
 
 # Colores
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
@@ -150,19 +150,19 @@ check "$([ $UNINSTALL -gt 0 ] && echo true || echo false)" "Limpieza en desinsta
 section "Compatibilidad"
 
 # 4.1 WordPress version
-WP_VERSION=$(grep "Requires at least:" "$PLUGIN_DIR/tbmx-megamenu.php" | awk '{print $4}')
+WP_VERSION=$(grep "Requires at least:" "$PLUGIN_DIR/tcb-megamenu.php" | awk '{print $4}')
 check "$([ -n "$WP_VERSION" ] && echo true || echo false)" "Versión mínima de WordPress definida ($WP_VERSION)"
 
 # 4.2 PHP version
-PHP_VERSION=$(grep "Requires PHP:" "$PLUGIN_DIR/tbmx-megamenu.php" | awk '{print $4}')
+PHP_VERSION=$(grep "Requires PHP:" "$PLUGIN_DIR/tcb-megamenu.php" | awk '{print $4}')
 check "$([ -n "$PHP_VERSION" ] && echo true || echo false)" "Versión mínima de PHP definida ($PHP_VERSION)"
 
 # 4.3 Text domain
-TEXT_DOMAIN=$(grep "Text Domain:" "$PLUGIN_DIR/tbmx-megamenu.php" | awk '{print $3}')
-check "$([ "$TEXT_DOMAIN" = "tbmx-megamenu" ] && echo true || echo false)" "Text domain correcto"
+TEXT_DOMAIN=$(grep "Text Domain:" "$PLUGIN_DIR/tcb-megamenu.php" | awk '{print $3}')
+check "$([ "$TEXT_DOMAIN" = "tcb-megamenu" ] && echo true || echo false)" "Text domain correcto"
 
 # 4.4 Translation ready
-POT_FILE="$PLUGIN_DIR/languages/tbmx-megamenu.pot"
+POT_FILE="$PLUGIN_DIR/languages/tcb-megamenu.pot"
 check "$([ -f "$POT_FILE" ] && echo true || echo false)" "Archivo POT para traducciones"
 
 # 4.5 Divi detection
@@ -196,19 +196,19 @@ check "$([ $README_LINES -gt 50 ] && echo true || echo false)" "readme.txt con c
 section "Preparación para Distribución"
 
 # 6.1 Plugin header
-PLUGIN_NAME=$(grep "Plugin Name:" "$PLUGIN_DIR/tbmx-megamenu.php" | cut -d: -f2 | xargs)
+PLUGIN_NAME=$(grep "Plugin Name:" "$PLUGIN_DIR/tcb-megamenu.php" | cut -d: -f2 | xargs)
 check "$([ -n "$PLUGIN_NAME" ] && echo true || echo false)" "Plugin Name en cabecera"
 
-PLUGIN_VERSION=$(grep "Version:" "$PLUGIN_DIR/tbmx-megamenu.php" | awk '{print $2}')
+PLUGIN_VERSION=$(grep "Version:" "$PLUGIN_DIR/tcb-megamenu.php" | awk '{print $2}')
 check "$([ -n "$PLUGIN_VERSION" ] && echo true || echo false)" "Version en cabecera"
 
-PLUGIN_DESC=$(grep "Description:" "$PLUGIN_DIR/tbmx-megamenu.php" | cut -d: -f2 | xargs)
+PLUGIN_DESC=$(grep "Description:" "$PLUGIN_DIR/tcb-megamenu.php" | cut -d: -f2 | xargs)
 check "$([ -n "$PLUGIN_DESC" ] && echo true || echo false)" "Description en cabecera"
 
-PLUGIN_AUTHOR=$(grep "Author:" "$PLUGIN_DIR/tbmx-megamenu.php" | cut -d: -f2 | xargs)
+PLUGIN_AUTHOR=$(grep "Author:" "$PLUGIN_DIR/tcb-megamenu.php" | cut -d: -f2 | xargs)
 check "$([ -n "$PLUGIN_AUTHOR" ] && echo true || echo false)" "Author en cabecera"
 
-PLUGIN_LICENSE=$(grep "License:" "$PLUGIN_DIR/tbmx-megamenu.php" | cut -d: -f2 | xargs)
+PLUGIN_LICENSE=$(grep "License:" "$PLUGIN_DIR/tcb-megamenu.php" | cut -d: -f2 | xargs)
 check "$([ -n "$PLUGIN_LICENSE" ] && echo true || echo false)" "License en cabecera"
 
 # 6.2 No debug code

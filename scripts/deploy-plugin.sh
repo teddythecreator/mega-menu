@@ -11,7 +11,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
-PLUGIN_SLUG="tbmx-megamenu"
+PLUGIN_SLUG="tcb-megamenu"
 ZIP_NAME="${PLUGIN_SLUG}.zip"
 REMOTE_USER_HOST="${1:-}"
 REMOTE_PATH="${2:-}"

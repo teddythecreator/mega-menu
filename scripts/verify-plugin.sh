@@ -14,7 +14,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
-PLUGIN_DIR="tbmx-megamenu"
+PLUGIN_DIR="tcb-megamenu"
 
 # Colores
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
@@ -29,9 +29,10 @@ ERRORS=0
 section "Estructura de archivos"
 
 REQUIRED_FILES=(
-    "tbmx-megamenu.php"
+    "tcb-megamenu.php"
     "uninstall.php"
     "readme.txt"
+    "INSTALLATION-GUIDE.md"
     "includes/class-plugin.php"
     "includes/class-menu-fields.php"
     "includes/class-menu-walker.php"
@@ -42,7 +43,6 @@ REQUIRED_FILES=(
     "assets/css/admin.css"
     "assets/js/megamenu.js"
     "assets/js/admin.js"
-    "languages/tbmx-megamenu.pot"
 )
 
 for file in "${REQUIRED_FILES[@]}"; do
@@ -75,22 +75,22 @@ fi
 # ── 3. Verificar cabecera del plugin ──
 section "Cabecera del plugin"
 
-if grep -q "Plugin Name: TBMX Mega Menu" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+if grep -q "Plugin Name: TCB MegaMenu" "$PLUGIN_DIR/tcb-megamenu.php"; then
     info "Plugin Name encontrado"
 else
-    err "Plugin Name no encontrado en tbmx-megamenu.php"
+    err "Plugin Name no encontrado en tcb-megamenu.php"
     ERRORS=$((ERRORS + 1))
 fi
 
-if grep -q "Version:" "$PLUGIN_DIR/tbmx-megamenu.php"; then
-    VERSION=$(grep "Version:" "$PLUGIN_DIR/tbmx-megamenu.php" | head -1 | awk '{print $3}')
+if grep -q "Version:" "$PLUGIN_DIR/tcb-megamenu.php"; then
+    VERSION=$(grep "Version:" "$PLUGIN_DIR/tcb-megamenu.php" | head -1 | awk '{print $3}')
     info "Versión: $VERSION"
 else
     err "Version no encontrada"
     ERRORS=$((ERRORS + 1))
 fi
 
-if grep -q "Text Domain: tbmx-megamenu" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+if grep -q "Text Domain: tcb-megamenu" "$PLUGIN_DIR/tcb-megamenu.php"; then
     info "Text Domain correcto"
 else
     err "Text Domain no encontrado o incorrecto"
@@ -101,15 +101,15 @@ fi
 section "Constantes definidas"
 
 CONSTANTS=(
-    "TBMX_MEGAMENU_VERSION"
-    "TBMX_MEGAMENU_FILE"
-    "TBMX_MEGAMENU_DIR"
-    "TBMX_MEGAMENU_URL"
-    "TBMX_MEGAMENU_BASENAME"
+    "TCB_MEGAMENU_VERSION"
+    "TCB_MEGAMENU_FILE"
+    "TCB_MEGAMENU_DIR"
+    "TCB_MEGAMENU_URL"
+    "TCB_MEGAMENU_BASENAME"
 )
 
 for const in "${CONSTANTS[@]}"; do
-    if grep -q "define( '$const'" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+    if grep -q "define( '$const'" "$PLUGIN_DIR/tcb-megamenu.php"; then
         info "$const"
     else
         err "Constante no definida: $const"
@@ -132,20 +132,20 @@ done
 # ── 6. Verificar hooks ──
 section "Hooks registrados"
 
-if grep -q "add_action( 'plugins_loaded'" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+if grep -q "add_action( 'plugins_loaded'" "$PLUGIN_DIR/tcb-megamenu.php"; then
     info "Hook plugins_loaded registrado"
 else
     err "Hook plugins_loaded no encontrado"
     ERRORS=$((ERRORS + 1))
 fi
 
-if grep -q "register_activation_hook" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+if grep -q "register_activation_hook" "$PLUGIN_DIR/tcb-megamenu.php"; then
     info "Activation hook registrado"
 else
     warn "Activation hook no encontrado (opcional)"
 fi
 
-if grep -q "register_deactivation_hook" "$PLUGIN_DIR/tbmx-megamenu.php"; then
+if grep -q "register_deactivation_hook" "$PLUGIN_DIR/tcb-megamenu.php"; then
     info "Deactivation hook registrado"
 else
     warn "Deactivation hook no encontrado (opcional)"

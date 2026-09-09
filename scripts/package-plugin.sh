@@ -4,14 +4,14 @@
 # Empaqueta el plugin WordPress en un .zip listo para subir (WP Admin o WP-CLI).
 #
 # Uso:
-#   ./scripts/package-plugin.sh              # genera tbmx-megamenu.zip en la raíz
-#   ./scripts/package-plugin.sh --tag 0.1.0  # genera tbmx-megamenu-0.1.0.zip
+#   ./scripts/package-plugin.sh              # genera tcb-megamenu.zip en la raíz
+#   ./scripts/package-plugin.sh --tag 1.0.0  # genera tcb-megamenu-1.0.0.zip
 #
 # Requisitos: bash, zip, git (opcional, para limpiar archivos ignorados).
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
-PLUGIN_SLUG="tbmx-megamenu"
+PLUGIN_SLUG="tcb-megamenu"
 VERSION="${1#--tag}"
 VERSION="${VERSION:-dev}"
 ZIP_NAME="${PLUGIN_SLUG}${VERSION:+-$VERSION}.zip"
