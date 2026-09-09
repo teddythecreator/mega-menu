@@ -65,12 +65,13 @@ Ver §10 del documento maestro (web) o el checklist interactivo en la sección "
 **Fases:**
 - ✅ **Fase 0 · Andamiaje** — estructura de archivos, bootstrap, readme [COMPLETADA]
 - ✅ **Fase 1 · Admin** — metabox, ajustes globales [COMPLETADA]
-- **Fase 2 · Front** — Walker, render, enqueue condicional [EN PROGRESO]
-- **Fase 3 · Interacción** — JS hover-intent, acordeón móvil
-- **Fase 4 · Pulido** — presets, i18n, QA
+- ✅ **Fase 2 · Front** — Walker, render, enqueue condicional [COMPLETADA]
+- ✅ **Fase 3 · Interacción** — JS hover-intent, acordeón móvil [COMPLETADA - incluido en Fase 2]
+- **Fase 4 · Pulido** — QA final, testing, documentación
 
 Ver [FASE-0-COMPLETADA.md](FASE-0-COMPLETADA.md) para detalles de la Fase 0.
 Ver [FASE-1-COMPLETADA.md](FASE-1-COMPLETADA.md) para detalles de la Fase 1.
+Ver [FASE-2-COMPLETADA.md](FASE-2-COMPLETADA.md) para detalles de la Fase 2.
 
 ## Documentación
 

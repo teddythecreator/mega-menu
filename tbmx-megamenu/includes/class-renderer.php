@@ -51,23 +51,33 @@ class Renderer {
         $layout = get_post( $layout_id );
 
         if ( ! $layout || 'et_pb_layout' !== $layout->post_type ) {
-            return '';
+            return $this->render_error( __( 'Layout not found.', 'tbmx-megamenu' ) );
         }
 
         // Get the layout content
         $content = $layout->post_content;
 
         if ( empty( $content ) ) {
-            return '';
+            return $this->render_error( __( 'Layout is empty.', 'tbmx-megamenu' ) );
         }
 
         // Process Divi shortcodes
         if ( self::is_divi_active() ) {
-            // Divi is active, process shortcodes
-            $content = do_shortcode( $content );
+            // Ensure Divi shortcodes are processed
+            if ( function_exists( 'et_pb_allow_shortcode_processing' ) ) {
+                et_pb_allow_shortcode_processing();
+            }
+
+            // Apply content filters (this processes Divi shortcodes)
+            $content = apply_filters( 'the_content', $content );
+
+            // Wrap in container for proper styling
+            $content = '<div class="tbmx-divi-content">' . $content . '</div>';
         } else {
-            // Divi not active, return raw content with warning
-            $content = '<p class="tbmx-warning">' . esc_html__( 'Divi is not active. Please activate Divi to render this layout.', 'tbmx-megamenu' ) . '</p>';
+            // Divi not active, show warning
+            return $this->render_error(
+                __( 'Divi is not active. Please activate Divi to render this layout.', 'tbmx-megamenu' )
+            );
         }
 
         return $content;
@@ -84,31 +94,47 @@ class Renderer {
         $children = $this->get_child_items( $item_id );
 
         if ( empty( $children ) ) {
-            return '<p class="tbmx-empty">' . esc_html__( 'No child menu items found.', 'tbmx-megamenu' ) . '</p>';
+            return '<p class="tbmx-empty">' . esc_html__( 'No child menu items found. Add sub-items to this menu item to populate the panel.', 'tbmx-megamenu' ) . '</p>';
         }
 
-        // Group into columns (3 columns by default)
-        $columns = array_chunk( $children, ceil( count( $children ) / 3 ) );
+        // Group into columns (3 columns by default, max 4)
+        $column_count = min( 4, max( 1, ceil( count( $children ) / 5 ) ) );
+        $columns      = array_chunk( $children, ceil( count( $children ) / $column_count ) );
 
         ob_start();
         ?>
-        <div class="tbmx-columns">
-            <?php foreach ( $columns as $column ) : ?>
+        <div class="tbmx-columns" style="grid-template-columns: repeat(<?php echo esc_attr( $column_count ); ?>, 1fr);">
+            <?php foreach ( $columns as $column_index => $column ) : ?>
                 <div class="tbmx-column">
-                    <ul class="tbmx-column-links">
-                        <?php foreach ( $column as $child ) : ?>
-                            <li>
-                                <a href="<?php echo esc_url( $child->url ); ?>">
-                                    <?php echo esc_html( $child->title ); ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php
+                    // Optional: column title based on first item's parent
+                    if ( ! empty( $column ) ) :
+                    ?>
+                        <ul class="tbmx-column-links">
+                            <?php foreach ( $column as $child ) : ?>
+                                <li>
+                                    <a href="<?php echo esc_url( $child->url ); ?>"<?php echo $child->target ? ' target="' . esc_attr( $child->target ) . '"' : ''; ?>>
+                                        <?php echo esc_html( $child->title ); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
         <?php
         return ob_get_clean();
+    }
+
+    /**
+     * Render error message
+     *
+     * @param string $message Error message.
+     * @return string Error HTML.
+     */
+    private function render_error( $message ) {
+        return '<p class="tbmx-warning">' . esc_html( $message ) . '</p>';
     }
 
     /**
@@ -118,16 +144,14 @@ class Renderer {
      * @return array Array of menu item objects.
      */
     private function get_child_items( $parent_id ) {
-        global $wpdb;
-
         // Get the menu this item belongs to
-        $menu_id = wp_get_post_terms( $parent_id, 'nav_menu', array( 'fields' => 'ids' ) );
+        $menu_ids = wp_get_post_terms( $parent_id, 'nav_menu', array( 'fields' => 'ids' ) );
 
-        if ( empty( $menu_id ) ) {
+        if ( empty( $menu_ids ) ) {
             return array();
         }
 
-        $menu_id = $menu_id[0];
+        $menu_id = $menu_ids[0];
 
         // Get all items in this menu
         $items = wp_get_nav_menu_items( $menu_id );

@@ -249,5 +249,17 @@ msgid "Divi is not active. Please activate Divi to render this layout."
 msgstr ""
 
 #: includes/class-renderer.php
-msgid "No child menu items found."
+msgid "Layout not found."
+msgstr ""
+
+#: includes/class-renderer.php
+msgid "Layout is empty."
+msgstr ""
+
+#: includes/class-renderer.php
+msgid "No child menu items found. Add sub-items to this menu item to populate the panel."
+msgstr ""
+
+#: includes/class-menu-walker.php
+msgid "Mega menu panel for %s"
 msgstr ""

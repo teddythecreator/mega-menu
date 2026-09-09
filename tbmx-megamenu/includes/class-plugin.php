@@ -154,8 +154,67 @@ final class Plugin {
         // Front-end assets (conditional)
         add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
 
-        // Custom walker will be applied via wp_nav_menu_args filter
-        // This will be implemented in Phase 2
+        // Apply custom walker to menus with mega items
+        add_filter( 'wp_nav_menu_args', array( $this, 'apply_walker' ) );
+
+        // Add body class when mega menu is active
+        add_filter( 'body_class', array( $this, 'add_body_class' ) );
+    }
+
+    /**
+     * Apply custom walker to menus that have mega items.
+     *
+     * Hooked to: wp_nav_menu_args
+     *
+     * @param array $args wp_nav_menu() arguments.
+     * @return array Modified arguments.
+     */
+    public function apply_walker( $args ) {
+        // If walker already set to ours, skip
+        if ( isset( $args['walker'] ) && $args['walker'] instanceof Menu_Walker ) {
+            return $args;
+        }
+
+        // Determine which menu we're dealing with
+        $menu_id = 0;
+
+        if ( ! empty( $args['menu'] ) ) {
+            if ( is_numeric( $args['menu'] ) ) {
+                $menu_id = (int) $args['menu'];
+            } else {
+                $menu = wp_get_nav_menu_object( $args['menu'] );
+                if ( $menu ) {
+                    $menu_id = $menu->term_id;
+                }
+            }
+        } elseif ( ! empty( $args['theme_location'] ) ) {
+            $locations = get_nav_menu_locations();
+            if ( isset( $locations[ $args['theme_location'] ] ) ) {
+                $menu_id = (int) $locations[ $args['theme_location'] ];
+            }
+        }
+
+        // Check if this menu has mega items
+        if ( $menu_id && Assets::menu_has_mega_items( $menu_id ) ) {
+            $args['walker'] = new Menu_Walker();
+        }
+
+        return $args;
+    }
+
+    /**
+     * Add body class when mega menu is active on the page.
+     *
+     * Hooked to: body_class
+     *
+     * @param array $classes Body classes.
+     * @return array Modified classes.
+     */
+    public function add_body_class( $classes ) {
+        if ( Assets::any_menu_has_mega_items() ) {
+            $classes[] = 'tbmx-megamenu-active';
+        }
+        return $classes;
     }
 
     /**

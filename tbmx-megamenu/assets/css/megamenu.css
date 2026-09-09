@@ -8,60 +8,243 @@
  * @version 0.1.0
  */
 
-/* ── Base panel ─────────────────────────────────────────────────── */
+/* ── Base: mega item ────────────────────────────────────────────── */
+.tbmx-mega-item {
+    position: relative;
+}
+
+.tbmx-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    background: var(--tbmx-accent, #e11414);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+/* ── Panel base ─────────────────────────────────────────────────── */
 .tbmx-panel {
-    /* Phase 2: Implement panel styles */
-    /* Uses: --tbmx-bg, --tbmx-fg, --tbmx-border, --tbmx-radius, --tbmx-shadow */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--tbmx-bg, #050506);
+    color: var(--tbmx-fg, #f5f5f5);
+    border-top: 1px solid var(--tbmx-border, rgba(255,255,255,.08));
+    border-radius: 0 0 var(--tbmx-radius, 10px) var(--tbmx-radius, 10px);
+    box-shadow: var(--tbmx-shadow, 0 24px 60px rgba(0,0,0,.5));
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity var(--tbmx-anim, .22s cubic-bezier(.22,.61,.36,1)),
+                transform var(--tbmx-anim, .22s cubic-bezier(.22,.61,.36,1)),
+                visibility 0s linear var(--tbmx-anim, .22s);
+    font-family: var(--tbmx-font, "Montserrat", system-ui, sans-serif);
 }
 
-/* ── Panel content layout ───────────────────────────────────────── */
-.tbmx-panel-content {
-    /* Phase 2: Grid/flex layout for columns */
-    /* Uses: --tbmx-gap, --tbmx-font */
+.tbmx-panel[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity var(--tbmx-anim, .22s cubic-bezier(.22,.61,.36,1)),
+                transform var(--tbmx-anim, .22s cubic-bezier(.22,.61,.36,1)),
+                visibility 0s linear 0s;
 }
 
-/* ── Columns ────────────────────────────────────────────────────── */
+/* ── Panel widths ───────────────────────────────────────────────── */
+.tbmx-width-full {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.tbmx-width-container {
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.tbmx-width-container[aria-hidden="false"] {
+    transform: translateX(-50%) translateY(0);
+}
+
+.tbmx-width-custom {
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.tbmx-width-custom[aria-hidden="false"] {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ── Panel alignment ────────────────────────────────────────────── */
+.tbmx-align-left .tbmx-panel-inner {
+    text-align: left;
+}
+
+.tbmx-align-center .tbmx-panel-inner {
+    text-align: center;
+}
+
+.tbmx-align-right .tbmx-panel-inner {
+    text-align: right;
+}
+
+/* ── Panel inner ────────────────────────────────────────────────── */
+.tbmx-panel-inner {
+    padding: var(--tbmx-gap, clamp(16px, 2vw, 32px));
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ── Columns layout ─────────────────────────────────────────────── */
+.tbmx-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--tbmx-gap, clamp(16px, 2vw, 32px));
+}
+
 .tbmx-column {
-    /* Phase 2: Column styles */
+    display: flex;
+    flex-direction: column;
 }
 
 .tbmx-column-title {
-    /* Phase 2: Column heading */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--tbmx-accent, #e11414);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--tbmx-border, rgba(255,255,255,.08));
 }
 
 .tbmx-column-links {
-    /* Phase 2: Link list */
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* ── Featured block ─────────────────────────────────────────────── */
-.tbmx-featured {
-    /* Phase 2: Featured image/banner + CTA */
+.tbmx-column-links li {
+    margin-bottom: 8px;
 }
 
-/* ── Animations ─────────────────────────────────────────────────── */
-.tbmx-panel[aria-hidden="false"] {
-    /* Phase 2: fade + translateY animation */
-    /* Uses: --tbmx-anim */
+.tbmx-column-links a {
+    display: block;
+    padding: 6px 0;
+    color: var(--tbmx-fg, #f5f5f5);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
-/* ── Focus states ───────────────────────────────────────────────── */
+.tbmx-column-links a:hover,
+.tbmx-column-links a:focus {
+    color: var(--tbmx-accent, #e11414);
+    padding-left: 8px;
+}
+
+/* ── Empty state ────────────────────────────────────────────────── */
+.tbmx-empty,
+.tbmx-warning {
+    padding: 20px;
+    text-align: center;
+    color: var(--tbmx-muted, rgba(245,245,245,.6));
+    font-size: 14px;
+}
+
+.tbmx-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: var(--tbmx-radius, 10px);
+    color: #ffc107;
+}
+
+/* ── Focus states (accessibility) ───────────────────────────────── */
 .tbmx-panel a:focus-visible,
 .tbmx-panel button:focus-visible {
-    /* Phase 2: Visible focus outline */
+    outline: 2px solid var(--tbmx-accent, #e11414);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
-/* ── Responsive: mobile accordion ───────────────────────────────── */
+.tbmx-mega-item > a:focus-visible {
+    outline: 2px solid var(--tbmx-accent, #e11414);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ── Mobile: accordion ──────────────────────────────────────────── */
 @media (max-width: 980px) {
     .tbmx-panel {
-        /* Phase 2: Accordion styles for mobile */
+        position: static;
+        width: 100% !important;
+        margin-left: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        border-radius: 0;
+        border-top: none;
+        border-left: 3px solid var(--tbmx-accent, #e11414);
+        box-shadow: none;
+        background: var(--tbmx-bg, #050506);
+    }
+
+    .tbmx-panel[aria-hidden="false"] {
+        transform: none !important;
+    }
+
+    .tbmx-panel-inner {
+        padding: 16px 20px;
+    }
+
+    .tbmx-columns {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .tbmx-column-links a {
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .tbmx-column-links a:hover,
+    .tbmx-column-links a:focus {
+        padding-left: 0;
+    }
+
+    .tbmx-badge {
+        margin-left: 6px;
+        font-size: 9px;
+        padding: 2px 6px;
     }
 }
 
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
     .tbmx-panel {
-        /* Phase 2: Disable animations */
-        animation: none !important;
         transition: none !important;
+        animation: none !important;
+    }
+
+    .tbmx-column-links a {
+        transition: none !important;
+    }
+}
+
+/* ── Print: hide panels ─────────────────────────────────────────── */
+@media print {
+    .tbmx-panel {
+        display: none !important;
     }
 }

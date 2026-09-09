@@ -64,6 +64,14 @@ class Assets {
 
         // Inject tokens as inline CSS
         add_action( 'wp_head', array( __CLASS__, 'print_tokens' ), 1 );
+
+        // If Divi layouts are used, ensure Divi styles are loaded
+        if ( self::has_divi_layout_panels() && Renderer::is_divi_active() ) {
+            // Divi should already load its styles, but we can force it if needed
+            if ( function_exists( 'et_builder_load_styles' ) ) {
+                et_builder_load_styles();
+            }
+        }
     }
 
     /**
@@ -145,6 +153,37 @@ class Assets {
         foreach ( $items as $item ) {
             if ( Menu_Fields::is_mega_enabled( $item->ID ) ) {
                 return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if any menu has mega items using Divi layouts
+     *
+     * @return bool
+     */
+    public static function has_divi_layout_panels() {
+        $locations = get_nav_menu_locations();
+
+        if ( empty( $locations ) ) {
+            return false;
+        }
+
+        foreach ( $locations as $location => $menu_id ) {
+            $items = wp_get_nav_menu_items( $menu_id );
+            if ( empty( $items ) ) {
+                continue;
+            }
+
+            foreach ( $items as $item ) {
+                if ( Menu_Fields::is_mega_enabled( $item->ID ) ) {
+                    $source = Menu_Fields::get_meta( $item->ID, Menu_Fields::META_SOURCE, 'divi_layout' );
+                    if ( 'divi_layout' === $source ) {
+                        return true;
+                    }
+                }
             }
         }
 
