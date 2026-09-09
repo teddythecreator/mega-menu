@@ -13,9 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Assets {
 
-    /**
-     * Enqueue public-facing assets (conditional)
-     */
     public function enqueue_public_assets() {
         if ( ! self::any_menu_has_mega_items() ) {
             return;
@@ -23,7 +20,6 @@ class Assets {
 
         $version = TCB_MEGAMENU_VERSION;
 
-        // Main stylesheet
         wp_enqueue_style(
             'tcb-megamenu',
             TCB_MEGAMENU_URL . 'assets/css/megamenu.css',
@@ -31,7 +27,6 @@ class Assets {
             $version
         );
 
-        // Main script (vanilla JS, no dependencies)
         wp_enqueue_script(
             'tcb-megamenu',
             TCB_MEGAMENU_URL . 'assets/js/megamenu.js',
@@ -40,7 +35,6 @@ class Assets {
             true
         );
 
-        // Pass config to JS
         $settings = Settings::get_settings();
         wp_localize_script( 'tcb-megamenu', 'tcbConfig', array(
             'hoverIn'        => intval( $settings['hover_in'] ),
@@ -51,10 +45,8 @@ class Assets {
             'lazyLoadImages' => true,
         ) );
 
-        // Inject tokens as inline CSS
         add_action( 'wp_head', array( __CLASS__, 'print_tokens' ), 1 );
 
-        // Ensure Divi styles are loaded if using Divi layouts
         if ( self::has_divi_layout_panels() && Renderer::is_divi_active() ) {
             if ( function_exists( 'et_builder_load_styles' ) ) {
                 et_builder_load_styles();
@@ -62,9 +54,6 @@ class Assets {
         }
     }
 
-    /**
-     * Enqueue admin assets
-     */
     public function enqueue_admin_assets( $hook_suffix ) {
         $allowed_screens = array( 'nav-menus.php', 'toplevel_page_' . Settings::PAGE_SLUG );
 
@@ -89,16 +78,12 @@ class Assets {
             true
         );
 
-        // WordPress color picker on settings page
         if ( 'toplevel_page_' . Settings::PAGE_SLUG === $hook_suffix ) {
             wp_enqueue_style( 'wp-color-picker' );
             wp_enqueue_script( 'wp-color-picker' );
         }
     }
 
-    /**
-     * Check if any registered menu has mega items
-     */
     public static function any_menu_has_mega_items() {
         $locations = get_nav_menu_locations();
 
@@ -115,9 +100,6 @@ class Assets {
         return false;
     }
 
-    /**
-     * Check if a specific menu has any mega menu items
-     */
     public static function menu_has_mega_items( $menu_id ) {
         $items = wp_get_nav_menu_items( $menu_id );
 
@@ -134,9 +116,6 @@ class Assets {
         return false;
     }
 
-    /**
-     * Check if any menu has mega items using Divi layouts
-     */
     public static function has_divi_layout_panels() {
         $locations = get_nav_menu_locations();
 
@@ -163,31 +142,25 @@ class Assets {
         return false;
     }
 
-    /**
-     * Generate inline CSS with tokens from settings
-     */
     public static function get_tokens_css() {
         $settings = Settings::get_settings();
         
-        // SIN FONDO - Panel completamente transparente
         $css  = ':root {';
-        $css .= '--tcb-bg:transparent;';
-        $css .= '--tcb-fg:' . esc_attr( $settings['fg'] ?? 'inherit' ) . ';';
-        $css .= '--tcb-muted:' . esc_attr( $settings['muted'] ?? 'inherit' ) . ';';
-        $css .= '--tcb-accent:' . esc_attr( $settings['accent'] ?? '#e11414' ) . ';';
-        $css .= '--tcb-border:transparent;';
-        $css .= '--tcb-radius:0;';
-        $css .= '--tcb-shadow:none;';
-        $css .= '--tcb-font:' . esc_attr( $settings['font'] ?? 'inherit' ) . ';';
-        $css .= '--tcb-gap:' . esc_attr( $settings['gap'] ?? 'clamp(16px, 2vw, 32px)' ) . ';';
-        $css .= '--tcb-anim:' . esc_attr( $settings['anim'] ?? '.22s cubic-bezier(.22,.61,.36,1)' ) . ';';
+        $css .= '--tcb-bg:' . esc_attr( $settings['bg'] ) . ';';
+        $css .= '--tcb-fg:' . esc_attr( $settings['fg'] ) . ';';
+        $css .= '--tcb-muted:' . esc_attr( $settings['muted'] ) . ';';
+        $css .= '--tcb-accent:' . esc_attr( $settings['accent'] ) . ';';
+        $css .= '--tcb-border:' . esc_attr( $settings['border'] ) . ';';
+        $css .= '--tcb-radius:' . esc_attr( $settings['radius'] ) . ';';
+        $css .= '--tcb-shadow:' . esc_attr( $settings['shadow'] ) . ';';
+        $css .= '--tcb-font:' . esc_attr( $settings['font'] ) . ';';
+        $css .= '--tcb-gap:' . esc_attr( $settings['gap'] ) . ';';
+        $css .= '--tcb-anim:' . esc_attr( $settings['anim'] ) . ';';
         $css .= '}';
 
         return $css;
     }
-    /**
-     * Print inline tokens CSS in the head
-     */
+
     public static function print_tokens() {
         echo '<style id="tcb-megamenu-tokens">' . self::get_tokens_css() . '</style>' . "\n";
     }
