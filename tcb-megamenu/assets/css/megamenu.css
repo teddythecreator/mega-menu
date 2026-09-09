@@ -29,8 +29,6 @@
 .tcb-panel {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
     z-index: 9998;
     background: transparent !important;
     color: var(--tcb-fg, inherit);
@@ -59,17 +57,22 @@
 
 /* ── Panel widths ───────────────────────────────────────────────── */
 .tcb-width-full {
-    left: 0;
-    right: 0;
+    left: 50%;
+    right: auto;
     width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    transform: translateX(-50%) translateY(10px);
+}
+
+.tcb-width-full[aria-hidden="false"] {
+    transform: translateX(-50%) translateY(0);
 }
 
 .tcb-width-container {
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    right: auto;
     width: 100%;
     max-width: 1200px;
+    transform: translateX(-50%) translateY(10px);
 }
 
 .tcb-width-container[aria-hidden="false"] {
@@ -78,6 +81,7 @@
 
 .tcb-width-custom {
     left: 50%;
+    right: auto;
     transform: translateX(-50%) translateY(10px);
 }
 

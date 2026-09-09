@@ -107,16 +107,24 @@ class Menu_Walker extends \Walker_Nav_Menu {
             $panel_id      = 'tcb-panel-' . $data_object->ID;
             $panel_content = $this->renderer->render( $data_object->ID );
 
-            $width = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_WIDTH, 'full' );
-            $align = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_ALIGN, 'left' );
+            $width    = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_WIDTH, 'full' );
+            $width_px = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_WIDTH_PX, 1200 );
+            $align    = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_ALIGN, 'left' );
 
             $panel_classes = array( 'tcb-panel' );
             $panel_classes[] = 'tcb-width-' . $width;
             $panel_classes[] = 'tcb-align-' . $align;
 
+            // Inline style para custom width
+            $inline_style = '';
+            if ( 'custom' === $width && $width_px > 0 ) {
+                $inline_style = ' style="width: ' . intval( $width_px ) . 'px;"';
+            }
+
             $output .= "\n<div";
             $output .= ' id="' . esc_attr( $panel_id ) . '"';
             $output .= ' class="' . esc_attr( implode( ' ', $panel_classes ) ) . '"';
+            $output .= $inline_style;
             $output .= ' role="region"';
             $output .= ' aria-label="' . esc_attr( sprintf( __( 'Mega menu panel for %s', 'tcb-megamenu' ), $data_object->title ) ) . '"';
             $output .= ' aria-hidden="true"';
