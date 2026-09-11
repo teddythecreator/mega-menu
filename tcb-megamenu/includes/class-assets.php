@@ -13,7 +13,86 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Assets {
 
+    /**
+     * Check if we're in Divi Builder context
+     */
+    public static function is_divi_builder() {
+        // Check if we're in admin
+        if ( ! is_admin() ) {
+            return false;
+        }
+
+        // Check for Divi Builder page
+        global $post;
+        
+        if ( ! $post ) {
+            return false;
+        }
+
+        // Check if current page is using Divi Builder
+        if ( function_exists( 'et_pb_is_pagebuilder_used' ) ) {
+            return et_pb_is_pagebuilder_used( $post->ID );
+        }
+
+        // Check for Divi Builder AJAX requests
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            return true;
+        }
+
+        // Check for specific Divi Builder admin pages
+        $current_screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+        
+        if ( $current_screen && isset( $current_screen->id ) ) {
+            $divi_screens = array(
+                'toplevel_page_et_divi',
+                'divi_page_et_divi',
+                'post',
+                'page'
+            );
+            
+            if ( in_array( $current_screen->id, $divi_screens ) ) {
+                // Check if we're editing with Divi Builder
+                if ( isset( $_GET['et_fb'] ) || isset( $_GET['et_pb_preview'] ) ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if we're in any page builder context (Divi, Elementor, etc.)
+     */
+    public static function is_page_builder() {
+        // Divi Builder
+        if ( self::is_divi_builder() ) {
+            return true;
+        }
+
+        // Elementor
+        if ( class_exists( '\\Elementor\\Plugin' ) ) {
+            if ( isset( $_GET['elementor-preview'] ) || isset( $_GET['action'] ) && $_GET['action'] === 'elementor' ) {
+                return true;
+            }
+        }
+
+        // WPBakery (Visual Composer)
+        if ( class_exists( 'Vc_Manager' ) ) {
+            if ( isset( $_GET['vc_action'] ) && $_GET['vc_action'] === 'vc_inline' ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function enqueue_public_assets() {
+        // Don't load in admin or page builders
+        if ( is_admin() || self::is_page_builder() ) {
+            return;
+        }
+
         if ( ! self::any_menu_has_mega_items() ) {
             return;
         }
@@ -62,6 +141,11 @@ class Assets {
     }
 
     public function enqueue_admin_assets( $hook_suffix ) {
+        // Don't load in Divi Builder or other page builders
+        if ( self::is_page_builder() ) {
+            return;
+        }
+
         $allowed_screens = array( 'nav-menus.php', 'toplevel_page_' . Settings::PAGE_SLUG );
 
         if ( ! in_array( $hook_suffix, $allowed_screens, true ) ) {
@@ -175,6 +259,11 @@ class Assets {
     }
 
     public static function print_tokens() {
+        // Don't print in page builders
+        if ( self::is_page_builder() ) {
+            return;
+        }
+
         echo '<style id="tcb-megamenu-tokens">' . self::get_tokens_css() . '</style>' . "\n";
     }
 }

@@ -105,6 +105,7 @@ final class Plugin {
         add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
 
         // Apply custom walker to menus with mega items
+        // IMPORTANT: Only apply on front-end, not in admin or page builders
         add_filter( 'wp_nav_menu_args', array( $this, 'apply_walker' ) );
 
         // Add body class when mega menu is active
@@ -113,8 +114,19 @@ final class Plugin {
 
     /**
      * Apply custom walker to menus that have mega items.
+     * Only applies on front-end, not in admin or page builders.
      */
     public function apply_walker( $args ) {
+        // Don't apply in admin
+        if ( is_admin() ) {
+            return $args;
+        }
+
+        // Don't apply in page builders (Divi, Elementor, etc.)
+        if ( Assets::is_page_builder() ) {
+            return $args;
+        }
+
         if ( isset( $args['walker'] ) && $args['walker'] instanceof Menu_Walker ) {
             return $args;
         }
@@ -148,6 +160,11 @@ final class Plugin {
      * Add body class when mega menu is active on the page.
      */
     public function add_body_class( $classes ) {
+        // Don't add in admin or page builders
+        if ( is_admin() || Assets::is_page_builder() ) {
+            return $classes;
+        }
+
         if ( Assets::any_menu_has_mega_items() ) {
             $classes[] = 'tcb-megamenu-active';
         }
