@@ -12,8 +12,15 @@
 set -euo pipefail
 
 PLUGIN_SLUG="tcb-megamenu"
-VERSION="${1#--tag}"
-VERSION="${VERSION:-dev}"
+
+# Manejar argumentos opcionales
+if [ $# -eq 0 ]; then
+    VERSION="dev"
+else
+    VERSION="${1#--tag}"
+    VERSION="${VERSION:-dev}"
+fi
+
 ZIP_NAME="${PLUGIN_SLUG}${VERSION:+-$VERSION}.zip"
 BUILD_DIR=".build-package"
 
