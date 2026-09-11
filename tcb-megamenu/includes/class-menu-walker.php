@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Menu_Walker extends \Walker_Nav_Menu {
 
     private $renderer;
+    private $mega_panels = array();
 
     public function __construct() {
         $this->renderer = new Renderer();
@@ -69,6 +70,12 @@ class Menu_Walker extends \Walker_Nav_Menu {
             $atts['aria-expanded']    = 'false';
             $atts['aria-controls']    = $panel_id;
             $atts['data-tcb-toggle']  = 'mega';
+            
+            // Store panel data for later rendering
+            $this->mega_panels[ $data_object->ID ] = array(
+                'id' => $panel_id,
+                'item' => $data_object,
+            );
         }
 
         $atts = apply_filters( 'nav_menu_link_attributes', $atts, $data_object, $args, $depth );
@@ -101,39 +108,55 @@ class Menu_Walker extends \Walker_Nav_Menu {
     }
 
     public function end_el( &$output, $data_object, $depth = 0, $args = null ) {
-        $is_mega = Menu_Fields::is_mega_enabled( $data_object->ID );
-
-        if ( $is_mega && 0 === $depth ) {
-            $panel_id      = 'tcb-panel-' . $data_object->ID;
-            $panel_content = $this->renderer->render( $data_object->ID );
-
-            $width    = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_WIDTH, 'full' );
-            $width_px = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_WIDTH_PX, 1200 );
-            $align    = Menu_Fields::get_meta( $data_object->ID, Menu_Fields::META_ALIGN, 'left' );
-
-            $panel_classes = array( 'tcb-panel' );
-            $panel_classes[] = 'tcb-width-' . $width;
-            $panel_classes[] = 'tcb-align-' . $align;
-
-            // Inline style para custom width
-            $inline_style = '';
-            if ( 'custom' === $width && $width_px > 0 ) {
-                $inline_style = ' style="width: ' . intval( $width_px ) . 'px;"';
-            }
-
-            $output .= "\n<div";
-            $output .= ' id="' . esc_attr( $panel_id ) . '"';
-            $output .= ' class="' . esc_attr( implode( ' ', $panel_classes ) ) . '"';
-            $output .= $inline_style;
-            $output .= ' role="region"';
-            $output .= ' aria-label="' . esc_attr( sprintf( __( 'Mega menu panel for %s', 'tcb-megamenu' ), $data_object->title ) ) . '"';
-            $output .= ' aria-hidden="true"';
-            $output .= ' hidden';
-            $output .= ">\n";
-            $output .= '<div class="tcb-panel-inner">' . $panel_content . "</div>\n";
-            $output .= "</div>\n";
-        }
-
         $output .= "</li>\n";
+    }
+
+    /**
+     * Render all mega panels after the menu
+     */
+    public function walk( $elements, $max_depth, ...$args ) {
+        $output = parent::walk( $elements, $max_depth, ...$args );
+        
+        // Append all mega panels at the end
+        if ( ! empty( $this->mega_panels ) ) {
+            $output .= "\n<!-- TCB Mega Menu Panels -->\n";
+            $output .= '<div class="tcb-mega-panels-container">' . "\n";
+            
+            foreach ( $this->mega_panels as $item_id => $panel_data ) {
+                $panel_id = $panel_data['id'];
+                $item = $panel_data['item'];
+                $panel_content = $this->renderer->render( $item_id );
+
+                $width    = Menu_Fields::get_meta( $item_id, Menu_Fields::META_WIDTH, 'full' );
+                $width_px = Menu_Fields::get_meta( $item_id, Menu_Fields::META_WIDTH_PX, 1200 );
+                $align    = Menu_Fields::get_meta( $item_id, Menu_Fields::META_ALIGN, 'left' );
+
+                $panel_classes = array( 'tcb-panel' );
+                $panel_classes[] = 'tcb-width-' . $width;
+                $panel_classes[] = 'tcb-align-' . $align;
+
+                // Inline style para custom width
+                $inline_style = '';
+                if ( 'custom' === $width && $width_px > 0 ) {
+                    $inline_style = ' style="width: ' . intval( $width_px ) . 'px;"';
+                }
+
+                $output .= '<div';
+                $output .= ' id="' . esc_attr( $panel_id ) . '"';
+                $output .= ' class="' . esc_attr( implode( ' ', $panel_classes ) ) . '"';
+                $output .= $inline_style;
+                $output .= ' role="region"';
+                $output .= ' aria-label="' . esc_attr( sprintf( __( 'Mega menu panel for %s', 'tcb-megamenu' ), $item->title ) ) . '"';
+                $output .= ' aria-hidden="true"';
+                $output .= ' hidden';
+                $output .= ">\n";
+                $output .= '<div class="tcb-panel-inner">' . $panel_content . "</div>\n";
+                $output .= "</div>\n";
+            }
+            
+            $output .= '</div>' . "\n";
+        }
+        
+        return $output;
     }
 }
