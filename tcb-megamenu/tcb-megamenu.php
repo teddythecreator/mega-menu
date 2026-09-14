@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'TCB_MEGAMENU_VERSION', '1.3.1' );
+define( 'TCB_MEGAMENU_VERSION', '1.3.4' );
 define( 'TCB_MEGAMENU_FILE', __FILE__ );
 define( 'TCB_MEGAMENU_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TCB_MEGAMENU_URL', plugin_dir_url( __FILE__ ) );
