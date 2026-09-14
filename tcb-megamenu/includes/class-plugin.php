@@ -104,17 +104,17 @@ final class Plugin {
         // Front-end assets (conditional)
         add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
 
-        // Apply custom walker to menus with mega items
-        // IMPORTANT: Only apply on front-end, not in admin or page builders
-        add_filter( 'wp_nav_menu_args', array( $this, 'apply_walker' ) );
+        // Apply custom walker to ALL menus (force for Divi compatibility)
+        // Priority 999 ensures it runs after theme's walker
+        add_filter( 'wp_nav_menu_args', array( $this, 'apply_walker' ), 999 );
 
         // Add body class when mega menu is active
         add_filter( 'body_class', array( $this, 'add_body_class' ) );
     }
 
     /**
-     * Apply custom walker to menus that have mega items.
-     * Only applies on front-end, not in admin or page builders.
+     * Apply custom walker to ALL menus on frontend.
+     * Forces walker for Divi compatibility - no external code needed.
      */
     public function apply_walker( $args ) {
         // Don't apply in admin
@@ -122,36 +122,19 @@ final class Plugin {
             return $args;
         }
 
-        // Don't apply in page builders (Divi, Elementor, etc.)
+        // Don't apply in page builders (Divi Builder, Elementor, etc.)
         if ( Assets::is_page_builder() ) {
             return $args;
         }
 
+        // Don't override if already using our walker
         if ( isset( $args['walker'] ) && $args['walker'] instanceof Menu_Walker ) {
             return $args;
         }
 
-        $menu_id = 0;
-
-        if ( ! empty( $args['menu'] ) ) {
-            if ( is_numeric( $args['menu'] ) ) {
-                $menu_id = (int) $args['menu'];
-            } else {
-                $menu = wp_get_nav_menu_object( $args['menu'] );
-                if ( $menu ) {
-                    $menu_id = $menu->term_id;
-                }
-            }
-        } elseif ( ! empty( $args['theme_location'] ) ) {
-            $locations = get_nav_menu_locations();
-            if ( isset( $locations[ $args['theme_location'] ] ) ) {
-                $menu_id = (int) $locations[ $args['theme_location'] ];
-            }
-        }
-
-        if ( $menu_id && Assets::menu_has_mega_items( $menu_id ) ) {
-            $args['walker'] = new Menu_Walker();
-        }
+        // FORCE our walker on ALL frontend menus
+        // This ensures compatibility with Divi and other themes
+        $args['walker'] = new Menu_Walker();
 
         return $args;
     }

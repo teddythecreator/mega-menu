@@ -4,25 +4,26 @@ Tags: mega menu, divi, navigation, menu, responsive, accessible
 Requires at least: 5.8
 Tested up to: 6.5
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Professional mega menus for WordPress with seamless Divi integration. Create stunning, accessible mega menus using Divi Library layouts or custom columns.
+Professional mega menus for WordPress with native Divi integration. Create stunning mega menus using Divi Library layouts or custom columns.
 
 == Description ==
 
-**TCB MegaMenu** transforms your standard WordPress navigation menus into professional, accessible mega menus — designed with the Divi Builder you already know and love.
+**TCB MegaMenu** transforms your standard WordPress navigation menus into professional, accessible mega menus with native Divi integration. The content of each panel can be a **Divi Library layout** or **custom columns** without needing Divi.
 
 = Key Features =
 
-* **Divi Library Integration** — Design your mega menu panels with the Divi Builder, save as Library layouts, and assign them to any menu item.
-* **Custom Columns Mode** — Works without Divi! Automatically organizes child menu items into responsive columns.
-* **Fully Accessible** — WCAG 2.1 AA compliant with full keyboard navigation and screen reader support.
-* **Responsive Design** — Desktop hover panels automatically convert to mobile accordions.
-* **Performance Optimized** — Conditional asset loading (zero overhead when not in use), vanilla JavaScript < 5 KB.
-* **Customizable** — 3 style presets (Dark, Light, Minimal) plus full color/typography customization.
-* **No Dependencies** — Pure vanilla JavaScript, no jQuery required on the front-end.
+* **Automatic Divi Integration** — Works without additional code
+* **4 Mobile Menu Styles** — Accordion, Drawer, Overlay, Slide
+* **5 Hamburger Icons** — Classic, Arrow, Dots, Plus, X
+* **Configurable Panel Width** — Full, Container, Custom
+* **Customizable Colors** — Background, Text, Accent
+* **WCAG 2.1 AA Accessibility** — Complete keyboard navigation
+* **Optimized Performance** — Conditional assets, vanilla JS < 5 KB
+* **No External Code** — Works automatically when activated
 
 = How It Works =
 
@@ -44,14 +45,14 @@ Professional mega menus for WordPress with seamless Divi integration. Create stu
 
 == Installation ==
 
-1. Upload the `tcb-megamenu` folder to `/wp-content/plugins/` or install through WordPress plugins screen.
+1. Upload the `tcb-megamenu` folder to `/wp-content/plugins/` or install through the WordPress plugins screen.
 2. Activate the plugin through the 'Plugins' screen.
 3. Go to **TCB MegaMenu → Settings** to configure global settings.
 4. Go to **Appearance → Menus** to enable mega panels on menu items.
 
 = Quick Start =
 
-1. Configure settings (choose a preset or customize colors)
+1. Configure settings (choose colors or use presets)
 2. Create/edit a menu and assign it to a theme location
 3. Enable "Mega Panel" on parent menu items
 4. Choose content source (Divi Library or Custom Columns)
@@ -73,7 +74,7 @@ Yes! The plugin follows WAI-ARIA disclosure/menu patterns with full keyboard nav
 
 = Can I customize the colors? =
 
-Yes! Global settings allow you to customize all colors, typography, spacing, and animation timing. Three presets are included: Dark, Light, and Minimal.
+Yes! Global settings allow you to customize all colors, typography, spacing, and animation timing. You can also customize the hamburger icon style, color, size, and thickness.
 
 = How do I create a Divi layout for the mega menu? =
 
@@ -91,20 +92,62 @@ Yes! You can enable mega panels on as many parent menu items as you want. Each c
 
 TCB MegaMenu works with any WordPress theme that uses `wp_nav_menu()`. It's been tested with Divi, Astra, GeneratePress, OceanWP, and Twenty Twenty-Four.
 
+= Do I need to add code to functions.php? =
+
+No! The plugin works automatically when activated. No external code or snippets are needed.
+
 == Screenshots ==
 
 1. Mega menu panel on desktop (hover state)
 2. Menu item metabox in Appearance → Menus
 3. Global settings page with color customization
 4. Mobile accordion view
-5. Divi Library layout integration
+5. Mobile drawer view
+6. Mobile overlay view
+7. Hamburger icon customization
 
 == Changelog ==
+
+= 1.3.5 =
+* Fixed settings form to properly save all configurations
+* Integrated walker automatically - no external code needed
+* Improved Divi compatibility
+* Clean mobile menu without duplicate icons
+* All settings now save correctly
+
+= 1.3.4 =
+* Added mobile-fix.css for clean mobile menus
+* Removed duplicate hamburger icons in mobile
+* Improved mobile dropdown structure
+* Better mobile responsive design
+
+= 1.3.3 =
+* Data preservation when deactivating plugin
+* Added Data Management section in settings
+* Improved settings interface
+* Added advanced settings options
+
+= 1.3.2 =
+* Fixed mobile menu rendering
+* Panels now render inside menu items
+* Better Divi compatibility
+* Improved HTML structure
+
+= 1.3.1 =
+* Added Divi Builder compatibility
+* Automatic detection of page builders
+* Plugin doesn't interfere with Divi Builder
+
+= 1.3.0 =
+* 4 mobile menu styles (Accordion, Drawer, Overlay, Slide)
+* 5 customizable hamburger icons
+* Complete icon customization (color, size, thickness)
+* Configurable drawer position and width
 
 = 1.0.0 =
 * Initial release
 * Divi Library layout integration
-* Custom columns mode (no Divi required)
+* Custom columns mode (no Divi needed)
 * 3 style presets (Dark, Light, Minimal)
 * Full WCAG 2.1 AA accessibility
 * Responsive mobile accordion
@@ -114,9 +157,11 @@ TCB MegaMenu works with any WordPress theme that uses `wp_nav_menu()`. It's been
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release of TCB MegaMenu.
+= 1.3.5 =
+Critical update: Fixed settings saving and integrated walker automatically. No external code needed anymore. Update recommended for all users.
 
 == Support ==
 
 For support, documentation, and updates, visit [thecreator.business](https://thecreator.business/).
+
+Email: soporte@thecreator.business

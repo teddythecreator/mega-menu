@@ -1,342 +1,259 @@
-# 🚀 TCB MegaMenu - Installation & Setup Guide
+# 📖 Guía de Instalación - TCB MegaMenu
 
-> **By [The Creator Business](https://thecreator.business/)**
-> Version 1.0.0
+## 🚀 Instalación Rápida (2 minutos)
 
----
+### Paso 1: Subir el Plugin
 
-## 📋 Table of Contents
+1. Ve a **Plugins → Añadir nuevo → Subir plugin**
+2. Selecciona el archivo `tcb-megamenu.zip`
+3. Haz clic en **Instalar ahora**
+4. Haz clic en **Activar plugin**
 
-1. [Installation](#installation)
-2. [Quick Start (5 minutes)](#quick-start)
-3. [Using with Divi](#using-with-divi)
-4. [Using Without Divi](#using-without-divi)
-5. [Configuration Guide](#configuration)
-6. [Troubleshooting](#troubleshooting)
-7. [FAQ](#faq)
+**¡Listo!** El plugin funciona automáticamente sin necesidad de código adicional.
 
 ---
 
-## Installation
+## ⚙️ Configuración Inicial
 
-### Method 1: WordPress Admin (Recommended)
+### 1. Configurar Ajustes Globales
 
-1. Download the `tcb-megamenu.zip` file
-2. Go to **Plugins → Add New → Upload Plugin**
-3. Select the zip file and click **Install Now**
-4. Click **Activate Plugin**
-
-### Method 2: FTP Upload
-
-1. Download and extract `tcb-megamenu.zip`
-2. Upload the `tcb-megamenu` folder to `/wp-content/plugins/`
-3. Go to **Plugins** in WordPress admin
-4. Activate **TCB MegaMenu**
-
-### Verify Installation
-
-After activation, you should see:
-- ✅ **TCB MegaMenu** in the main admin menu (left sidebar)
-- ✅ New fields in menu items (Appearance → Menus)
-
----
-
-## Quick Start
-
-### Step 1: Configure Global Settings (2 min)
-
-1. Click **TCB MegaMenu** in the admin menu
-2. Go to **Settings**
-3. Choose a preset:
-   - **Dark** — Dark background, white text, red accent
-   - **Light** — Light background, dark text, red accent
-   - **Minimal** — Gray background, black text, square corners
-4. Click **Save Changes**
-
-### Step 2: Create Your Menu (3 min)
-
-1. Go to **Appearance → Menus**
-2. Create a new menu or edit existing
-3. Add menu items (pages, categories, custom links)
-4. **Important:** Assign the menu to a theme location
-5. Click **Save Menu**
-
-### Step 3: Enable Mega Menu (2 min)
-
-1. Find the parent menu item you want to convert
-2. Click the **▼ arrow** to expand it
-3. Scroll down to **TCB MegaMenu** section
-4. Check **"Enable Mega Panel"**
-5. Choose **Content Source**:
-   - **Divi Library Layout** (if using Divi)
-   - **Custom Columns** (without Divi)
-6. Configure width, alignment, optional badge
-7. Click **Save Menu**
-
-### Step 4: View on Front-End (30 sec)
-
-1. Open your website
-2. Hover over the menu item
-3. **The mega menu should appear!** 🎉
-
----
-
-## Using with Divi
-
-### Create a Divi Layout for Mega Menu
-
-1. Go to **Divi → Divi Library**
-2. Click **Add New Layout**
-3. Name it descriptively (e.g., "Mega Menu - Services")
-4. Design your layout with Divi Builder:
-   - Use **Sections** and **Rows** for structure
-   - Add **Modules**: Text, Blurb, Button, Image, etc.
-   - Use **Columns** to organize content
-5. Save the layout
-
-### Design Tips
-
-**Recommended structure:**
-```
-Section (Full Width)
-├── Row (4 columns)
-│   ├── Column 1/4: Title + description
-│   ├── Column 1/4: Links list
-│   ├── Column 1/4: Links list
-│   └── Column 1/4: CTA button
-```
-
-**Best practices:**
-- Use percentage widths (not fixed pixels)
-- Keep layouts simple and clean
-- Test on mobile (accordion mode)
-- Use Divi's built-in modules
-
-### Assign Layout to Menu
-
-1. Go to **Appearance → Menus**
-2. Enable **Mega Panel** on parent item
-3. Select **Divi Library Layout** as Content Source
-4. Choose your layout from dropdown
-5. Save menu
-
----
-
-## Using Without Divi
-
-### Create Menu with Sub-Items
-
-1. Go to **Appearance → Menus**
-2. Add parent menu item (e.g., "Services")
-3. Add child items:
-   - Drag items slightly to the right under parent
-   - Or select parent from dropdown when adding
-4. Enable **Mega Panel** on parent
-5. Select **Custom Columns (no Divi)** as Content Source
-6. Save menu
-
-### How Columns Work
-
-Sub-items automatically organize into columns:
-
-- **1-5 items** → 1 column
-- **6-10 items** → 2 columns
-- **11-15 items** → 3 columns
-- **16+ items** → 4 columns (max)
-
-### Example
-
-```
-Services (Mega Panel enabled)
-├── Web Design
-├── Development
-├── SEO
-├── Marketing
-└── Consulting
-```
-
-This creates a 2-column layout with 5 links.
-
----
-
-## Configuration
-
-### Global Settings
-
-Go to **TCB MegaMenu → Settings**
+1. Ve a **TCB MegaMenu → Settings** en el menú principal
+2. Configura las siguientes secciones:
 
 #### Colors
-- **Background Color** — Panel background
-- **Text Color** — Main text
-- **Muted Text** — Secondary text
-- **Accent Color** — Links hover, badges
-- **Border Color** — Borders and separators
+- **Background Color**: Color de fondo del panel (ej: `#ffffff`)
+- **Text Color**: Color del texto (ej: `#333333`)
+- **Accent Color**: Color de acento para hover y badges (ej: `#e11414`)
 
 #### Layout
-- **Font Family** — Panel typography
-- **Border Radius** — Corner rounding
-- **Box Shadow** — Panel shadow
-- **Gap** — Spacing between elements
+- **Border Radius**: Redondez de esquinas (ej: `10px`)
+- **Gap/Spacing**: Espaciado entre elementos (ej: `32px`)
 
-#### Behavior
-- **Hover In Delay** — Time before opening (default: 120ms)
-- **Hover Out Delay** — Time before closing (default: 200ms)
-- **Mobile Breakpoint** — Width for mobile mode (default: 980px)
-- **Default Panel Width** — Full or Container
+#### Desktop Behavior
+- **Hover In Delay**: Tiempo antes de abrir el panel (ej: `120` ms)
+- **Hover Out Delay**: Tiempo antes de cerrar el panel (ej: `200` ms)
 
-### Per-Item Settings
+#### Mobile Settings
+- **Mobile Breakpoint**: Ancho donde se activa el modo móvil (ej: `980` px)
+- **Mobile Menu Style**: Estilo del menú móvil
+  - **Accordion**: Panel vertical (recomendado)
+  - **Drawer**: Panel lateral deslizante
+  - **Overlay**: Panel a pantalla completa
+  - **Slide**: Panel que se desliza desde arriba
 
-In **Appearance → Menus**, expand a menu item:
+#### Hamburger Icon
+- **Icon Style**: Estilo del icono
+  - **Classic**: Tres líneas (☰)
+  - **Arrow**: Flechas (←)
+  - **Dots**: Tres puntos (⋮)
+  - **Plus**: Más/menos (+)
+  - **X**: Marca X (✕)
+- **Icon Color**: Color del icono (ej: `#333333`)
+- **Icon Size**: Tamaño del icono (ej: `24` px)
+- **Line Thickness**: Grosor de las líneas (ej: `2` px)
 
-- **Enable Mega Panel** — Activate mega menu
-- **Content Source** — Divi Layout or Custom Columns
-- **Select Divi Layout** — Choose layout (if using Divi)
-- **Panel Width** — Full / Container / Custom
-- **Panel Alignment** — Left / Center / Right
-- **Icon** — Optional icon class or SVG
-- **Badge** — Optional label (e.g., "New", "Sale")
-
----
-
-## Troubleshooting
-
-### Mega menu doesn't appear
-
-**Possible causes:**
-
-1. **Plugin not activated**
-   - Go to Plugins and activate TCB MegaMenu
-
-2. **Mega Panel not enabled**
-   - Edit menu and check "Enable Mega Panel"
-
-3. **Menu not assigned to location**
-   - In Menus, check a theme location and save
-
-4. **No layout selected**
-   - If using Divi, select a layout from dropdown
-
-5. **No sub-items**
-   - If using Custom Columns, add child items
-
-### Divi layout doesn't render
-
-**Possible causes:**
-
-1. **Divi not active**
-   - Activate Divi theme or Divi Builder plugin
-   - Plugin shows warning if Divi is missing
-
-2. **Layout is empty**
-   - Edit layout in Divi Library and add content
-
-3. **Layout not published**
-   - Ensure layout is published (not draft)
-
-### Colors don't apply
-
-**Solutions:**
-
-1. **Clear browser cache**
-   - Press Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)
-
-2. **Clear caching plugin**
-   - If using WP Rocket, W3 Total Cache, etc., clear cache
-
-3. **Check for CSS conflicts**
-   - Use browser inspector to check for overrides
-
-### Mobile menu doesn't work
-
-**Solutions:**
-
-1. **Check breakpoint**
-   - Go to Settings → Behavior → Mobile Breakpoint
-   - Adjust to match your theme
-
-2. **Theme conflict**
-   - Some themes have their own mobile menu
-   - Check theme documentation
-
-### JavaScript errors in console
-
-**Solutions:**
-
-1. **Plugin conflict**
-   - Deactivate other plugins one by one
-
-2. **Theme incompatibility**
-   - Switch to default theme to test
-
-3. **jQuery not loaded**
-   - Admin requires jQuery (WordPress loads it by default)
+3. Haz clic en **Save Changes**
 
 ---
 
-## FAQ
+## 🎯 Crear tu Primer Mega Menú
 
-### Do I need Divi?
+### Opción A: Usando Divi Library Layouts
 
-**No.** The plugin works without Divi using "Custom Columns" mode. However, for Divi Library layouts, you need Divi theme or Divi Builder plugin.
+1. **Crear un Layout en Divi**
+   - Ve a **Divi → Divi Library**
+   - Haz clic en **Add New Layout**
+   - Diseña tu mega menú con secciones, filas y módulos
+   - Guarda el layout
 
-### Is it accessible?
+2. **Asignar el Layout al Menú**
+   - Ve a **Apariencia → Menús**
+   - Crea o edita un menú
+   - Expande el ítem del menú que quieres convertir en mega menú
+   - Marca **"Enable Mega Panel"**
+   - En **Content Source**, selecciona **Divi Library Layout**
+   - En **Select Divi Layout**, elige el layout que creaste
+   - Configura **Panel Width** (Full, Container, Custom)
+   - Configura **Panel Alignment** (Left, Center, Right)
+   - Opcionalmente, añade un **Badge** (ej: "Nuevo", "Oferta")
+   - Guarda el menú
 
-**Yes.** Full WCAG 2.1 AA compliance with keyboard navigation, screen reader support, and visible focus indicators.
+### Opción B: Usando Columnas Personalizadas (sin Divi)
 
-### Will it slow my site?
+1. **Crear el Menú**
+   - Ve a **Apariencia → Menús**
+   - Crea o edita un menú
+   - Añade el ítem principal (ej: "Servicios")
+   - Añade sub-ítems debajo del ítem principal
+   - Arrastra los sub-ítems ligeramente a la derecha para anidarlos
 
-**No.** Assets only load when mega menus are present. JavaScript is vanilla and < 5 KB. No jQuery on front-end.
+2. **Activar Mega Panel**
+   - Expande el ítem principal
+   - Marca **"Enable Mega Panel"**
+   - En **Content Source**, selecciona **Custom Columns (no Divi)**
+   - Configura **Panel Width** y **Panel Alignment**
+   - Guarda el menú
 
-### Can I use multiple mega menus?
+Los sub-ítems se organizarán automáticamente en columnas.
 
-**Yes.** Enable mega panels on as many parent items as needed. Each can have its own layout.
+---
 
-### How do I update?
+## 📱 Probar el Menú Móvil
 
-1. Download new version
-2. Deactivate old plugin
-3. Delete old plugin
-4. Upload and activate new version
-5. Settings are preserved
+1. Redimensiona la ventana del navegador a menos del breakpoint configurado (por defecto 980px)
+2. Deberías ver el icono de hamburguesa junto a cada mega ítem
+3. Haz clic en el icono de hamburguesa
+4. El menú debería desplegarse como acordeón (o el estilo que configuraste)
+5. Verifica que no hay iconos duplicados
+6. Verifica que los enlaces son clickeables
 
-### Can I customize with CSS?
+---
 
-**Yes.** Add custom CSS in **Appearance → Customize → Additional CSS**:
+## 🖥️ Probar el Menú Desktop
+
+1. Redimensiona la ventana del navegador a más del breakpoint configurado
+2. Pasa el mouse sobre un mega ítem
+3. El panel debería desplegarse automáticamente
+4. Verifica que el contenido se muestra correctamente
+5. Verifica que los enlaces son clickeables
+6. Mueve el mouse fuera del panel - debería cerrarse automáticamente
+
+---
+
+## 🔧 Solución de Problemas
+
+### El menú no aparece en el frontend
+
+**Causa:** El menú no está asignado a una ubicación del tema
+
+**Solución:**
+1. Ve a **Apariencia → Menús**
+2. En la parte inferior, busca **"Ubicación del tema"**
+3. Marca la ubicación donde quieres que aparezca el menú (ej: "Primary Menu")
+4. Guarda los cambios
+
+### Los ajustes no se guardan
+
+**Causa:** Problema con el formulario de ajustes
+
+**Solución:**
+1. Ve a **TCB MegaMenu → Settings**
+2. Verifica que puedes cambiar los valores
+3. Haz clic en **Save Changes**
+4. Recarga la página
+5. Verifica que los cambios se mantuvieron
+
+Si el problema persiste:
+1. Desactiva el plugin
+2. Activa el plugin
+3. Intenta guardar los ajustes nuevamente
+
+### El menú móvil no funciona
+
+**Causa:** El breakpoint no coincide con tu tema
+
+**Solución:**
+1. Ve a **TCB MegaMenu → Settings → Mobile Settings**
+2. Ajusta el **Mobile Breakpoint** para que coincida con tu tema
+3. Guarda los cambios
+4. Limpia la caché del navegador (Ctrl+F5)
+5. Redimensiona la ventana para probar
+
+### El contenido de Divi no se muestra
+
+**Causa:** Divi no está activo o el layout no existe
+
+**Solución:**
+1. Verifica que Divi theme o Divi Builder está activo
+2. Verifica que el layout existe en **Divi → Divi Library**
+3. Verifica que el layout está seleccionado en el metabox del menú
+4. Verifica que el layout tiene contenido
+
+### Los iconos duplicados aparecen en móvil
+
+**Causa:** El CSS móvil no se carga correctamente
+
+**Solución:**
+1. Limpia la caché del navegador (Ctrl+F5)
+2. Verifica que el archivo `mobile-fix.css` existe en `wp-content/plugins/tcb-megamenu/assets/css/`
+3. Abre la consola del navegador (F12) y verifica que no hay errores 404
+
+---
+
+## 📋 Checklist de Verificación
+
+Antes de considerar la instalación completa, verifica:
+
+- [ ] El plugin está activo
+- [ ] Los ajustes se guardan correctamente
+- [ ] El menú está asignado a una ubicación del tema
+- [ ] Al menos un ítem tiene "Enable Mega Panel" activado
+- [ ] El contenido del panel se muestra en desktop
+- [ ] El menú móvil funciona correctamente
+- [ ] No hay iconos duplicados en móvil
+- [ ] Los enlaces son clickeables
+- [ ] Las animaciones funcionan suavemente
+
+---
+
+## 🎓 Consejos Avanzados
+
+### Usar Múltiples Mega Menús
+
+Puedes tener múltiples mega menús en el mismo menú:
+1. Activa "Enable Mega Panel" en varios ítems padre
+2. Cada ítem puede tener su propio layout o columnas
+3. Solo un panel se abre a la vez
+
+### Personalizar con CSS Adicional
+
+Puedes añadir CSS personalizado en **Apariencia → Personalizar → CSS adicional**:
 
 ```css
-/* Change badge color */
+/* Cambiar el color del badge */
 .tcb-badge {
-    background: #ff6b6b;
+    background: #ff6b6b !important;
 }
 
-/* Increase column spacing */
+/* Aumentar el espaciado entre columnas */
 .tcb-columns {
-    gap: 40px;
+    gap: 40px !important;
+}
+
+/* Cambiar la animación */
+.tcb-panel {
+    transition-duration: 0.4s !important;
 }
 ```
 
-### Does it work with WooCommerce?
+### Usar con WooCommerce
 
-**Yes.** Works with any WordPress theme using `wp_nav_menu()`.
-
-### Can I translate it?
-
-**Yes.** The plugin is translation-ready. Translation files go in `/languages/` folder.
-
----
-
-## Support
-
-For support and documentation:
-- **Website:** [thecreator.business](https://thecreator.business/)
-- **Email:** support@thecreator.business
+El plugin es compatible con WooCommerce:
+- Puedes crear mega menús para categorías de productos
+- Usa layouts de Divi para mostrar productos destacados
+- Funciona con el menú de la tienda
 
 ---
 
-## License
+## 📞 Soporte
 
-GPL v2 or later - See LICENSE file for details.
+Si necesitas ayuda:
+
+- **Email:** soporte@thecreator.business
+- **Website:** https://thecreator.business/
+- **Horario:** Lunes a Viernes, 9:00 - 18:00 (GMT+1)
+
+Incluye en tu mensaje:
+- Versión de WordPress
+- Versión del plugin
+- Tema activo
+- Descripción detallada del problema
+- Capturas de pantalla si es posible
 
 ---
 
-**Thank you for using TCB MegaMenu!** 🎉
+## 🎉 ¡Felicidades!
+
+Ahora tienes un mega menú profesional funcionando en tu sitio WordPress. Disfruta de la experiencia de usuario mejorada y la integración perfecta con Divi.
+
+**¡Gracias por usar TCB MegaMenu!** 🚀

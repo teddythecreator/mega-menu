@@ -1,363 +1,215 @@
-# TCB MegaMenu by The Creator Business
+# TCB MegaMenu
 
-> **Plugin profesional de WordPress para mega menús con integración nativa de Divi**
-> 
-> Versión 1.3.0 · GPL v2 · https://thecreator.business/
+**Plugin profesional de mega menús para WordPress con integración nativa de Divi**
+
+Versión: 1.3.5  
+Autor: The Creator Business  
+Website: https://thecreator.business/
 
 ---
 
-## 🎯 Descripción
+## 📋 Descripción
 
-**TCB MegaMenu** convierte los menús nativos de WordPress en mega menús profesionales con estética Divi. El contenido de cada panel puede ser un **layout de la Biblioteca de Divi** o **columnas personalizadas** sin necesidad de Divi.
+TCB MegaMenu convierte los menús nativos de WordPress en mega menús profesionales con integración nativa de Divi. El contenido de cada panel puede ser un layout de la Biblioteca de Divi o columnas personalizadas sin necesidad de Divi.
 
 ### Características Principales
 
-- ✅ **Integración con Divi Library** — Usa cualquier layout como contenido del panel
-- ✅ **Modo columnas sin Divi** — Funciona sin Divi usando sub-ítems del menú
-- ✅ **4 estilos de menú móvil** — Accordion, Drawer, Overlay, Slide
-- ✅ **5 iconos hamburguesa personalizables** — Classic, Arrow, Dots, Plus, X
-- ✅ **Panel Width configurable** — Full, Container, Custom (px)
-- ✅ **Colores personalizables** — Background, Text, Accent configurables
-- ✅ **Accesibilidad WCAG 2.1 AA** — Navegación por teclado, ARIA completo
-- ✅ **Rendimiento optimizado** — Assets condicionales, JS vanilla < 5 KB
-- ✅ **Responsive completo** — Breakpoint configurable
-- ✅ **Animaciones suaves** — Hover-intent, staggered columns
-
----
-
-## 📋 Requisitos
-
-- **WordPress** 5.8 o superior
-- **PHP** 8.0 o superior
-- **Divi theme** o **Divi Builder plugin** (opcional, para layouts de Divi)
+✅ **Integración Automática con Divi** - Funciona sin código adicional  
+✅ **4 Estilos de Menú Móvil** - Accordion, Drawer, Overlay, Slide  
+✅ **5 Iconos de Hamburguesa** - Classic, Arrow, Dots, Plus, X  
+✅ **Panel Width Configurable** - Full, Container, Custom  
+✅ **Colores Personalizables** - Background, Text, Accent  
+✅ **Accesibilidad WCAG 2.1 AA** - Navegación por teclado completa  
+✅ **Rendimiento Optimizado** - Assets condicionales, JS vanilla < 5 KB  
+✅ **Sin Código Externo** - Funciona automáticamente al activar
 
 ---
 
 ## 🚀 Instalación
 
-### Método 1: WordPress Admin (Recomendado)
+### Paso 1: Subir el Plugin
 
 1. Ve a **Plugins → Añadir nuevo → Subir plugin**
 2. Selecciona el archivo `tcb-megamenu.zip`
 3. Haz clic en **Instalar ahora**
 4. Haz clic en **Activar plugin**
 
-### Método 2: Por FTP
+**¡Eso es todo!** El plugin funciona automáticamente sin necesidad de añadir código adicional.
 
-1. Descomprime `tcb-megamenu.zip`
-2. Sube la carpeta `tcb-megamenu` a `/wp-content/plugins/`
-3. Ve a **Plugins** en WordPress admin
-4. Activa **TCB MegaMenu**
+### Paso 2: Configurar Ajustes
 
-### Verificación
+1. Ve a **TCB MegaMenu → Settings**
+2. Configura los colores, layout y comportamiento
+3. Haz clic en **Save Changes**
 
-Después de activar, verás:
-- ✅ Menú **TCB MegaMenu** en la barra lateral del admin
-- ✅ Icono de grid amarillo
-- ✅ Submenús: Settings
+### Paso 3: Crear Mega Menús
+
+1. Ve a **Apariencia → Menús**
+2. Crea o edita un menú
+3. Expande un ítem del menú
+4. Marca **"Enable Mega Panel"**
+5. Selecciona **Content Source** (Divi Layout o Custom Columns)
+6. Configura el ancho y alineación
+7. Guarda el menú
 
 ---
 
-## 🎨 Configuración Rápida
+## 🎯 Uso
 
-### 1. Configurar Colores
+### Desktop
 
-Ve a **TCB MegaMenu → Settings**:
+- Pasa el mouse sobre un ítem con mega panel activado
+- El panel se despliega automáticamente con el contenido configurado
+- Funciona con layouts de Divi o columnas personalizadas
 
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| **Background Color** | Color de fondo del panel | `#ffffff` |
-| **Text Color** | Color del texto | `#333333` |
-| **Accent Color** | Color de acento (links hover, badges) | `#e11414` |
+### Móvil
 
-### 2. Configurar Layout
+- Redimensiona la ventana (< breakpoint configurado)
+- Aparece el icono de hamburguesa junto a cada mega ítem
+- Haz clic para desplegar el menú como acordeón
+- Sin iconos duplicados, estructura limpia
 
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| **Border Radius** | Redondez de esquinas | `10px` |
-| **Gap/Spacing** | Espaciado interno | `32px` |
+---
 
-### 3. Configurar Comportamiento Desktop
+## ⚙️ Configuración
 
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| **Hover In Delay** | Tiempo antes de abrir (ms) | `120` |
-| **Hover Out Delay** | Tiempo antes de cerrar (ms) | `200` |
+### Colors
 
-### 4. Configurar Menú Móvil
+- **Background Color** - Color de fondo del panel
+- **Text Color** - Color del texto
+- **Accent Color** - Color de acento (hover, badges)
 
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| **Mobile Breakpoint** | Ancho donde se activa móvil (px) | `980` |
-| **Mobile Style** | Estilo del menú móvil | `accordion` |
-| **Drawer Position** | Posición del drawer | `left` |
-| **Drawer Width** | Ancho del drawer (px) | `300` |
+### Layout
 
-### 5. Configurar Icono Hamburguesa
+- **Border Radius** - Redondez de esquinas
+- **Gap/Spacing** - Espaciado entre elementos
 
-| Opción | Descripción | Ejemplo |
-|--------|-------------|---------|
-| **Icon Style** | Estilo del icono | `classic` |
-| **Icon Color** | Color del icono | `#333333` |
-| **Icon Size** | Tamaño del icono (px) | `24` |
-| **Line Thickness** | Grosor de línea (px) | `2` |
+### Desktop Behavior
+
+- **Hover In Delay** - Tiempo antes de abrir (ms)
+- **Hover Out Delay** - Tiempo antes de cerrar (ms)
+
+### Mobile Settings
+
+- **Mobile Breakpoint** - Ancho donde se activa móvil (px)
+- **Mobile Menu Style** - Accordion, Drawer, Overlay, Slide
+- **Drawer Position** - Left o Right (solo para Drawer)
+- **Drawer Width** - Ancho del drawer (px)
+
+### Hamburger Icon
+
+- **Icon Style** - Classic, Arrow, Dots, Plus, X
+- **Icon Color** - Color del icono
+- **Icon Size** - Tamaño del icono (px)
+- **Line Thickness** - Grosor de las líneas (px)
 
 ---
 
 ## 📱 Estilos de Menú Móvil
 
-### 1. 📋 Accordion (Vertical)
-Panel se despliega verticalmente debajo del trigger.
-- **Ideal para:** Menús simples
-- **Ventaja:** Simple y directo
+### Accordion (Por defecto)
+- Panel se despliega verticalmente
+- Ideal para menús simples
+- Sin iconos duplicados
 
-### 2. 📥 Drawer (Lateral)
-Panel se desliza desde izquierda o derecha.
-- **Ideal para:** Menús complejos
-- **Ventaja:** Elegante, mucho espacio
-- **Configurable:** Posición (left/right) y ancho (200-500px)
+### Drawer
+- Panel se desliza desde izquierda o derecha
+- Elegante y profesional
+- Ancho configurable (200-500px)
 
-### 3. 🔲 Overlay (Fullscreen)
-Panel ocupa toda la pantalla.
-- **Ideal para:** Experiencias inmersivas
-- **Ventaja:** Impactante
+### Overlay
+- Panel ocupa toda la pantalla
+- Experiencia inmersiva
+- Ideal para menús complejos
 
-### 4. 📤 Slide Down
-Panel se desliza desde arriba.
-- **Ideal para:** Acceso rápido
-- **Ventaja:** Rápido y accesible
-
----
-
-## 🍔 Iconos Hamburguesa
-
-| Icono | Estilo | Uso Recomendado |
-|-------|--------|-----------------|
-| ☰ **Classic** | Tres líneas | Cualquier sitio |
-| ← **Arrow** | Flechas | Sitios con dirección |
-| ⋮ **Dots** | Tres puntos | Diseños minimalistas |
-| + **Plus** | Línea que rota | Estilo flat |
-| ✕ **X** | X mark | Estilo bold |
+### Slide Down
+- Panel se desliza desde arriba
+- Rápido y accesible
+- Max-height con scroll
 
 ---
 
-## 🎯 Crear tu Primer Mega Menú
+## 🍔 Iconos de Hamburguesa
 
-### Paso 1: Crear el Menú
+- **Classic** - Tres líneas horizontales (el más reconocido)
+- **Arrow** - Flechas direccionales
+- **Dots** - Tres puntos verticales (minimalista)
+- **Plus** - Línea que rota
+- **X** - X mark directo
 
-1. Ve a **Apariencia → Menús**
-2. Crea un nuevo menú o edita uno existente
-3. Añade ítems principales
-4. Asigna el menú a una ubicación del tema
-5. Guarda
-
-### Paso 2: Activar Mega Panel
-
-1. Haz clic en la flecha ▼ del ítem que quieres convertir
-2. Marca **"Enable Mega Panel"**
-3. Se desplegarán los campos adicionales
-
-### Paso 3: Configurar el Contenido
-
-**Opción A: Usar Divi Library Layout**
-1. En **Content Source**, selecciona **Divi Library Layout**
-2. En **Select Divi Layout**, elige tu layout
-3. (Crea layouts en Divi → Divi Library)
-
-**Opción B: Usar Columnas sin Divi**
-1. En **Content Source**, selecciona **Custom Columns**
-3. Añade sub-ítems al menú (se organizarán en columnas automáticamente)
-
-### Paso 4: Configurar el Panel
-
-- **Panel Width**: Full / Container / Custom
-- **Panel Alignment**: Left / Center / Right
-- **Icon** (opcional): Clase de icono o SVG
-- **Badge** (opcional): Etiqueta (ej: "New", "Sale")
-
-### Paso 5: Guardar y Probar
-
-1. Guarda el menú
-3. Visita tu sitio web
-4. Pasa el mouse sobre el ítem
-5. ¡El mega menú aparece! 🎉
+Todos los iconos son personalizables en color, tamaño y grosor.
 
 ---
 
-## 🎯 Panel Width
+## 🔧 Requisitos
 
-| Opción | Comportamiento |
-|--------|----------------|
-| **Full Width** | Panel ocupa todo el viewport (100vw) |
-| **Container Width** | Panel centrado con máximo 1200px |
-| **Custom Width** | Panel con ancho exacto en píxeles |
+- WordPress 5.8 o superior
+- PHP 8.0 o superior
+- Divi theme o Divi Builder plugin (opcional, para layouts de Divi)
 
 ---
 
-## 📊 Estructura del Plugin
+## 📊 Especificaciones Técnicas
 
-```
-tcb-megamenu/
-├── tcb-megamenu.php              # Archivo principal
-├── uninstall.php                  # Limpieza al desinstalar
-├── readme.txt                     # WordPress.org format
-├── LICENSE                        # GPL v2
-├── INSTALLATION-GUIDE.md          # Guía completa
-├── GUIA-VISUAL-MOVIL.md           # Guía visual móvil
-├── includes/
-│   ├── class-plugin.php          # Singleton principal
-│   ├── class-menu-fields.php     # Metabox
-│   ├── class-menu-walker.php     # Walker con ARIA
-│   ├── class-settings.php        # Ajustes globales
-│   ├── class-assets.php          # Assets condicionales
-│   └── class-renderer.php        # Render de paneles
-├── assets/
-│   ├── css/
-│   │   ├── megamenu.css          # Estilos front
-│   │   └── admin.css             # Estilos admin
-│   └── js/
-│       ├── megamenu.js           # JS front (< 5 KB)
-│       └── admin.js              # JS admin
-└── languages/
-    └── (preparado para traducciones)
-```
-
----
-
-## 🔧 Para Desarrolladores
-
-### Hooks y Filtros
-
-```php
-// Modificar configuración del JS
-add_filter('tcb_megamenu_config', function($config) {
-    $config['hoverIn'] = 150;
-    return $config;
-});
-```
-
-### API Pública JavaScript
-
-```javascript
-// Abrir un panel
-TCB_MegaMenu.open('.menu-item-123 a');
-
-// Cerrar un panel
-TCB_MegaMenu.close('.menu-item-123 a');
-
-// Cerrar todos los paneles
-TCB_MegaMenu.closeAll();
-```
-
-### Variables CSS
-
-```css
-:root {
-    --tcb-bg: #ffffff;
-    --tcb-fg: #333333;
-    --tcb-accent: #e11414;
-    --tcb-border: rgba(0,0,0,.08);
-    --tcb-radius: 10px;
-    --tcb-shadow: 0 24px 60px rgba(0,0,0,.15);
-    --tcb-font: inherit;
-    --tcb-gap: 32px;
-    --tcb-anim: .22s;
-    --tcb-mobile-width: 300px;
-    --tcb-hamburger-color: #333333;
-    --tcb-hamburger-size: 24px;
-    --tcb-hamburger-thickness: 2px;
-}
-```
+- **Tamaño JS:** < 5 KB (vanilla, sin dependencias)
+- **Accesibilidad:** WCAG 2.1 AA
+- **Compatibilidad:** Divi, Elementor, WPBakery
+- **Rendimiento:** Assets condicionales, solo carga cuando es necesario
 
 ---
 
 ## 🐛 Troubleshooting
 
-### "El mega menú no aparece"
-- Verifica que el plugin está activado
-- Verifica que "Enable Mega Panel" está marcado
-- Verifica que el menú está asignado a una ubicación
-- Limpia la caché del navegador (Ctrl+F5)
+### El menú no aparece en el frontend
 
-### "El layout de Divi no se renderiza"
-- Verifica que Divi theme o Divi Builder están activos
-- Verifica que el layout está publicado
-- Verifica que el layout tiene contenido
+1. Verifica que el menú está asignado a una ubicación del tema
+2. Verifica que "Enable Mega Panel" está activado en al menos un ítem
+3. Limpia la caché del navegador (Ctrl+F5)
+4. Verifica que el tema usa `wp_nav_menu()`
 
-### "Los colores no se aplican"
-- Ve a TCB MegaMenu → Settings
-- Configura los colores
-- Guarda los cambios
-- Limpia la caché del navegador
+### Los ajustes no se guardan
 
-### "El menú móvil no funciona"
-- Verifica el Mobile Breakpoint en Settings
-- Redimensiona la ventana del navegador
-- Verifica que el JavaScript se carga
+1. Ve a TCB MegaMenu → Settings
+2. Verifica que el formulario tiene el tag `<form>`
+3. Limpia la caché del navegador
+4. Desactiva y reactiva el plugin
 
----
+### El menú móvil no funciona
 
-## 📚 Documentación
-
-- **Guía de Instalación:** `INSTALLATION-GUIDE.md`
-- **Guía Visual Móvil:** `GUIA-VISUAL-MOVIL.md`
-- **WordPress.org Readme:** `readme.txt`
-- **Licencia:** `LICENSE` (GPL v2)
-
----
-
-## 🎓 Historial de Versiones
-
-### v1.3.0 (Actual)
-- ✅ 4 estilos de menú móvil (Accordion, Drawer, Overlay, Slide)
-- ✅ 5 iconos hamburguesa personalizables
-- ✅ Color, tamaño y grosor del icono configurables
-- ✅ Drawer con posición y ancho configurables
-- ✅ Overlay automático para drawer/overlay
-- ✅ Animaciones suaves para todos los estilos
-
-### v1.2.0
-- ✅ Background configurable (sin transparencia forzada)
-- ✅ Settings simplificado y funcional
-- ✅ Móvil completamente funcional
-- ✅ Panel Width funcionando correctamente
-
-### v1.1.0
-- ✅ Integración corregida con Divi
-- ✅ Menú principal (no bajo Apariencia)
-- ✅ Documentación completa
-
-### v1.0.0
-- ✅ Metabox completo con 8 campos
-- ✅ Página de ajustes globales
-- ✅ Walker personalizado con ARIA
-- ✅ Render de layouts de Divi
-- ✅ Modo columnas sin Divi
-- ✅ Accesibilidad WCAG 2.1 AA
-- ✅ Rendimiento optimizado (< 5 KB JS)
+1. Verifica que el breakpoint es correcto
+2. Redimensiona la ventana del navegador
+3. Limpia la caché del navegador
+4. Verifica en la consola del navegador (F12) que no hay errores
 
 ---
 
 ## 📞 Soporte
 
-- **Website:** https://thecreator.business/
 - **Email:** soporte@thecreator.business
+- **Website:** https://thecreator.business/
+- **Horario:** Lunes a Viernes, 9:00 - 18:00 (GMT+1)
 
 ---
 
 ## 📄 Licencia
 
-GPL v2 or later - Ver [LICENSE](tcb-megamenu/LICENSE) para más detalles.
+GPL v2 or later
 
 ---
 
-## 🎉 Créditos
+## 🎉 Características Destacadas
 
-**Desarrollado por:** The Creator Business  
-**Versión:** 1.3.0  
-**Última actualización:** 2024  
-**Website:** https://thecreator.business/
+✅ **Funciona Automáticamente** - Sin código adicional  
+✅ **Compatible con Divi** - Integración nativa  
+✅ **4 Estilos Móviles** - Accordion, Drawer, Overlay, Slide  
+✅ **5 Iconos Personalizables** - Classic, Arrow, Dots, Plus, X  
+✅ **Ajustes Guardables** - Todos los ajustes se guardan correctamente  
+✅ **Sin Iconos Duplicados** - Estructura limpia en móvil  
+✅ **Panel Width Configurable** - Full, Container, Custom  
+✅ **Accesibilidad Completa** - WCAG 2.1 AA  
+✅ **Rendimiento Optimizado** - < 5 KB JavaScript  
+✅ **Sin Dependencias** - Vanilla JS puro
 
 ---
 
-**¡Gracias por usar TCB MegaMenu!** 🚀
+**¡Disfruta de tu mega menú profesional!** 🚀

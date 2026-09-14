@@ -1,29 +1,55 @@
-# 📱 Guía Visual - Opciones de Menú Móvil TCB MegaMenu
+# 📱 Guía Visual - Menú Móvil TCB MegaMenu
 
-## 🎨 Estilos de Menú Móvil
+## 🎯 Estilos de Menú Móvil Disponibles
 
-### 1. 📋 Accordion (Vertical)
+El plugin ofrece 4 estilos diferentes de menú móvil, cada uno con sus propias características y casos de uso ideales.
+
+---
+
+## 📋 1. Accordion (Vertical)
+
+**Recomendado para:** Menús simples y directos
+
+### Características
+- ✅ Panel se despliega verticalmente debajo del ítem
+- ✅ Sin iconos duplicados
+- ✅ Estructura limpia y organizada
+- ✅ Separadores entre ítems
+- ✅ Padding consistente (15px 20px)
+
+### Apariencia
 ```
 ┌─────────────────────────┐
-│  Menú Principal         │
+│  ☰ Servicios            │
 ├─────────────────────────┤
-│  ▼ Item 1               │
-├─────────────────────────┤ ← Border-left accent
-│    ├─ Subitem 1.1       │
-│    ├─ Subitem 1.2       │
-│    └─ Subitem 1.3       │
-├─────────────────────────┤
-│  ▶ Item 2               │
-├─────────────────────────┤
-│  ▶ Item 3               │
+│  Diseño Web             │
+│  Desarrollo             │
+│  SEO                    │
+│  Marketing              │
+│  Consultoría            │
 └─────────────────────────┘
-
-✅ Simple y directo
-✅ Ocupa todo el ancho
-✅ Ideal para menús simples
 ```
 
-### 2. 📥 Drawer (Lateral)
+### Cuándo Usarlo
+- Menús con pocos ítems
+- Sitios corporativos
+- Blogs y sitios de contenido
+- Cuando prefieres simplicidad
+
+---
+
+## 📥 2. Drawer (Lateral)
+
+**Recomendado para:** Menús complejos con muchos ítems
+
+### Características
+- ✅ Panel se desliza desde la izquierda o derecha
+- ✅ Overlay oscuro detrás del panel
+- ✅ Ancho configurable (200-500px)
+- ✅ Posición configurable (left/right)
+- ✅ Scroll interno si el contenido es largo
+
+### Apariencia
 ```
 ┌─────────────────────────────────────┐
 │  Header              [☰]            │
@@ -43,14 +69,32 @@
 │  └──────────┘░░░░░░░░░░░░░░░░░░░░░│
 │                                     │
 └─────────────────────────────────────┘
-
-✅ Elegante y profesional
-✅ Mucho espacio para contenido
-✅ Posición: Izquierda o Derecha
-✅ Ancho configurable (200-500px)
 ```
 
-### 3. 🔲 Overlay (Fullscreen)
+### Configuración
+- **Drawer Position:** Left o Right
+- **Drawer Width:** 200-500px (recomendado: 300px)
+
+### Cuándo Usarlo
+- E-commerce con muchas categorías
+- Sitios con menús complejos
+- Cuando necesitas mucho espacio
+- Apps móviles nativas
+
+---
+
+## 🔲 3. Overlay (Fullscreen)
+
+**Recomendado para:** Experiencias inmersivas
+
+### Características
+- ✅ Panel ocupa toda la pantalla
+- ✅ Efecto de zoom al abrir
+- ✅ Overlay oscuro detrás
+- ✅ Contenido centrado
+- ✅ Ideal para menús principales
+
+### Apariencia
 ```
 ┌─────────────────────────────────────┐
 │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
@@ -71,14 +115,28 @@
 │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 └─────────────────────────────────────┘
-
-✅ Inmersivo y impactante
-✅ Ocupa toda la pantalla
-✅ Efecto de zoom al abrir
-✅ Ideal para experiencias únicas
 ```
 
-### 4. 📤 Slide Down
+### Cuándo Usarlo
+- Landing pages
+- Portfolios creativos
+- Sitios con diseño minimalista
+- Cuando quieres impacto visual
+
+---
+
+## 📤 4. Slide Down
+
+**Recomendado para:** Acceso rápido
+
+### Características
+- ✅ Panel se desliza desde arriba
+- ✅ Ocupa todo el ancho
+- ✅ Max-height con scroll
+- ✅ Rápido y accesible
+- ✅ No bloquea el contenido
+
+### Apariencia
 ```
 ┌─────────────────────────────────────┐
 │  ┌───────────────────────────────┐  │
@@ -101,18 +159,21 @@
 │  Contenido de la página...          │
 │                                     │
 └─────────────────────────────────────┘
-
-✅ Rápido y accesible
-✅ Se desliza desde arriba
-✅ Max-height con scroll
-✅ Ideal para acceso rápido
 ```
+
+### Cuándo Usarlo
+- Blogs y sitios de noticias
+- Sitios con contenido largo
+- Cuando necesitas acceso rápido
+- Menús secundarios
 
 ---
 
-## 🍔 Estilos de Icono Hamburguesa
+## 🍔 Iconos de Hamburguesa Disponibles
 
-### 1. ☰ Classic (3 líneas)
+### 1. Classic (☰)
+**El más reconocido y usado**
+
 ```
 Cerrado:          Abierto:
 ┌──────┐          ┌──────┐
@@ -120,13 +181,15 @@ Cerrado:          Abierto:
 │ ━━━  │    →     │   ╳  │
 │ ━━━  │          │  ╱   │
 └──────┘          └──────┘
-
-⭐ El más reconocido
-⭐ Se transforma en X
-⭐ Recomendado para cualquier sitio
 ```
 
-### 2. ← Arrow (Flecha)
+**Recomendado para:** Cualquier sitio
+
+---
+
+### 2. Arrow (←)
+**Flechas direccionales**
+
 ```
 Cerrado:          Abierto:
 ┌──────┐          ┌──────┐
@@ -134,13 +197,15 @@ Cerrado:          Abierto:
 │ ━━━  │    →     │ ━━━  │
 │  ╲   │          │      │
 └──────┘          └──────┘
-
-⭐ Efecto direccional
-⭐ Moderno y dinámico
-⭐ Ideal para sitios con dirección clara
 ```
 
-### 3. ⋮ Dots (3 puntos)
+**Recomendado para:** Sitios con dirección clara
+
+---
+
+### 3. Dots (⋮)
+**Tres puntos verticales**
+
 ```
 Cerrado:          Abierto:
 ┌──────┐          ┌──────┐
@@ -148,13 +213,15 @@ Cerrado:          Abierto:
 │  ●   │    →     │  ●   │
 │  ●   │          │  ●   │
 └──────┘          └──────┘
-
-⭐ Minimalista
-⭐ Limpio y elegante
-⭐ Ideal para diseños modernos
 ```
 
-### 4. + Plus/Minus
+**Recomendado para:** Diseños minimalistas
+
+---
+
+### 4. Plus (+)
+**Línea que rota**
+
 ```
 Cerrado:          Abierto:
 ┌──────┐          ┌──────┐
@@ -163,13 +230,15 @@ Cerrado:          Abierto:
 │      │          │      │
 └──────┘          └──────┘
   ( + )             ( - )
-
-⭐ Simple y directo
-⭐ Rotación de 90°
-⭐ Ideal para estilo flat
 ```
 
-### 5. ✕ X Mark
+**Recomendado para:** Estilo flat
+
+---
+
+### 5. X (✕)
+**X mark directo**
+
 ```
 Cerrado:          Abierto:
 ┌──────┐          ┌──────┐
@@ -177,207 +246,47 @@ Cerrado:          Abierto:
 │   ╳  │    →     │   ╳  │
 │  ╱   │          │  ╱   │
 └──────┘          └──────┘
-
-⭐ Siempre visible como X
-⭐ Directo y claro
-⭐ Ideal para estilo bold
 ```
+
+**Recomendado para:** Estilo bold
 
 ---
 
 ## 🎨 Personalización del Icono
 
 ### Color del Icono
-```
-Header Claro:              Header Oscuro:
-┌──────────────────┐       ┌──────────────────┐
-│                  │       │                  │
-│  ☰ (negro)       │       │  ☰ (blanco)      │
-│                  │       │                  │
-└──────────────────┘       └──────────────────┘
-Color: #333333             Color: #ffffff
-
-Color de Marca:
-┌──────────────────┐
-│                  │
-│  ☰ (rojo)        │
-│                  │
-└──────────────────┘
-Color: #e11414
-```
+- Debe contrastar con el fondo del header
+- Ejemplos:
+  - Header claro: `#333333`
+  - Header oscuro: `#ffffff`
+  - Color de marca: tu color corporativo
 
 ### Tamaño del Icono
-```
-Pequeño (16px):      Mediano (24px):      Grande (32px):
-┌────────┐           ┌────────────┐       ┌────────────────┐
-│  ☰     │           │    ☰       │       │      ☰         │
-└────────┘           └────────────┘       └────────────────┘
-```
+- Rango: 16px - 48px
+- Por defecto: 24px
+- Recomendaciones:
+  - **16-20px:** Diseños minimalistas
+  - **24-28px:** Estándar (recomendado)
+  - **32-48px:** Diseños bold
 
 ### Grosor de Línea
-```
-Fino (1px):          Normal (2px):        Grueso (3px):
-┌────────────┐       ┌────────────┐       ┌────────────┐
-│  ─ ─ ─     │       │  ━ ━ ━     │       │  █ █ █     │
-└────────────┘       └────────────┘       └────────────┘
-```
+- Rango: 1px - 5px
+- Por defecto: 2px
+- Recomendaciones:
+  - **1-2px:** Diseños delicados
+  - **2-3px:** Estándar (recomendado)
+  - **4-5px:** Diseños bold
 
 ---
 
-## 📊 Tabla de Recomendaciones
+## 📊 Comparación de Estilos
 
-### Por Tipo de Sitio
-
-| Tipo de Sitio | Mobile Style | Hamburger Icon | Icon Size | Notas |
-|---------------|--------------|----------------|-----------|-------|
-| **Corporativo** | Drawer (Right) | Classic | 24px | Elegante y profesional |
-| **E-commerce** | Drawer (Left) | Classic | 28px | Fácil acceso al menú |
-| **Portfolio** | Overlay | Dots | 32px | Experiencia inmersiva |
-| **Blog** | Slide | Plus | 24px | Acceso rápido |
-| **Landing** | Overlay | Arrow | 36px | Impactante |
-| **Minimalista** | Accordion | Dots | 20px | Limpio y simple |
-| **Bold** | Drawer (Right) | X | 28px | Directo y claro |
-
-### Por Cantidad de Items
-
-| Items | Mobile Style | Notas |
-|-------|--------------|-------|
-| **1-5** | Accordion | Simple y directo |
-| **6-10** | Slide | Rápido y accesible |
-| **11-20** | Drawer | Espacio suficiente |
-| **20+** | Overlay o Drawer | Mucho contenido |
-
-### Por Diseño del Header
-
-| Header | Mobile Style | Icon Color | Notas |
-|--------|--------------|------------|-------|
-| **Claro** | Cualquiera | Oscuro (#333) | Buen contraste |
-| **Oscuro** | Cualquiera | Claro (#fff) | Buen contraste |
-| **Color** | Cualquiera | Blanco o color marca | Destacar |
-| **Transparente** | Overlay | Según fondo | Adaptar |
-
----
-
-## 🚀 Configuraciones Rápidas
-
-### ⚡ Configuración Minimalista
-```yaml
-Mobile Style: Accordion
-Hamburger Icon: Dots
-Icon Color: #666666
-Icon Size: 20px
-Line Thickness: 2px
-```
-**Ideal para:** Sitios limpios y modernos
-
-### 💼 Configuración Profesional
-```yaml
-Mobile Style: Drawer (Right)
-Drawer Width: 320px
-Hamburger Icon: Classic
-Icon Color: #333333
-Icon Size: 24px
-Line Thickness: 2px
-```
-**Ideal para:** Sitios corporativos y e-commerce
-
-### 🎨 Configuración Creativa
-```yaml
-Mobile Style: Overlay
-Hamburger Icon: Plus
-Icon Color: #e11414
-Icon Size: 32px
-Line Thickness: 3px
-```
-**Ideal para:** Portfolios y landing pages
-
-### ⚡ Configuración Rápida
-```yaml
-Mobile Style: Slide
-Hamburger Icon: Arrow
-Icon Color: #333333
-Icon Size: 24px
-Line Thickness: 2px
-```
-**Ideal para:** Blogs y sitios de contenido
-
-### 🎯 Configuración Impactante
-```yaml
-Mobile Style: Overlay
-Hamburger Icon: X
-Icon Color: #ffffff
-Icon Size: 36px
-Line Thickness: 3px
-```
-**Ideal para:** Landing pages y experiencias únicas
-
----
-
-## 📱 Preview de Combinaciones
-
-### Accordion + Classic
-```
-┌─────────────────────────┐
-│  Header      [☰]        │
-├─────────────────────────┤
-│  ▼ Item 1               │
-│    ├─ Subitem 1.1       │
-│    └─ Subitem 1.2       │
-├─────────────────────────┤
-│  ▶ Item 2               │
-└─────────────────────────┘
-✅ Simple y reconocido
-```
-
-### Drawer + Dots
-```
-┌─────────────────────────────────┐
-│  Header          [⋮]            │
-├─────────────────────────────────┤
-│  ┌────────┐░░░░░░░░░░░░░░░░░░░│
-│  │        │░░░░░░░░░░░░░░░░░░░│
-│  │  Menú  │░░░░░░░░░░░░░░░░░░░│
-│  │        │░░░░░░░░░░░░░░░░░░░│
-│  │  Item  │░░░░░░░░░░░░░░░░░░░│
-│  └────────┘░░░░░░░░░░░░░░░░░░░│
-└─────────────────────────────────┘
-✅ Minimalista y elegante
-```
-
-### Overlay + Plus
-```
-┌─────────────────────────────────┐
-│  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
-│  ░░░┌───────────────┐░░░░░░░░░│
-│  ░░░│               │░░░░░░░░░│
-│  ░░░│   [+] Menú    │░░░░░░░░░│
-│  ░░░│               │░░░░░░░░░│
-│  ░░░│   Item 1      │░░░░░░░░░│
-│  ░░░│   Item 2      │░░░░░░░░░│
-│  ░░░│               │░░░░░░░░░│
-│  ░░░└───────────────┘░░░░░░░░░│
-│  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
-└─────────────────────────────────┘
-✅ Simple e inmersivo
-```
-
-### Slide + Arrow
-```
-┌─────────────────────────────────┐
-│  ┌───────────────────────────┐  │
-│  │  [←] Menú                 │  │
-│  │                           │  │
-│  │  Item 1                   │  │
-│  │  Item 2                   │  │
-│  │  Item 3                   │  │
-│  └───────────────────────────┘  │
-├─────────────────────────────────┤
-│  Header                         │
-├─────────────────────────────────┤
-│  Contenido...                   │
-└─────────────────────────────────┘
-✅ Rápido y direccional
-```
+| Estilo | Ventaja | Desventaja | Uso Recomendado |
+|--------|---------|------------|-----------------|
+| **Accordion** | Simple, rápido | Limita el contenido | Menús simples, pocos items |
+| **Drawer** | Elegante, mucho espacio | Requiere más interacción | Menús complejos, muchos items |
+| **Overlay** | Inmersivo, impactante | Puede ser intrusivo | Landing pages, experiencias únicas |
+| **Slide** | Rápido, accesible | Limita el alto | Blogs, sitios de contenido |
 
 ---
 
@@ -417,15 +326,113 @@ Line Thickness: 3px
 
 ---
 
-## 📞 Soporte
+## 📱 Configuraciones Recomendadas
 
-Si necesitas ayuda para elegir la configuración perfecta:
+### Sitio Corporativo
+```yaml
+Mobile Style: Drawer (Right)
+Drawer Width: 320px
+Hamburger Icon: Classic
+Icon Color: #333333
+Icon Size: 24px
+```
 
-1. **Prueba diferentes combinaciones** en Settings
-2. **Redimensiona la ventana** para ver el resultado
-3. **Limpia la caché** si no ves los cambios
-4. **Contacta soporte**: soporte@thecreator.business
+### E-commerce
+```yaml
+Mobile Style: Drawer (Left)
+Drawer Width: 320px
+Hamburger Icon: Classic
+Icon Size: 28px
+```
+
+### Portfolio
+```yaml
+Mobile Style: Overlay
+Hamburger Icon: Dots
+Icon Size: 32px
+```
+
+### Blog
+```yaml
+Mobile Style: Slide
+Hamburger Icon: Plus
+Icon Size: 24px
+```
+
+### Landing Page
+```yaml
+Mobile Style: Overlay
+Hamburger Icon: X
+Icon Size: 36px
+```
 
 ---
 
+## 🧪 Testing de Estilos Móviles
+
+### Checklist de Pruebas
+
+- [ ] El icono de hamburguesa aparece correctamente
+- [ ] Al hacer clic, el panel se abre
+- [ ] El contenido es visible y legible
+- [ ] Los enlaces son clickeables
+- [ ] El panel se cierra al hacer clic fuera
+- [ ] El panel se cierra al hacer clic en el icono
+- [ ] No hay iconos duplicados
+- [ ] Las animaciones son suaves
+- [ ] El scroll funciona correctamente (si aplica)
+- [ ] El overlay aparece (para Drawer y Overlay)
+
+### Dispositivos a Probar
+
+- iPhone (375px)
+- iPad (768px)
+- Android móvil (360px)
+- Android tablet (1024px)
+
+---
+
+## 🐛 Troubleshooting de Estilos Móviles
+
+### "El icono no aparece"
+**Solución:**
+1. Verifica que el breakpoint es correcto
+2. Redimensiona la ventana del navegador
+3. Limpia la caché del navegador (Ctrl+F5)
+
+### "El panel no se abre"
+**Solución:**
+1. Verifica que el JavaScript se carga correctamente
+2. Abre la consola del navegador (F12) y busca errores
+3. Verifica que el CSS móvil se carga
+
+### "Hay iconos duplicados"
+**Solución:**
+1. Verifica que el archivo `mobile-fix.css` se carga
+2. Limpia la caché del navegador
+3. Verifica que no hay CSS personalizado que interfiera
+
+### "El contenido no se ve bien"
+**Solución:**
+1. Verifica que el estilo móvil es correcto
+2. Ajusta el padding y spacing en los ajustes
+3. Verifica que el contenido de Divi se renderiza correctamente
+
+---
+
+## 🎉 Conclusión
+
+El plugin TCB MegaMenu ofrece 4 estilos de menú móvil y 5 iconos de hamburguesa personalizables. Cada estilo tiene sus propias ventajas y casos de uso ideales.
+
+**Recomendación general:**
+- Para la mayoría de sitios: **Accordion** con icono **Classic**
+- Para e-commerce: **Drawer** con icono **Classic**
+- Para portfolios creativos: **Overlay** con icono **Dots**
+
 **¡Experimenta con todas las combinaciones y encuentra la perfecta para tu sitio!** 🎨
+
+---
+
+**Versión del documento:** 1.0  
+**Fecha:** 2024  
+**Plugin:** TCB MegaMenu v1.3.5
