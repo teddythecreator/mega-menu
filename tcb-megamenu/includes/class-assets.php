@@ -106,6 +106,14 @@ class Assets {
             $version
         );
 
+        // Cargar mobile fixes
+        wp_enqueue_style(
+            'tcb-megamenu-mobile',
+            TCB_MEGAMENU_URL . 'assets/css/mobile-fix.css',
+            array( 'tcb-megamenu' ),
+            $version
+        );
+
         wp_enqueue_script(
             'tcb-megamenu',
             TCB_MEGAMENU_URL . 'assets/js/megamenu.js',

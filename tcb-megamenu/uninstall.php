@@ -3,13 +3,6 @@
  * Uninstall handler for TCB-MegaMenu.
  *
  * Fired when the plugin is uninstalled.
- * 
- * IMPORTANT: This only removes the plugin's global settings and transients.
- * Menu item configurations (_tcb_* meta) are PRESERVED so users don't lose
- * their work when temporarily deactivating or updating the plugin.
- *
- * To completely remove all data including menu configurations, use the
- * "Reset All Data" option in TCB MegaMenu → Settings → Data Management.
  *
  * @package TCB_MegaMenu
  */
@@ -20,22 +13,31 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-// Delete global settings option
+// Delete global settings
 delete_option( 'tcb_megamenu_settings' );
+
+// Delete all menu item meta
+$meta_keys = array(
+    '_tcb_enabled',
+    '_tcb_source',
+    '_tcb_layout_id',
+    '_tcb_width',
+    '_tcb_width_px',
+    '_tcb_align',
+    '_tcb_icon',
+    '_tcb_badge',
+);
+
+foreach ( $meta_keys as $key ) {
+    $wpdb->query(
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->postmeta} WHERE meta_key = %s",
+            $key
+        )
+    );
+}
 
 // Clear transients
 $wpdb->query(
     "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_tcb_%' OR option_name LIKE '_transient_timeout_tcb_%'"
 );
-
-/**
- * IMPORTANT: Menu item meta (_tcb_*) is NOT deleted here.
- * 
- * This preserves user configurations when:
- * - Temporarily deactivating the plugin
- * - Updating to a new version
- * - Testing with the plugin on/off
- * 
- * Users who want to completely remove all data can use the
- * "Reset All Data" button in the plugin settings page.
- */
