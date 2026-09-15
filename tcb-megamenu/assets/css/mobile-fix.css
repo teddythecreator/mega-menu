@@ -1,0 +1,244 @@
+/**
+ * TCB-MegaMenu - Mobile Responsive Fixes
+ * 
+ * Fixes for mobile menu:
+ * - Remove duplicate hamburger icons from submenu items
+ * - Clean dropdown structure
+ * - Simple and clean mobile design
+ *
+ * @package TCB_MegaMenu
+ * @version 1.3.4
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE FIXES (max-width: 768px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    
+    /* ── Hide duplicate hamburger/submenu icons in mobile ──────── */
+    .tcb-mega-item .sub-menu .tcb-hamburger,
+    .tcb-mega-item .sub-menu .hamburger-icon,
+    .tcb-mega-item .sub-menu .submenu-icon,
+    .tcb-mega-item .sub-menu .menu-toggle-btn,
+    .tcb-mega-item .tcb-panel .tcb-hamburger {
+        display: none !important;
+    }
+    
+    /* ── Clean mobile dropdown structure ───────────────────────── */
+    .tcb-mega-panels-container {
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* ── Mobile panel (accordion style) ────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion {
+        position: static !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important;
+        background: var(--tcb-bg, #ffffff) !important;
+        border: none !important;
+        border-top: 1px solid var(--tcb-border, #eeeeee) !important;
+        border-radius: 0 !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 9999 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion[aria-hidden="false"] {
+        display: block !important;
+        transform: none !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion[aria-hidden="true"] {
+        display: none !important;
+    }
+    
+    /* ── Panel inner content ───────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-panel-inner {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    /* ── Clean list structure ──────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-columns {
+        display: block !important;
+        grid-template-columns: none !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links li {
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: 1px solid var(--tcb-border, #eeeeee) !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links li:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* ── Clean link items ──────────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 15px 20px !important;
+        color: var(--tcb-fg, #333333) !important;
+        text-decoration: none !important;
+        font-size: 15px !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        transition: background-color 0.2s ease !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a:hover,
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a:focus {
+        background-color: rgba(0,0,0,0.03) !important;
+        color: var(--tcb-accent, #e11414) !important;
+        padding-left: 20px !important;
+    }
+    
+    /* ── Hide any nested icons or indicators ───────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a::after,
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a::before {
+        display: none !important;
+    }
+    
+    /* ── Badge styling in mobile ───────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-badge {
+        display: inline-block !important;
+        margin-left: 8px !important;
+        padding: 2px 8px !important;
+        background: var(--tcb-accent, #e11414) !important;
+        color: #ffffff !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        border-radius: 3px !important;
+    }
+    
+    /* ── Main hamburger button (only one visible) ──────────────── */
+    .tcb-mega-item > .tcb-hamburger {
+        display: inline-block !important;
+        position: relative !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        width: var(--tcb-hamburger-size, 24px) !important;
+        height: var(--tcb-hamburger-size, 24px) !important;
+        margin-left: 8px !important;
+        vertical-align: middle !important;
+    }
+    
+    /* ── Hide hamburger in submenu items ───────────────────────── */
+    .tcb-mega-item .sub-menu .tcb-hamburger,
+    .tcb-mega-item .tcb-panel .tcb-hamburger {
+        display: none !important;
+    }
+    
+    /* ── Divi content in mobile ────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-divi-content {
+        padding: 15px 20px !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-divi-content .et_pb_section {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-divi-content .et_pb_row {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-divi-content .et_pb_column {
+        padding: 10px 0 !important;
+    }
+    
+    /* ── Empty state in mobile ─────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-empty {
+        padding: 20px !important;
+        text-align: center !important;
+        color: var(--tcb-muted, #666666) !important;
+        font-size: 14px !important;
+    }
+    
+    /* ── Error state in mobile ─────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion .tcb-error {
+        padding: 15px 20px !important;
+        background: rgba(255, 193, 7, 0.1) !important;
+        border: 1px solid rgba(255, 193, 7, 0.3) !important;
+        border-radius: 0 !important;
+        color: #ffc107 !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET RESPONSIVE (769px - 980px)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 980px) and (min-width: 769px) {
+    
+    /* ── Hide duplicate icons in tablet ────────────────────────── */
+    .tcb-mega-item .sub-menu .tcb-hamburger,
+    .tcb-mega-item .sub-menu .hamburger-icon,
+    .tcb-mega-item .sub-menu .submenu-icon {
+        display: none !important;
+    }
+    
+    /* ── Tablet panel structure ────────────────────────────────── */
+    .tcb-panel.tcb-mobile-accordion {
+        position: static !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        border-left: 3px solid var(--tcb-accent, #e11414) !important;
+        box-shadow: none !important;
+        margin: 10px 0 !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-panel-inner {
+        padding: 16px 20px !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-columns {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a {
+        padding: 10px 0 !important;
+        font-size: 15px !important;
+    }
+    
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a:hover,
+    .tcb-panel.tcb-mobile-accordion .tcb-column-links a:focus {
+        padding-left: 0 !important;
+    }
+}
