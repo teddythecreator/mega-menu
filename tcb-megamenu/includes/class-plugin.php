@@ -102,7 +102,7 @@ final class Plugin {
 
     private function define_public_hooks() {
         // Front-end assets (conditional)
-        add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ) );
+        add_action( 'wp_enqueue_scripts', array( $this->assets, 'enqueue_public_assets' ), 999 );
 
         // Apply custom walker to ALL menus (force for Divi compatibility)
         // Priority 999 ensures it runs after theme's walker

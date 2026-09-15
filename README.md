@@ -2,7 +2,7 @@
 
 **Plugin profesional de mega menús para WordPress con integración nativa de Divi**
 
-Versión: 1.3.5  
+Versión: 1.3.6  
 Autor: The Creator Business  
 Website: https://thecreator.business/
 

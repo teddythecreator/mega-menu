@@ -4,7 +4,7 @@ Tags: mega menu, divi, navigation, menu, responsive, accessible
 Requires at least: 5.8
 Tested up to: 6.5
 Requires PHP: 8.0
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,14 @@ No! The plugin works automatically when activated. No external code or snippets 
 7. Hamburger icon customization
 
 == Changelog ==
+
+= 1.3.6 =
+* CRITICAL: Integrated walker natively - panels now render INSIDE each menu item
+* CRITICAL: Forced walker with priority 999 for Divi compatibility
+* CRITICAL: Forced assets loading with priority 999
+* 100% autonomous - NO external code needed in functions.php
+* Full Divi compatibility without snippets
+* Works automatically with any theme
 
 = 1.3.5 =
 * Fixed settings form to properly save all configurations
